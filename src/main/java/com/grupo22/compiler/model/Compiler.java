@@ -31,10 +31,9 @@ public class Compiler {
 	public final static String CODE_FILE_NAME_FORMAT = "src/main/java/com/grupo22/compiler/code/code%d.txt";
 	public final static String TOKENS_OUTPUT_FORMAT = "src/main/java/com/grupo22/compiler/output/tokens_output%d.txt";
 	public static void main (String args[]) {
-		int number = 1; //Cambiar aquí el numero de codigo de ejemplo a parsear
-		
-		String CODE_FILE_NAME = String.format(CODE_FILE_NAME_FORMAT, number);
-		String TOKENS_OUTPUT_FILE = String.format(TOKENS_OUTPUT_FORMAT, number);
+		int CODE_FILE_NUMBER = 1; //Cambiar aquí el numero de codigo de ejemplo a parsear
+		String CODE_FILE_NAME = String.format(CODE_FILE_NAME_FORMAT, CODE_FILE_NUMBER);
+		String TOKENS_OUTPUT_FILE = String.format(TOKENS_OUTPUT_FORMAT, CODE_FILE_NUMBER);
 		FileWriter tokens;
 		FileReader fileReader;
 		try {
@@ -45,7 +44,7 @@ public class Compiler {
 			br = new BufferedReader(fileReader);
 			char[] pointer ={ (char) br.read()};
 			int[] line={1};
-			A_sint(br,pointer,line);
+			A_sint(br,pointer,line, CODE_FILE_NUMBER);
 		}catch (IOException e) {
 			System.err.println("Couldn't create a new file");
 		}
@@ -59,10 +58,10 @@ public class Compiler {
 		}
 	}
 
-	private static void A_sint(BufferedReader br, char[] pointer, int[] line) {
+	private static void A_sint(BufferedReader br, char[] pointer, int[] line, int CODE_FILE_NUMBER) {
 		try {
 			token= A_lex(br,pointer, line,false);
-			U(br,pointer,line).getValue();
+			U(br,pointer,line, CODE_FILE_NUMBER).getValue();
 			if(hayError){
 				System.err.println("Corrija los errores existentes.");
 			}else{
@@ -258,9 +257,9 @@ public class Compiler {
 		case "true": 
 			return genToken("TRUE","");
 		default: //probablemente aqui unicamente generara siempre el token y se comprobara su ya existencia y aÃƒÂ±adira a la ts mÃƒÂ¡s adelante en el a.semantico //por hacer
-			if(!TSControl.TS.existeLex(palabra)) { 
+			if(TSControl.existeLex(palabra) ==-1) { 
 				//__hm__ts__.put(palabra,palabra.hashCode()); //modificado 3/01/23 21:23, anterior: __hm__ts__.put(palabra,contadovich++);
-				TSControl.TS.putSimboloLex(palabra); 
+				TSControl.putSimbolo(palabra); 
 			}else if(hayDeclaracion){
 				genError(17, line, palabra);
 			}
@@ -316,8 +315,8 @@ public class Compiler {
 		case "TRUE":
 			return "true";
 		case "TABLEID":
-			if(TSControl.existeLocalOGlobal((Integer)token.getAtr())){
-				return TSControl.getClosestVar((Integer)token.getAtr()).getNombreVar();
+			if(-1!=TSControl.existe((Integer)token.getAtr())){
+				return TSControl.getVar((Integer)token.getAtr()).getNombreVar();
 			}else{
 				return "";
 			}
@@ -428,10 +427,10 @@ public class Compiler {
 		return token.getCod().equals("FINAL")? new SimpleEntry<String[],Boolean>(devolverArray("null"),false): new SimpleEntry<String[],Boolean>(P(br, pointer, line).getKey(),false);
 	}
 
-	private static Entry<String[],Boolean> U(BufferedReader br, char[] pointer, int[] line) throws IOException {
+	private static Entry<String[],Boolean> U(BufferedReader br, char[] pointer, int[] line, int CODE_FILE_NUMBER) throws IOException {
 		parser+="1 ";
 		//ASEM: INICIALIZA LA TABLA DE SIMBOLOS CON EL NOMBRE GLOBAL
-		TSControl = new TSControl();
+		TSControl = new TSControl(CODE_FILE_NUMBER);
 		return P(br, pointer, line);
 	}
 
@@ -468,7 +467,7 @@ public class Compiler {
 			//Quien lo haya hecho porfa que me explique cual es el objetivo.
 			//Escrito por David.
 
-			EntryTS temp = TSControl.getClosestVar((int) token.atributo);
+			EntryTS temp = TSControl.getVar((int) token.atributo);
 
 			if(temp!=null) {
 				TSControl.putSimboloEnGlobal(temp.getNombreVar(), "funcion");
@@ -539,8 +538,8 @@ public class Compiler {
 
 			if(resX.getValue()){
 				//Tipo de X no coincide con TipoRetorno
-				if(!resX.getKey()[0].equals(TSControl.getClosestVar(funcionTratada[0].hashCode()).getTipoRetorno())) {
-					genError(31, line[0], funcionTratada[0] +"#"+TSControl.getClosestVar(funcionTratada[0].hashCode()).getTipoRetorno() +"#" +resX.getKey()[0] );
+				if(!resX.getKey()[0].equals(TSControl.getVar(funcionTratada[0].hashCode()).getTipoRetorno())) {
+					genError(31, line[0], funcionTratada[0] +"#"+TSControl.getVar(funcionTratada[0].hashCode()).getTipoRetorno() +"#" +resX.getKey()[0] );
 					return new SimpleEntry<String[],Boolean>(devolverArray("errorSem"),false);
 				}
 
@@ -735,7 +734,7 @@ public class Compiler {
 							genError(30, line[0], resT[0]+"#"+resW[0]);
 							return new SimpleEntry<>(devolverArray("errorSem"), false);
 						}else {//Aniade tipo
-							TSControl.TS.putSimbolo(TSControl.TS.getVarName(lexem), resT[0]);
+							TSControl.putSimbolo(TSControl.getVarName(lexem), resT[0]);
 						}
 						if(token.getCod().equals("PYC")){
 							token=A_lex(br, pointer, line, false);
@@ -770,7 +769,7 @@ public class Compiler {
 							genError(30, line[0], resT[0]+ "#"+resW[0]);
 							return new SimpleEntry<>(devolverArray("errorSem"), false);
 						}else {//AniADETIPO
-							TSControl.TS.putSimbolo(TSControl.TS.getVarName(lexem), resT[0]);
+							TSControl.putSimbolo(TSControl.getVarName(lexem), resT[0]);
 						}
 						if(token.getCod().equals("PYC")){
 							token=A_lex(br, pointer, line, false);
@@ -1135,7 +1134,7 @@ public class Compiler {
 		String[] res=new String[1];
 		if(token.codigo.equals("TABLEID")){
 			parser+="30 ";
-			EntryTS idI=TSControl.getClosestVar((int)token.atributo);
+			EntryTS idI=TSControl.getVar((int)token.atributo);
 			int lexema=(int) token.atributo;
 			funcionTratada[0]=idI.getNombreVar();	//GUARDAMOS NOMBRE FUNCION
 
@@ -1250,7 +1249,7 @@ public class Compiler {
 		if((token.codigo.equals("PARENT") && ((int) token.atributo==0))||token.codigo.equals("CAD")||token.codigo.equals("CTE")||token.codigo.equals("FALSE")||token.codigo.equals("TRUE")||token.codigo.equals("TABLEID")){
 			parser+="41 ";
 			Entry<String[],Boolean> resE=E(br, pointer, line);
-			EntryTS id=TSControl.getClosestVar(funcionTratada[0].hashCode());
+			EntryTS id=TSControl.getVar(funcionTratada[0].hashCode());
 
 			if(id.getTipoParamXX(CuentaParametros)!=null && id.getTipoParamXX(CuentaParametros).equals(resE.getKey()[0])) {
 				CuentaParametros++;		
@@ -1268,7 +1267,7 @@ public class Compiler {
 		}
 		else if(token.codigo.equals("PARENT") && ((int) token.atributo==1)){
 			parser+="42 ";
-			EntryTS id=TSControl.getClosestVar(funcionTratada[0].hashCode());
+			EntryTS id=TSControl.getVar(funcionTratada[0].hashCode());
 			if(id.getNumParam()>0) {
 				genError(33, line[0], funcionTratada[0]);
 				return new SimpleEntry<String[],Boolean>(devolverArray("errorSem"),true);			
@@ -1288,7 +1287,7 @@ public class Compiler {
 			parser+="43 ";
 			token=A_lex(br, pointer, line, false);
 			Entry<String[],Boolean> resE = E(br, pointer, line);
-			EntryTS id=TSControl.getClosestVar(funcionTratada[0].hashCode());
+			EntryTS id=TSControl.getVar(funcionTratada[0].hashCode());
 
 			if(resE.getValue()){
 				if(id.getTipoParamXX(CuentaParametros)!=null && id.getTipoParamXX(CuentaParametros).equals(resE.getKey()[0])) {
