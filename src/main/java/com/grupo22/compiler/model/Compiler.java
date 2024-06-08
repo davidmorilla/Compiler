@@ -3,6 +3,7 @@ import java.io.*;
 import java.util.AbstractMap.SimpleEntry;
 import java.util.ArrayList;
 import java.util.Map.Entry;
+import java.util.Scanner;
 
 import com.grupo22.compiler.util.EntryTS;
 import com.grupo22.compiler.util.Token;
@@ -27,17 +28,20 @@ public class Compiler {
 	static ArrayList<String> TiposParametros;
 	static String[] funcionTratada = new String[1];
 	static int CuentaParametros=0;
-
-
+	public final static String CODE_FILE_NAME_FORMAT = "src/main/java/com/grupo22/compiler/code/code%d.txt";
+	public final static String TOKENS_OUTPUT_FORMAT = "src/main/java/com/grupo22/compiler/output/tokens_output%d.txt";
 	public static void main (String args[]) {
-
+		int number = 1; //Cambiar aquí el numero de codigo de ejemplo a parsear
+		
+		String CODE_FILE_NAME = String.format(CODE_FILE_NAME_FORMAT, number);
+		String TOKENS_OUTPUT_FILE = String.format(TOKENS_OUTPUT_FORMAT, number);
 		FileWriter tokens;
 		FileReader fileReader;
 		try {
 
-			tokens = new FileWriter("C:\\Users\\Usuario\\Desktop\\Universidad\\Tercero\\Procesadores de Lenguajes\\tokensOutput.txt");
+			tokens = new FileWriter(TOKENS_OUTPUT_FILE);
 			tokensW = new BufferedWriter(tokens);
-			fileReader = new FileReader("C:\\Users\\Usuario\\Desktop\\Universidad\\Tercero\\Procesadores de Lenguajes\\textito.txt");
+			fileReader = new FileReader(CODE_FILE_NAME);
 			br = new BufferedReader(fileReader);
 			char[] pointer ={ (char) br.read()};
 			int[] line={1};
@@ -54,6 +58,7 @@ public class Compiler {
 			e.printStackTrace();
 		}
 	}
+
 	private static void A_sint(BufferedReader br, char[] pointer, int[] line) {
 		try {
 			token= A_lex(br,pointer, line,false);
