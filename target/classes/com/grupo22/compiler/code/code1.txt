@@ -1,0 +1,11 @@
+let a    int   ;
+let b     int  ;
+let number int ;
+put  "Introduce el primer operando " ;
+get a;
+put "Introduce el segundo operando";get
+    b;
+function operacion int (int num1, int num2)
+{
+    return num1%num2;
+}

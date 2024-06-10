@@ -10,16 +10,16 @@ import com.grupo22.compiler.util.TS;
 
 
 public class TSControl {
-	private TS globalTS;
-	private boolean isGlobal;
-	private int contadorTS;
 	/** Es la tabla de simbolos actual. Se actualiza automaticamente cada vez que se usan las funciones createTS() y destroyTS()
 	 */
 	private TS currentTS;
-	private BufferedWriter tablaSW;
-	private FileWriter tablaS;
+	private TS globalTS;
+	private boolean isGlobal;
+	private int contadorTS;
+	private BufferedWriter TSBufferedWriter;
+	private FileWriter TSFileWriter;
 	public final static String TS_OUTPUT_FORMAT = "src/main/java/com/grupo22/compiler/output/ts_output%d.txt";
-	/** Crea un controlador de tablas de simbolos. Crea una tabla de simbolos global. Abre el buffer de escritura para cuando se quiera imprimir alguna TS.
+	/** Crea un controlador de TSFileWriter de simbolos. Crea una tabla de simbolos global. Abre el buffer de escritura para cuando se quiera imprimir alguna TS.
 	 */
 	public TSControl(int code_number){
 		String TS_OUTPUT = String.format(TS_OUTPUT_FORMAT, code_number);
@@ -28,11 +28,11 @@ public class TSControl {
 		isGlobal=true;
 		contadorTS =0;
 		try {
-			tablaS = new FileWriter(TS_OUTPUT);
+			TSFileWriter = new FileWriter(TS_OUTPUT);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		tablaSW = new BufferedWriter(tablaS);
+		TSBufferedWriter = new BufferedWriter(TSFileWriter);
 	}
 	/** @param nombreFuncion nombre (string) de la funcion que crea la tabla de simbolos
 	 * 	@throws IllegalStateException si se declara una función dentro de otra
@@ -64,23 +64,23 @@ public class TSControl {
 		//por implementar
 		try {
 			if(isGlobal){
-				tablaSW.write("TABLA GLOBAL #0:\n");
+				TSBufferedWriter.write("TABLA GLOBAL #0:\n");
 			} else{
-				tablaSW.write("TABLA DE LA FUNCION '"+ currentTS.getNombreTabla()+"' #"+contadorTS+":\n");
+				TSBufferedWriter.write("TABLA DE LA FUNCION '"+ currentTS.getNombreTabla()+"' #"+contadorTS+":\n");
 			}
 
 			for(Integer var : currentTS.getLexemas()) {
-				tablaSW.write("* LEXEMA : '"+currentTS.getVar(var).getNombreVar()+"'\n\tAtributos:\n\t+tipo:\t\t'"+currentTS.getVar(var).getTipo()+"'\n\t+despl:\t\t"+currentTS.getVar(var).getDespl()+"\n");
+				TSBufferedWriter.write("* LEXEMA : '"+currentTS.getVar(var).getNombreVar()+"'\n\tAtributos:\n\t+tipo:\t\t'"+currentTS.getVar(var).getTipo()+"'\n\t+despl:\t\t"+currentTS.getVar(var).getDespl()+"\n");
 				int np=currentTS.getVar(var).getNumParam();
 				if(np!=-1){
-					tablaSW.write("\t+numParam:\t\t" + np + "\n");
+					TSBufferedWriter.write("\t+numParam:\t\t" + np + "\n");
 					for(int i=0; i<np; i++){
-						tablaSW.write("\t+tipoParam " + i+1 +":\t\t'" + currentTS.getVar(var).getTipoParamXX(i) + "'\n");
+						TSBufferedWriter.write("\t+tipoParam " + i+1 +":\t\t'" + currentTS.getVar(var).getTipoParamXX(i) + "'\n");
 					}
-					tablaSW.write("\t+tipoRetorno:\t\t'"+ currentTS.getVar(var).getTipoRetorno() + "'\n");
+					TSBufferedWriter.write("\t+tipoRetorno:\t\t'"+ currentTS.getVar(var).getTipoRetorno() + "'\n");
 				}
 			}
-			tablaSW.write("-------------------------------------------\n");
+			TSBufferedWriter.write("-------------------------------------------\n");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -133,6 +133,7 @@ public class TSControl {
 
 
 	public EntryTS getFromGlobal(int lexema){
+		System.out.println(lexema +globalTS.toString());
 		return globalTS.getVar(lexema);
 	}
 	public String getNameFromGlobal(int lexema){
@@ -157,7 +158,7 @@ public class TSControl {
 	 */
 	public void closeWritingBuffer(){
 		try {
-			tablaSW.close();
+			TSBufferedWriter.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

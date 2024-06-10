@@ -1322,7 +1322,7 @@ public class Compiler {
 		else if(token.codigo.equals("PYC")){
 			parser+="46 ";
 			return new SimpleEntry<String[],Boolean>(devolverArray("void"),true);
-		}
+  		}
 		else{
 			genError(21, line[0],  tokenToString(token) + "#;' o '(' o 'false' o 'true' o 'cadena' o 'constante' o 'variable");
 			return recuperacionError(br, pointer, line);
@@ -1334,10 +1334,11 @@ public class Compiler {
 			parser+="47 ";
 			//ASEM
 			hashFuncion=(int)token.atributo;
+			System.out.println("hashFunction = " + hashFuncion);
 			EntryTS ent= TSControl.getFromGlobal(hashFuncion);
 			funcionTratada[0] = ent.getNombreVar();//COGEMOS EL NOMBRE DE LA FUNCION
 			System.out.println(funcionTratada[0]);
-			TSControl.setParametersFunc(funcionTratada[0],null,null,null,null,"funcion");
+			TSControl.putSimboloEnGlobal(funcionTratada[0],"funcion");
 
 			//TSControl.TS.putSimbolo(funcionTratada[0], "funcion");//la aÃ±adimos a la TS Global
 			System.out.println("1338 "+funcionTratada[0]);

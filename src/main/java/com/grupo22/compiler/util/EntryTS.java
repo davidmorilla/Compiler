@@ -125,6 +125,8 @@ public class EntryTS {
     public String getNombreVar() {
         return nombreVar;
     }
-
+    public String toString() {
+    	return nombreVar;
+    }
     
 }
