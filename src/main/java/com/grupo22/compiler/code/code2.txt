@@ -1,0 +1,36 @@
+let s string; 
+function FactorialRecursivo int (int n) 
+{
+if (n == 0) return 1;
+}
+
+let uno int = 1; 
+let UNO int = uno;
+function salto string (void)
+{
+return "\n";
+}
+function FactorialDo int (int n)
+{
+let  factorial int; 
+
+function FactorialWhile int ()
+{
+let int factorial= 1;
+let int i;
+while (i < num) 
+{
+factorial *= ++i;
+}
+return factorial;
+}
+function FactorialFor int (int n)
+{
+let int i;
+let int factorial= UNO;
+for (i = 1; i <= n; i++)
+{
+factorial *= i;
+}
+return factorial;
+}

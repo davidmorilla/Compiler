@@ -15,7 +15,7 @@ public class TSControl {
 	private TS currentTS;
 	private TS globalTS;
 	private boolean isGlobal;
-	private int contadorTS;
+	private static int contadorTS;
 	private BufferedWriter TSBufferedWriter;
 	private FileWriter TSFileWriter;
 	public final static String TS_OUTPUT_FORMAT = "src/main/java/com/grupo22/compiler/output/ts_output%d.txt";
@@ -39,6 +39,7 @@ public class TSControl {
 	 *  @implSpec Automaticamente actualiza TS a la tabla de simbolos que acaba de crearse
 	 */
 	public void createTS(String nombreFuncion) throws IllegalStateException{
+		System.out.println("SE HA CREADO 1");
 		if(isGlobal) {
 			currentTS=new TS(nombreFuncion);
 			isGlobal=false;
@@ -51,11 +52,14 @@ public class TSControl {
 	 *  @implSpec Automaticamente actualiza TS a la tabla de simbolos global e imprime en el buffer de escritura abierto la tabla de simbolos local que acaba de destruirse
 	 */
 	public void destroyTS() throws IllegalStateException{
+		System.out.println("SE HA BORRADO 1" +isGlobal);
+
 		printTS();
-		isGlobal=true;
+		//isGlobal=true;
 		if(isGlobal){
 			throw new IllegalStateException("No se puede eliminar la tabla de símbolos global\n");
 		}
+		isGlobal=true;
 		currentTS=globalTS;;
 	}
 	/** Imprime la tabla de símbolos actual en el buffer de escritura abierto
