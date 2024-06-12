@@ -1,2 +1,2 @@
-TABLA DE LA FUNCION 'LOCAL' #1:
+TABLA GLOBAL #0:
 -------------------------------------------
