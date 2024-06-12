@@ -1,0 +1,8 @@
+TABLA DE LA FUNCION 'LOCAL' #1:
+-------------------------------------------
+TABLA GLOBAL #0:
+* LEXEMA : 'operacion'
+	Atributos:
+	+tipo:		'funcion'
+	+despl:		0
+-------------------------------------------

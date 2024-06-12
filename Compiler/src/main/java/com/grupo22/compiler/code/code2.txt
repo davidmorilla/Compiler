@@ -1,0 +1,37 @@
+put david();
+
+let  s string; 
+function FactorialRecursivo int (int n) 
+{
+if (n == 0) return 1;
+return FactorialRecursivo(n%1); /* llamada recursiva */
+}
+let  uno int= 1;
+let  UNO int= uno;
+function salto string (void)
+{
+return "\n";
+}
+
+function FactorialDo int (int n)
+{
+let factorial int=  uno; 
+}
+
+function FactorialWhile int (void)
+{
+let factorial int= 1; 
+let i int;
+
+
+return factorial;
+}
+function FactorialFor int (int n)
+{
+let i int ;
+let factorial int = UNO;/* declaración de variables locales */
+
+factorial %= i;
+
+return factorial;
+}

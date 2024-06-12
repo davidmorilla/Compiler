@@ -1,0 +1,27 @@
+let For int;
+let Do int;
+let While int; 
+function imprime int(string s, string msg, int f) 
+{
+put s;
+put msg ;
+
+put (f);
+
+put salto(); 
+
+return; 
+}
+
+
+function cadena string (boolean log)
+{
+if (log) {return s;}
+else {return"Fin";}
+
+s = "El factorial "; 
+put s;
+put
+"\nIntroduce un 'número'.";
+get num; 
+}
