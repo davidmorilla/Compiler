@@ -23,7 +23,7 @@ public class Compiler {
 	static String parser ="Descendente ";
 	static TSControl TSControl;
 
-
+	
 
 	static boolean hayError=false;
 	static int hashFuncion=-1;
@@ -34,8 +34,9 @@ public class Compiler {
 	public final static String TOKENS_OUTPUT_FORMAT = "src/main/java/com/grupo22/compiler/output/tokens_output%d.txt";
 	public final static String PARSE_OUTPUT_FORMAT = "src/main/java/com/grupo22/compiler/output/parse_output%d.txt";
 	
-	final static int CODE_FILE_NUMBER = 5; //Cambiar aquí el numero de codigo de ejemplo a parsear
+	public static int CODE_FILE_NUMBER = 1; //Cambiar aquí el numero de codigo de ejemplo a parsear
 
+	
 	public static void main (String args[]) {
 		String CODE_FILE_NAME = String.format(CODE_FILE_NAME_FORMAT, CODE_FILE_NUMBER);
 		String TOKENS_OUTPUT_FILE = String.format(TOKENS_OUTPUT_FORMAT, CODE_FILE_NUMBER);
