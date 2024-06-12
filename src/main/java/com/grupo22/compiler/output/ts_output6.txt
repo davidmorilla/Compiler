@@ -1,2 +1,20 @@
+TABLA DE LA FUNCION 'LOCAL' #1:
+-------------------------------------------
+TABLA DE LA FUNCION 'LOCAL' #2:
+-------------------------------------------
+TABLA DE LA FUNCION 'LOCAL' #3:
+-------------------------------------------
 TABLA GLOBAL #0:
+* LEXEMA : 'operacion'
+	Atributos:
+	+tipo:		'funcion'
+	+despl:		0
+* LEXEMA : 'RRa'
+	Atributos:
+	+tipo:		'funcion'
+	+despl:		0
+* LEXEMA : 'cadena'
+	Atributos:
+	+tipo:		'funcion'
+	+despl:		0
 -------------------------------------------

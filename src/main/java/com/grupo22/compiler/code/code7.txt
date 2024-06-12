@@ -1,0 +1,7 @@
+
+	function RRa boolean (void)
+	{
+
+	return n;
+	}
+	

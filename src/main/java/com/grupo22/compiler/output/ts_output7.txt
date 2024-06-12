@@ -1,13 +1,7 @@
 TABLA DE LA FUNCION 'LOCAL' #1:
 -------------------------------------------
-TABLA DE LA FUNCION 'LOCAL' #2:
--------------------------------------------
 TABLA GLOBAL #0:
-* LEXEMA : 'imprime'
-	Atributos:
-	+tipo:		'funcion'
-	+despl:		0
-* LEXEMA : 'cadena'
+* LEXEMA : 'RRa'
 	Atributos:
 	+tipo:		'funcion'
 	+despl:		0

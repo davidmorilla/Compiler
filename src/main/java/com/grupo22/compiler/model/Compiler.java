@@ -30,7 +30,7 @@ public class Compiler {
 	static int CuentaParametros=0;
 	public final static String CODE_FILE_NAME_FORMAT = "src/main/java/com/grupo22/compiler/code/code%d.txt";
 	public final static String TOKENS_OUTPUT_FORMAT = "src/main/java/com/grupo22/compiler/output/tokens_output%d.txt";
-	final static int CODE_FILE_NUMBER = 5; //Cambiar aquí el numero de codigo de ejemplo a parsear
+	final static int CODE_FILE_NUMBER = 6; //Cambiar aquí el numero de codigo de ejemplo a parsear
 
 	public static void main (String args[]) {
 		String CODE_FILE_NAME = String.format(CODE_FILE_NAME_FORMAT, CODE_FILE_NUMBER);
@@ -62,6 +62,7 @@ public class Compiler {
 
 	private static void A_sint(BufferedReader br, char[] pointer, int[] line, int CODE_FILE_NUMBER) {
 		try {
+			TSControl = new TSControl(CODE_FILE_NUMBER);
 			token= A_lex(br,pointer, line,false);
 			Entry<String[], Boolean> resSin= U(br,pointer,line, CODE_FILE_NUMBER);
 			if(!resSin.getValue()){
@@ -432,8 +433,6 @@ public class Compiler {
 	private static Entry<String[],Boolean> U(BufferedReader br, char[] pointer, int[] line, int CODE_FILE_NUMBER) throws IOException {
 		parser+="1 ";
 		//ASEM: INICIALIZA LA TABLA DE SIMBOLOS CON EL NOMBRE GLOBAL
-		TSControl = new TSControl(CODE_FILE_NUMBER);
-
 		if(P(br, pointer, line).getValue()) {
 			return new SimpleEntry<String[], Boolean>(devolverArray("null"), true);
 		} else {
@@ -1299,12 +1298,17 @@ public class Compiler {
 			token=A_lex(br, pointer, line, false);
 			parser+="49 ";
 			return new SimpleEntry<String[],Boolean>(devolverArray("void"),true);
-		}
+		}else if(token.codigo.equals("INT") || token.codigo.equals("BOOL") || token.codigo.equals("STR")) {
+			parser+="48 ";
+			Entry<String[],Boolean> resT =T(br, pointer, line);
+			if(resT.getValue()) {
 
-		if(T(br, pointer, line).getValue()) {
-			return new SimpleEntry<String[],Boolean>(devolverArray("null"),true);
-		}
-		else {
+				return new SimpleEntry<String[],Boolean>(devolverArray("null"),true);
+			}
+			else {
+				return new SimpleEntry<String[],Boolean>(devolverArray("errorSin"),false);
+			}
+		}else {
 			return new SimpleEntry<String[],Boolean>(devolverArray("errorSin"),false);
 		}
 	}

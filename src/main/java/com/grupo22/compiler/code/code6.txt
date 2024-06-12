@@ -1,6 +1,53 @@
+let s string;
+s;	
+let a int;
+let bb boolean ;
+a= a % 3;
 
+	function operacion void (string s, int RR)
+	{
+	put(s);
+	let _s boolean;
+	put "hola";
+	put a;
+	put RR; get s;
+	put (0132765 % (8 %3)%a);
+	if (bb) put kk;
+	}
+
+let _s string;
+
+
+	function RRa int (int n, boolean b)
+	{
+	let kk string ;
+	let log boolean;
+	log= n == b ;
+	get kk;
 	
-		if ((v1 == v2)) /* NOT ((v1 igual a v2) AND (v1 distinto de v3)) */
-		{
-		}	
-	s = "El primer valor era ";
+	if (b && log) return log;
+	return n % RRa (n % 1, bb);
+	}
+	
+RR = 1;
+_s = "++++++Hellooooooooooooooooooo";
+let _s1 int;
+
+	function cadena string (void)
+	{
+	get bb;
+	let xx int;
+	xx=_s;
+	if(bb) return _s;
+	}
+
+
+if(david)
+{return "";}
+
+
+sM= RR (a, bb, kk);
+get id;
+put cadena();
+
+
