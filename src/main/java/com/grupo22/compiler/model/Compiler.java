@@ -30,7 +30,7 @@ public class Compiler {
 	static int CuentaParametros=0;
 	public final static String CODE_FILE_NAME_FORMAT = "src/main/java/com/grupo22/compiler/code/code%d.txt";
 	public final static String TOKENS_OUTPUT_FORMAT = "src/main/java/com/grupo22/compiler/output/tokens_output%d.txt";
-	final static int CODE_FILE_NUMBER = 4; //Cambiar aquí el numero de codigo de ejemplo a parsear
+	final static int CODE_FILE_NUMBER = 5; //Cambiar aquí el numero de codigo de ejemplo a parsear
 
 	public static void main (String args[]) {
 		String CODE_FILE_NAME = String.format(CODE_FILE_NAME_FORMAT, CODE_FILE_NUMBER);
@@ -793,6 +793,13 @@ public class Compiler {
 				if(token.getCod().equals("LLAVE") && (int)token.getAtr()==1)
 				{
 					token=A_lex(br, pointer, line, false);
+
+					Entry<String[],Boolean> resYp=Yp(br,pointer,line);
+					if(resYp.getValue()) {
+						return new SimpleEntry<String[],Boolean>(devolverArray("null"),true);
+
+					} else {return new SimpleEntry<String[],Boolean>(devolverArray("errorSin"),false);}
+					/*
 					if(token.getCod().equals("ELSE"))
 					{
 						token=A_lex(br, pointer, line, false);
@@ -818,10 +825,17 @@ public class Compiler {
 						genError(21, line[0], tokenToString(token)+ "#else");
 						return new SimpleEntry<String[],Boolean>(devolverArray("errorSin"),false);
 					}
+					 */
 				}else{
 					genError(21, line[0], tokenToString(token) + "#}");
 					return new SimpleEntry<String[],Boolean>(devolverArray("errorSin"),false);
 				}
+
+
+
+
+
+
 			}else{return new SimpleEntry<String[],Boolean>(devolverArray("errorSin"),false);}
 		}else{
 			if(token.getCod().equals("TABLEID") ||token.getCod().equals("PUT") ||token.getCod().equals("GET") ||token.getCod().equals("RET")){
@@ -831,6 +845,36 @@ public class Compiler {
 		}
 	}
 
+	private static Entry<String[],Boolean> Yp(BufferedReader br, char[] pointer, int[] line) throws IOException {
+		if(token.codigo.equals("ELSE")) {
+			parser+="56 ";
+			token=A_lex(br, pointer, line, false);
+			if(token.codigo.equals("LLAVE") && (int) token.atributo==0) {
+				token=A_lex(br, pointer, line, false);
+				Entry<String[],Boolean> resC= C(br,pointer,line);
+				if(resC.getValue()) {
+					if(token.codigo.equals("LLAVE") && (int) token.atributo==1) {
+						token=A_lex(br, pointer, line, false);
+						return new SimpleEntry<String[],Boolean>(devolverArray("null"),true);
+					} else {
+						return new SimpleEntry<String[],Boolean>(devolverArray("errorSin"),false);
+					}
+				}else {
+					return new SimpleEntry<String[],Boolean>(devolverArray("errorSin"),false);
+				}
+			} else {
+				return new SimpleEntry<String[],Boolean>(devolverArray("errorSin"),false);
+			}
+		} else if(token.codigo.equals("FUNC") || token.codigo.equals("IF") || token.codigo.equals("TABLEID") || token.codigo.equals("PUT") || token.codigo.equals("GET") || 
+				token.codigo.equals("RET") || token.codigo.equals("LET") || (token.codigo.equals("LLAVE") && (int) token.atributo==1)) {
+			parser+="57 ";
+			return new SimpleEntry<String[],Boolean>(devolverArray("null"),true);
+
+		} else {
+			return new SimpleEntry<String[],Boolean>(devolverArray("errorSin"),false);
+		}
+
+	}	
 	private static Entry<String[],Boolean> E(BufferedReader br, char[] pointer, int[] line) throws IOException {
 		if((token.codigo.equals("PARENT") && ((int) token.atributo ==0))||token.codigo.equals("CAD")||token.codigo.equals("CTE")||token.codigo.equals("FALSE")||token.codigo.equals("TABLEID")||token.codigo.equals("TRUE")){
 			parser+="21 ";

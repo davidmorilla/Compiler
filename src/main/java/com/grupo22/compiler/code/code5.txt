@@ -1,0 +1,49 @@
+	function demo  boolean(void) /* definición de la función demo, sin argumentos y que no devuelve
+	nada */
+	{
+	let v1 int; 
+	let zv int;
+	put "Escriba \"tres\" números: ";
+	get v1; get v2; get v3;
+	if (v3 == 0) return;
+	
+		if (((v1 == v2) && (v1 == v3))) /* NOT ((v1 igual a v2) AND (v1 distinto de v3)) */
+		{
+			put "Escriba su nombre: ";
+			let s string;
+			get s;
+			
+			if (v2 == v3) /* si v2<v3, v0=v2; en otro caso v0=1/v3 */
+			{
+				let v0 int= v2; 
+			}else			
+			{
+				v0= 1 % v3;
+			}
+			put s;
+		}
+		
+	s = "El primer valor era ";
+		if (v1 == 0)
+		{
+			put (s); put v1; put ".\n";
+		}
+		else
+		{
+		put s; 
+		imprimeSuma(uno, UNO); 
+		put (".\n");
+	
+		}
+	potencia (v0, 4);
+	let i int;
+	for (i);
+	
+	potencia (zv, 5);
+	imprimeSuma (i, num);
+	imprime ("", cadena(true), 666);
+	}
+	demo();
+	/* esto constituye la llamada a una función sin argumentos.
+	Es en este instante cuando se llama a esta función y, por tanto,
+	cuando se ejecuta todo el código de dicha función */

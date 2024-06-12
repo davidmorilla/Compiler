@@ -16,12 +16,12 @@ return;
 
 function cadena string (boolean log)
 {
-if (!log) {return s;}
+if (log) {return s;}
 else {return"Fin";}
 
 s = "El factorial "; 
 put s;
 put
 "\nIntroduce un 'número'.";
-get
-num; 
+get num; 
+}

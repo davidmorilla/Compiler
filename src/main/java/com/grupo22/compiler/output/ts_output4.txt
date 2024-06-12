@@ -1,2 +1,32 @@
+TABLA DE LA FUNCION 'LOCAL' #1:
+-------------------------------------------
+TABLA DE LA FUNCION 'LOCAL' #2:
+-------------------------------------------
+TABLA DE LA FUNCION 'LOCAL' #3:
+-------------------------------------------
+TABLA DE LA FUNCION 'LOCAL' #4:
+-------------------------------------------
+TABLA DE LA FUNCION 'LOCAL' #5:
+-------------------------------------------
 TABLA GLOBAL #0:
+* LEXEMA : 'bisiesto'
+	Atributos:
+	+tipo:		'funcion'
+	+despl:		0
+* LEXEMA : 'dias'
+	Atributos:
+	+tipo:		'funcion'
+	+despl:		0
+* LEXEMA : 'esFechaCorrecta'
+	Atributos:
+	+tipo:		'funcion'
+	+despl:		0
+* LEXEMA : 'imprimeSuma'
+	Atributos:
+	+tipo:		'funcion'
+	+despl:		0
+* LEXEMA : 'potencia'
+	Atributos:
+	+tipo:		'funcion'
+	+despl:		0
 -------------------------------------------
