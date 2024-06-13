@@ -1,0 +1,6 @@
+let x int;
+x;
+
+function nombrefuncion void (int RR){
+let RR int;
+}

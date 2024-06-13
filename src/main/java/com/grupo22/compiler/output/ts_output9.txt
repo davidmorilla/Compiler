@@ -1,0 +1,19 @@
+TABLA LOCAL DE LA FUNCION 'nombrefuncion' #1:
+* LEXEMA : 'RR'
+	Atributos:
+	+tipo:		'int'
+	+despl:		0
+-------------------------------------------
+TABLA GLOBAL #0:
+* LEXEMA : 'RR'
+	Atributos:
+	+tipo:		'int'
+	+despl:		0
+* LEXEMA : 'nombrefuncion'
+	Atributos:
+	+tipo:		'funcion'
+	+despl:		2
+	+numParam:		1
+	+tipoParam 1:		'int'
+	+tipoRetorno:		'void'
+-------------------------------------------
