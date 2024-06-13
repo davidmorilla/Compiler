@@ -1,0 +1,14 @@
+TABLA LOCAL DE LA FUNCION 'f1' #1:
+* LEXEMA : 'f1'
+	Atributos:
+	+tipo:		'int'
+	+despl:		0
+* LEXEMA : 's1'
+	Atributos:
+	+tipo:		'string'
+	+despl:		2
+* LEXEMA : 'b1'
+	Atributos:
+	+tipo:		'boolean'
+	+despl:		130
+-------------------------------------------

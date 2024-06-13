@@ -1,9 +1,12 @@
 package com.grupo22.compiler.util;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class EntryTS {
     private String tipo;
     private int numParam;
-    private String[] tipoParamXX;
+    private List<String> tipoParamXX;
     private String tipoRetorno;
     private String EtiqFuncion;
     private int despl;
@@ -52,7 +55,7 @@ public class EntryTS {
      */
     public void setNumParam(int numParam) {
         this.numParam = numParam;
-        this.tipoParamXX= new String[numParam];
+        this.tipoParamXX= new ArrayList<String>(numParam);
     }
     /**
      * 
@@ -60,7 +63,7 @@ public class EntryTS {
      * @return El tipo del parametro cuya posicion es index
      */
     public String getTipoParamXX(int index) {
-        return tipoParamXX[index];
+        return tipoParamXX.get(index);
     }
     /**
      * Introduce el tipo de los parametros de entrada de una funcion
@@ -68,12 +71,12 @@ public class EntryTS {
      * @param tipo tipo del parametro cuya posicion es index
      */
     public void setTipoParamXX(int index, String tipo) {
-        this.tipoParamXX[index] = tipo;
+        this.tipoParamXX.add(index, tipo);
     }
 
-    public void setTipoParamXX(String[] params){
+    public void setTipoParamXX(List<String> params){
         for(int i=0;i<numParam;i++){
-            tipoParamXX[i]=params[i];
+            tipoParamXX.add(i,params.get(i));
         }
     }
     /**

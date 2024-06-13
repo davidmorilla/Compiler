@@ -1,6 +1,7 @@
 package com.grupo22.compiler.util;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.List;
 
 public class TS {
 	private HashMap<String,Integer> __hm__ts__;
@@ -26,6 +27,9 @@ public class TS {
 	 */
 	public String getNombreTabla(){
 		return nombreTabla;
+	}
+	public void setNombreTabla(String nombreTabla){
+		this.nombreTabla= nombreTabla;
 	}
 	/**
 	 * Esta funcion solo debe utilizarla el Analizador Lexico. Si quiere introducirse un simbolo por el AnalizadorSemantico debe usar la funcion putSimbolo()
@@ -100,7 +104,7 @@ public class TS {
 	 * @return null si no existe y el nombre de la variable tambien.
 	 */
 	public String getVarName(int lexema){
-
+		System.out.println(__lex_to_name.toString());
 		System.out.println("98: " +getNombreTabla()+ __lex_to_name.get(lexema));
 		return __lex_to_name.get(lexema);
 	}
@@ -147,7 +151,7 @@ public class TS {
 	 * @param tipoParamXX
 	 * @param EtiqFuncion
 	 */
-	public void setParameters(String nombreVar,String tipoRetorno, Integer numParam, String[] tipoParamXX, String EtiqFuncion,String tipo){
+	public void setParameters(String nombreVar,String tipoRetorno, Integer numParam, List<String> tipoParamXX, String EtiqFuncion,String tipo){
 		//System.out.println(simbolos==null);
 		System.out.println(nombreVar==null);
 		System.out.println(simbolos.toString());
@@ -170,6 +174,7 @@ public class TS {
 
 		simbolos.put(nombreVar.hashCode(), entry);
 	}
+
 	public String toString() {
 		return __lex_to_name.toString();
 	}

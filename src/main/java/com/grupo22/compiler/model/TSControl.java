@@ -4,6 +4,7 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 
 import com.grupo22.compiler.util.EntryTS;
 import com.grupo22.compiler.util.TS;
@@ -38,6 +39,9 @@ public class TSControl {
 	 * 	@throws IllegalStateException si se declara una función dentro de otra
 	 *  @implSpec Automaticamente actualiza TS a la tabla de simbolos que acaba de crearse
 	 */
+	public boolean isGlobal() {
+		return isGlobal;
+	}
 	public void createTS(String nombreFuncion) throws IllegalStateException{
 		System.out.println("SE HA CREADO 1");
 		if(isGlobal) {
@@ -70,7 +74,7 @@ public class TSControl {
 			if(isGlobal){
 				TSBufferedWriter.write("TABLA GLOBAL #0:\n");
 			} else{
-				TSBufferedWriter.write("TABLA DE LA FUNCION '"+ currentTS.getNombreTabla()+"' #"+contadorTS+":\n");
+				TSBufferedWriter.write("TABLA LOCAL DE LA FUNCION '"+ currentTS.getNombreTabla()+"' #"+contadorTS+":\n");
 			}
 
 			for(Integer var : currentTS.getLexemas()) {
@@ -79,7 +83,7 @@ public class TSControl {
 				if(np!=-1){
 					TSBufferedWriter.write("\t+numParam:\t\t" + np + "\n");
 					for(int i=0; i<np; i++){
-						TSBufferedWriter.write("\t+tipoParam " + i+1 +":\t\t'" + currentTS.getVar(var).getTipoParamXX(i) + "'\n");
+						TSBufferedWriter.write("\t+tipoParam " + (i+1) +":\t\t'" + currentTS.getVar(var).getTipoParamXX(i) + "'\n");
 					}
 					TSBufferedWriter.write("\t+tipoRetorno:\t\t'"+ currentTS.getVar(var).getTipoRetorno() + "'\n");
 				}
@@ -104,7 +108,7 @@ public class TSControl {
 			return globalTS.existe(lexema)? 0 : -1;
 		}
 	}
-	
+
 	/** @param lexema hashcode del identificador
 	 *  @return 1 si existe en la tabla de simbolos local
 	 *  @return 0 si no existe en la tabla de simbolos local pero si en la global
@@ -137,7 +141,6 @@ public class TSControl {
 
 
 	public EntryTS getFromGlobal(int lexema){
-		System.out.println(lexema +globalTS.toString());
 		return globalTS.getVar(lexema);
 	}
 	public String getNameFromGlobal(int lexema){
@@ -157,7 +160,18 @@ public class TSControl {
 	public void putSimbolo(String nombreVar){
 		currentTS.putSimboloLex(nombreVar);
 	}
-	
+	public void putSimbolo(int lexema, String Tipo){
+		System.out.println("varname::" + currentTS.getVarName(lexema));
+		currentTS.putSimbolo(currentTS.getVarName(lexema), Tipo);
+	}
+
+	public void setNombreTabla(String nombreTabla) {
+		if(!isGlobal) {
+			currentTS.setNombreTabla(nombreTabla);
+		} else {
+			System.err.println("No se puede cambiar de nombre a la tabla de símbolos global");
+		}
+	}
 	/** Cierra el buffer de escritura 
 	 */
 	public void closeWritingBuffer(){
@@ -177,9 +191,10 @@ public class TSControl {
 	 * @param tipoParamXX
 	 * @param EtiqFuncion
 	 */
-	public void setParametersFunc(String nombreVar, String tipoRetorno, Integer numParam, String[] tipoParamXX, String EtiqFuncion,String tipo){
+	public void setParametersFunc(String nombreVar, String tipoRetorno, Integer numParam, List<String> tipoParamXX, String EtiqFuncion,String tipo){
 		globalTS.setParameters(nombreVar, tipoRetorno, numParam, tipoParamXX, EtiqFuncion,tipo);
 	}
+
 	public String getVarName(int lexem) {
 		// TODO Auto-generated method stub
 		return currentTS.getVarName(lexem);

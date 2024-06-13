@@ -1,0 +1,45 @@
+let z int;
+let boolean_2 boolean;
+let x int;
+let ss string;
+let xx int;
+let boolean_1 boolean;
+if(boolean_2){
+
+}
+function f1 int(int f1,  string s1, boolean b1)
+{
+		get z;
+		b1 =  boolean_2;
+		/*xx %= f1%x;*/
+		put/*Alerta!*/
+		ss;
+		return xx;
+}
+
+let  zzz  int;
+
+ss="-Prueba con varios Operadores...";
+
+integer= 99  % 3 ;
+	 
+
+
+function f2 boolean ( int f2 , boolean b2 )
+{
+		get y;
+		put ((444%55%7%(088%f2)));
+		return (boolean_2&&boolean_1&&b2);
+}
+
+x =
+  x % 6	
+    % z 
+    % 1
+    % (2
+    % y 
+    % 6)
+	;
+	
+
+put (f1 (x, f2 (3, boolean_2)));

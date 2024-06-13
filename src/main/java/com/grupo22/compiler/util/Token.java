@@ -13,4 +13,7 @@ public class Token {    //GENERAR UN PAIR (SI ES NULL, SE PONE STRING NULO
     public Object getAtr () {        //CUIDADO PORQUE DEBE SER SHORT
         return atributo;
     }
+    public String toString() {
+    	return codigo + ", " + atributo;
+    }
 }
