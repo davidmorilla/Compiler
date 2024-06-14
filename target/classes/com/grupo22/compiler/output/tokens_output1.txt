@@ -13,26 +13,3 @@
 <PUT,>
 <CAD,"Introduce el primer operando ">
 <PYC,>
-<PUT,>
-<CAD,"Introduce el segundo operando">
-<PYC,>
-<GET,>
-<TABLEID,98>
-<PYC,>
-<FUNC,>
-<TABLEID,1662196504>
-<INT,>
-<PARENT,0>
-<INT,>
-<TABLEID,3392875>
-<COMA,>
-<INT,>
-<TABLEID,3392876>
-<PARENT,1>
-<LLAVE,0>
-<RET,>
-<TABLEID,3392875>
-<MOD,>
-<TABLEID,3392876>
-<PYC,>
-<LLAVE,1>

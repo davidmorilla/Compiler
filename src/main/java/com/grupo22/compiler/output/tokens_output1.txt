@@ -35,4 +35,3 @@
 <MOD,>
 <TABLEID,3392876>
 <PYC,>
-<LLAVE,1>

@@ -1,8 +1,10 @@
-TABLA DE LA FUNCION 'LOCAL' #1:
--------------------------------------------
-TABLA GLOBAL #0:
-* LEXEMA : 'operacion'
+TABLA LOCAL DE LA FUNCION 'operacion' #1:
+* LEXEMA : 'num1'
 	Atributos:
-	+tipo:		'funcion'
+	+tipo:		'boolean'
 	+despl:		0
+* LEXEMA : 'num2'
+	Atributos:
+	+tipo:		'boolean'
+	+despl:		2
 -------------------------------------------
