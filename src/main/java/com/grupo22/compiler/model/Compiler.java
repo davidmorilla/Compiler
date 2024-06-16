@@ -1093,7 +1093,7 @@ public class Compiler {
 				//<ASEM>
 				String tipoD = resD.getKey()[0];
 				if(!tipo.equals(tipoD)){throw new Exception("Los tipos no coinciden en la condición");}
-				Entry<String[],Boolean> resM=M(br,pointer,line,tipo);
+				Entry<String[],Boolean> resM=M(br,pointer,line,tipoD);
 				String tipoM = resM.getKey()[0];
 
 				if(resM.getValue()) {
