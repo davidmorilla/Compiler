@@ -169,6 +169,11 @@ public class TSControl {
 	{
 		globalTS.setTipo(lexema, tipo);
 	}
+	
+	public void setTipo(int lexema, String tipo)
+	{
+		currentTS.setTipo(lexema, tipo);
+	}
 
 	public void setNombreTabla(String nombreTabla) {
 		if(!isGlobal) {

@@ -29,8 +29,8 @@ public class Compiler {
 	static ArrayList<String> TiposParametros;
 	static boolean dentroFuncion=false;
 	static boolean declaracionExplicita=false;
-	static String funcionTratada=null;
-	static String funcionInvocada=null;
+	static String funcionTratada;
+	static String funcionInvocada;
 	//static boolean invocada=false;
 	static int CuentaParametros=0;
 	public final static String CODE_FILE_NAME_FORMAT = "src/main/java/com/grupo22/compiler/code/code%d.txt";
@@ -66,7 +66,6 @@ public class Compiler {
 
 	private static void A_sint_sem(BufferedReader br, char[] pointer, int[] line, int CODE_FILE_NUMBER) {
 		try {
-			TSControl = new TSControl(CODE_FILE_NUMBER);
 			token= A_lex(br,pointer, line,false);
 			Entry<String[], Boolean> resSin= U(br,pointer,line, CODE_FILE_NUMBER);
 			if(!resSin.getValue()){
@@ -275,7 +274,7 @@ public class Compiler {
 			else if((!TSControl.isGlobal()&&TSControl.existeLex(palabra)==-1&&!declaracionExplicita)||((TSControl.isGlobal()&&TSControl.existeLex(palabra)==-1&&!declaracionExplicita)))
 			{
 				System.out.println("entra en la 2a con: "+palabra);
-				TSControl.putSimboloEnGlobal(palabra,"int");
+				TSControl.putSimboloEnGlobal(palabra,null);
 			}
 			else if(TSControl.isGlobal()&&TSControl.existeLex(palabra)==-1)
 			{
@@ -461,6 +460,9 @@ public class Compiler {
 
 	private static Entry<String[],Boolean> U(BufferedReader br, char[] pointer, int[] line, int CODE_FILE_NUMBER) throws Exception {
 		parser+="1 ";
+		TSControl = new TSControl(CODE_FILE_NUMBER);
+		String funcionTratada=null;
+		String funcionInvocada=null;
 		if(P(br, pointer, line).getValue()) {
 			return new SimpleEntry<String[], Boolean>(devolverArray("null"), true);
 		} else {
@@ -512,13 +514,17 @@ public class Compiler {
 				//cebes
 				TSControl.putSimboloEnGlobal(temp.getNombreVar(), "funcion");
 			}*/
-			if(TSControl.getVar((int)token.getAtr()).getTipo().equals("function")){
-				funcionInvocada=TSControl.getNameFromGlobal((int)token.getAtr());
-			}
 			if(temp==null)
 			{
-				throw new Exception("Ese identificador no existe.");
+				temp = TSControl.getFromGlobal((int) token.atributo);
+				if(temp.getTipo()==null)
+				{
+					TSControl.setTipoGlobal((int) token.atributo, "int");
+				}
 				//return new SimpleEntry<String[],Boolean>(devolverArray("errorSem"),true);
+			}
+			if(temp.getTipo().equals("function")){
+				funcionInvocada=TSControl.getNameFromGlobal((int)token.getAtr());
 			}
 			token=A_lex(br, pointer, line, false);
 			Entry<String[],Boolean> resZ= Z(br,pointer,line);
@@ -567,6 +573,20 @@ public class Compiler {
 			parser+="7 ";
 			token=A_lex(br, pointer, line, false);
 			if(token.getCod().equals("TABLEID")){
+				EntryTS temp = TSControl.getVar((int) token.atributo);
+				if(temp==null)
+				{
+					temp = TSControl.getFromGlobal((int) token.atributo);
+					if(temp.getTipo()==null)
+					{
+						TSControl.setTipoGlobal((int) token.atributo, "int");
+					}
+					//return new SimpleEntry<String[],Boolean>(devolverArray("errorSem"),true);
+				}
+				if(!temp.getTipo().equals("string")&&!temp.getTipo().equals("int"))
+				{
+					throw new Exception("Tipo no valido para get(no es ni int ni string)");
+				}
 				token=A_lex(br, pointer, line, false);
 				if(token.getCod().equals("PYC")){
 					token=A_lex(br, pointer, line, false);
@@ -597,6 +617,10 @@ public class Compiler {
 			if(resX.getValue()){
 				//Tipo de X no coincide con TipoRetorno
 				System.out.println("Comprobar funcion en S-8 : "+funcionTratada);
+				if(funcionTratada==null)
+				{
+					throw new Exception("Return declarado fuera del ambito de la función.");
+				}
 				if(!resX.getKey()[0].equals(TSControl.getVar(funcionTratada.hashCode()).getTipoRetorno())) {
 					throw new Exception("El tipo del elemento devuelto no coincide  con el tipo de return de la funcion.");
 					//genError(31, line[0], funcionTratada +"#"+TSControl.getVar(funcionTratada.hashCode()).getTipoRetorno() +"#" +resX.getKey()[0] );
@@ -697,7 +721,7 @@ public class Compiler {
 					System.out.println(token.codigo);
 					if(token.codigo.equals("PYC")){	
 						token=A_lex(br, pointer, line, false);
-						return new SimpleEntry<String[],Boolean>(devolverArray("null"),true);
+						return new SimpleEntry<String[],Boolean>(devolverArray("function"),true);
 					}
 					else{
 						System.out.println("este8");
@@ -1183,32 +1207,41 @@ public class Compiler {
 	private static Entry<String[],Boolean> I(BufferedReader br, char[] pointer, int[] line) throws Exception {
 		if(token.codigo.equals("TABLEID")){
 			parser+="30 ";
-			EntryTS idI=TSControl.getVar((int)token.atributo);	
-			int lexema=(int) token.atributo;
-			//A RESOLVER
-			if(idI.getTipo().equals("function")) {funcionInvocada=idI.getNombreVar();}
-			if(idI==null)
-			{						
-				throw new Exception("Ese identificador no existe.");
-				//return new SimpleEntry<String[],Boolean>(devolverArray("errorSem"),false);
+			EntryTS temp = TSControl.getVar((int) token.atributo);
+			/*if(temp!=null) {
+				//cebes
+				TSControl.putSimboloEnGlobal(temp.getNombreVar(), "funcion");
+			}*/
+			if(temp==null)
+			{
+				temp = TSControl.getFromGlobal((int) token.atributo);
+				if(temp.getTipo()==null)
+				{
+					TSControl.setTipoGlobal((int) token.atributo, "int");
+				}
+				//return new SimpleEntry<String[],Boolean>(devolverArray("errorSem"),true);
 			}
-			String tipoId=idI.getTipo();
+			if(temp.getTipo().equals("function")){
+				funcionInvocada=TSControl.getNameFromGlobal((int)token.getAtr());
+			}
 			token=A_lex(br, pointer, line, false);
 
 			//SI O FALLA, PETA
-			System.out.println("1143 "+ lexema);
-			Entry<String[],Boolean> resO=O(br,pointer,line, lexema);
+			//System.out.println("1143 "+ lexema);
+			Entry<String[],Boolean> resO=O(br,pointer,line);
 			if(resO.getValue()) {
-				if(tipoId.equals("function")&&resO.getKey()[0].equals("function")) {	//!!!!!!! tipo.funcion no existe aun
+				if(resO.getKey()[0].equals("function")&&temp.getTipo().equals("function")) {	//!!!!!!! tipo.funcion no existe aun
 					//1133//NO ENTIENDO BIEN ESTE ERROR
-					String tipoFunc=idI.getTipoRetorno();
-					return new SimpleEntry<String[],Boolean>(devolverArray(tipoFunc),true);
+					return new SimpleEntry<String[],Boolean>(devolverArray(temp.getTipoRetorno()),true);
 				}
-				else if(tipoId.equals("function")&&!resO.getKey()[0].equals("function")){
-					throw new Exception("El identificador pertenece a una funcion, pero no se ha tratado como tal.");
+				else if(resO.getKey()[0].equals("null")&&!temp.getTipo().equals("function")){
+					return new SimpleEntry<String[],Boolean>(devolverArray(temp.getTipo()),true);
 					//return new SimpleEntry<String[],Boolean>(devolverArray("errorSem"),false);
 				}
-				else{return new SimpleEntry<String[],Boolean>(devolverArray(tipoId),true);}				
+				else{
+					throw new Exception("Se trata un identificador como si fuera de funcion sin serlo o no se trata como funcion cuando lo es.");
+					//return new SimpleEntry<String[],Boolean>(devolverArray("errorSem"),false);
+				}				
 			}
 			return new SimpleEntry<String[],Boolean>(devolverArray("null"),false); 	
 		}
@@ -1255,7 +1288,7 @@ public class Compiler {
 		}
 	}
 
-	private static Entry<String[],Boolean> O(BufferedReader br, char[] pointer, int[] line, int lexema) throws Exception {
+	private static Entry<String[],Boolean> O(BufferedReader br, char[] pointer, int[] line) throws Exception {
 		if(token.codigo.equals("PARENT") && ((int) token.atributo==0)){
 			parser+="36 ";
 			token=A_lex(br, pointer, line, false);

@@ -70,6 +70,7 @@ public class TS {
 	 * @throws IllegalArgumentException si no es ninguno de los tipos anteriores
 	 */  
 	private int getTamTipo(String tipo) { //HAY QUE COMPLETAR TAMANOS
+		if(tipo==null){return 0;}
 		switch(tipo){
 		case "boolean":
 			return 2;
@@ -77,7 +78,7 @@ public class TS {
 			return 2;
 		case "string":
 			return 128;
-		case "funcion":
+		case "function":
 			return 0;
 		default:
 			throw new IllegalArgumentException("No es un tipo valido\n");
@@ -179,6 +180,7 @@ public class TS {
 		EntryTS entry=simbolos.get(lexema);
 		entry.setTipo(tipo);
 		simbolos.put(lexema, entry);
+		despl+=getTamTipo(tipo);
 	}
 
 	public String toString() {
