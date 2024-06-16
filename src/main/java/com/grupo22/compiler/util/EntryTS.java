@@ -63,7 +63,7 @@ public class EntryTS {
      * @return El tipo del parametro cuya posicion es index
      */
     public String getTipoParamXX(int index) {
-    	System.out.println("linea 66 entryts: "+index);
+    	//System.out.println("linea 66 entryts: "+index);
     	if(numParam<=index) return null;
         return tipoParamXX.get(index);
     }
