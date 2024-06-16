@@ -174,6 +174,12 @@ public class TS {
 
 		simbolos.put(nombreVar.hashCode(), entry);
 	}
+	
+	public void setTipo(int lexema,String tipo){
+		EntryTS entry=simbolos.get(lexema);
+		entry.setTipo(tipo);
+		simbolos.put(lexema, entry);
+	}
 
 	public String toString() {
 		return __lex_to_name.toString();

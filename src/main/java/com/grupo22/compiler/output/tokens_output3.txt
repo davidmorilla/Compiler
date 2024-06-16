@@ -36,11 +36,12 @@
 <PARENT,1>
 <PYC,>
 <PUT,>
-<TABLEID,109202137>
-<PARENT,0>
-<PARENT,1>
+<CAD,"holabuenas">
 <PYC,>
 <RET,>
+<TABLEID,102>
+<MOD,>
+<CTE,5>
 <PYC,>
 <LLAVE,1>
 <FUNC,>
@@ -51,6 +52,14 @@
 <TABLEID,107332>
 <PARENT,1>
 <LLAVE,0>
+<LET,>
+<TABLEID,115>
+<STR,>
+<PYC,>
+<TABLEID,115>
+<ASIG,0>
+<CAD,"El factorial ">
+<PYC,>
 <IF,>
 <PARENT,0>
 <TABLEID,107332>
@@ -76,7 +85,12 @@
 <PUT,>
 <CAD,"\nIntroduce un 'número'.">
 <PYC,>
+<LET,>
+<TABLEID,109446>
+<INT,>
+<PYC,>
 <GET,>
 <TABLEID,109446>
 <PYC,>
 <LLAVE,1>
+<FINAL,>

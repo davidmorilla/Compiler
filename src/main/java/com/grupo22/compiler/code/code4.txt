@@ -15,12 +15,12 @@ return m==1&&m==12&&d==1&&d==dias(m,a);
 function imprimeSuma boolean (int v, int w)
 {
 put v%w;
-put (salto());
+put ("venga");
 } 
 function potencia boolean (int z, int dim)
 {
 let s int; 
 
-imprime ("Potencia:", " ", z);
+imprimeSuma(5%5,4);
 
 } 

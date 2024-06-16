@@ -1,32 +1,96 @@
-TABLA DE LA FUNCION 'LOCAL' #1:
+TABLA LOCAL DE LA FUNCION 'bisiesto' #1:
+* LEXEMA : 'a'
+	Atributos:
+	+tipo:		'int'
+	+despl:		0
 -------------------------------------------
-TABLA DE LA FUNCION 'LOCAL' #2:
+TABLA LOCAL DE LA FUNCION 'dias' #2:
+* LEXEMA : 'm'
+	Atributos:
+	+tipo:		'int'
+	+despl:		0
+* LEXEMA : 'a'
+	Atributos:
+	+tipo:		'int'
+	+despl:		2
 -------------------------------------------
-TABLA DE LA FUNCION 'LOCAL' #3:
+TABLA LOCAL DE LA FUNCION 'esFechaCorrecta' #3:
+* LEXEMA : 'd'
+	Atributos:
+	+tipo:		'int'
+	+despl:		0
+* LEXEMA : 'm'
+	Atributos:
+	+tipo:		'int'
+	+despl:		2
+* LEXEMA : 'a'
+	Atributos:
+	+tipo:		'int'
+	+despl:		4
 -------------------------------------------
-TABLA DE LA FUNCION 'LOCAL' #4:
+TABLA LOCAL DE LA FUNCION 'imprimeSuma' #4:
+* LEXEMA : 'v'
+	Atributos:
+	+tipo:		'int'
+	+despl:		0
+* LEXEMA : 'w'
+	Atributos:
+	+tipo:		'int'
+	+despl:		2
 -------------------------------------------
-TABLA DE LA FUNCION 'LOCAL' #5:
+TABLA LOCAL DE LA FUNCION 'potencia' #5:
+* LEXEMA : 'z'
+	Atributos:
+	+tipo:		'int'
+	+despl:		0
+* LEXEMA : 'dim'
+	Atributos:
+	+tipo:		'int'
+	+despl:		2
+* LEXEMA : 's'
+	Atributos:
+	+tipo:		'int'
+	+despl:		4
 -------------------------------------------
 TABLA GLOBAL #0:
 * LEXEMA : 'bisiesto'
 	Atributos:
-	+tipo:		'funcion'
+	+tipo:		'function'
 	+despl:		0
+	+numParam:		1
+	+tipoParam 1:		'int'
+	+tipoRetorno:		'boolean'
 * LEXEMA : 'dias'
 	Atributos:
-	+tipo:		'funcion'
-	+despl:		0
+	+tipo:		'function'
+	+despl:		2
+	+numParam:		2
+	+tipoParam 1:		'int'
+	+tipoParam 2:		'int'
+	+tipoRetorno:		'int'
 * LEXEMA : 'esFechaCorrecta'
 	Atributos:
-	+tipo:		'funcion'
-	+despl:		0
+	+tipo:		'function'
+	+despl:		4
+	+numParam:		3
+	+tipoParam 1:		'int'
+	+tipoParam 2:		'int'
+	+tipoParam 3:		'int'
+	+tipoRetorno:		'boolean'
 * LEXEMA : 'imprimeSuma'
 	Atributos:
-	+tipo:		'funcion'
-	+despl:		0
+	+tipo:		'function'
+	+despl:		6
+	+numParam:		2
+	+tipoParam 1:		'int'
+	+tipoParam 2:		'int'
+	+tipoRetorno:		'boolean'
 * LEXEMA : 'potencia'
 	Atributos:
-	+tipo:		'funcion'
-	+despl:		0
+	+tipo:		'function'
+	+despl:		8
+	+numParam:		2
+	+tipoParam 1:		'int'
+	+tipoParam 2:		'int'
+	+tipoRetorno:		'boolean'
 -------------------------------------------

@@ -8,14 +8,16 @@ put msg ;
 
 put (f);
 
-put salto(); 
+put "holabuenas"; 
 
-return; 
+return f%5; 
 }
 
 
 function cadena string (boolean log)
 {
+let s string;
+s = "El factorial "; 
 if (log) {return s;}
 else {return"Fin";}
 
@@ -23,5 +25,6 @@ s = "El factorial ";
 put s;
 put
 "\nIntroduce un 'número'.";
+let num int;
 get num; 
 }

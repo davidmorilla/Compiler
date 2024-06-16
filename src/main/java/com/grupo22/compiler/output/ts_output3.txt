@@ -1,14 +1,58 @@
-TABLA DE LA FUNCION 'LOCAL' #1:
+TABLA LOCAL DE LA FUNCION 'imprime' #1:
+* LEXEMA : 's'
+	Atributos:
+	+tipo:		'string'
+	+despl:		0
+* LEXEMA : 'msg'
+	Atributos:
+	+tipo:		'string'
+	+despl:		128
+* LEXEMA : 'f'
+	Atributos:
+	+tipo:		'int'
+	+despl:		256
 -------------------------------------------
-TABLA DE LA FUNCION 'LOCAL' #2:
+TABLA LOCAL DE LA FUNCION 'cadena' #2:
+* LEXEMA : 'log'
+	Atributos:
+	+tipo:		'boolean'
+	+despl:		0
+* LEXEMA : 's'
+	Atributos:
+	+tipo:		'string'
+	+despl:		2
+* LEXEMA : 'num'
+	Atributos:
+	+tipo:		'int'
+	+despl:		130
 -------------------------------------------
 TABLA GLOBAL #0:
+* LEXEMA : 'For'
+	Atributos:
+	+tipo:		'int'
+	+despl:		0
+* LEXEMA : 'Do'
+	Atributos:
+	+tipo:		'int'
+	+despl:		2
+* LEXEMA : 'While'
+	Atributos:
+	+tipo:		'int'
+	+despl:		4
 * LEXEMA : 'imprime'
 	Atributos:
-	+tipo:		'funcion'
-	+despl:		0
+	+tipo:		'function'
+	+despl:		6
+	+numParam:		3
+	+tipoParam 1:		'string'
+	+tipoParam 2:		'string'
+	+tipoParam 3:		'int'
+	+tipoRetorno:		'int'
 * LEXEMA : 'cadena'
 	Atributos:
-	+tipo:		'funcion'
-	+despl:		0
+	+tipo:		'function'
+	+despl:		8
+	+numParam:		1
+	+tipoParam 1:		'boolean'
+	+tipoRetorno:		'string'
 -------------------------------------------

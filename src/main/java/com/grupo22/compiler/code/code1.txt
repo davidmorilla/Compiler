@@ -4,7 +4,10 @@ let number int ;
 put  "Introduce el primer operando " ;
 put "Introduce el segundo operando";get
     b;
-function operacion int (int num1, int num2)
+function operacion int (int num1, string num2)
 {
-    return num1%num2;
+    let a int=5; 
+    return num1%num3;
 }
+
+operacion(a,operacion(a,b));

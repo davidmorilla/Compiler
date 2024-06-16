@@ -164,6 +164,11 @@ public class TSControl {
 		System.out.println("varname::" + currentTS.getVarName(lexema));
 		currentTS.putSimbolo(currentTS.getVarName(lexema), Tipo);
 	}
+	
+	public void setTipoGlobal(int lexema, String tipo)
+	{
+		globalTS.setTipo(lexema, tipo);
+	}
 
 	public void setNombreTabla(String nombreTabla) {
 		if(!isGlobal) {
