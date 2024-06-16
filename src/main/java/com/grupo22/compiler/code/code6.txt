@@ -22,10 +22,10 @@ let _s string;
 	{
 	let kk string ;
 	let log boolean;
-	log= n == b ;
+	log= n == num ;
 	get kk;
 	
-	if (b && log) return log;
+	if (b && log) return n2;
 	return n % RRa (n % 1, bb);
 	}
 	
@@ -35,18 +35,18 @@ let _s1 int;
 
 	function cadena string (void)
 	{
-	get bb;
-	let xx int;
+	get a;
+	let xx string;
 	xx=_s;
 	if(bb) return _s;
 	}
 
 
-if(david)
-{return "";}
+if(_s==s)
+{put "";}
 
-
-sM= RR (a, bb, kk);
+function cadena string(void){}
+sM= RRa(a, bb);
 get id;
 put cadena();
 

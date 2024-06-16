@@ -1,0 +1,8 @@
+
+function operacion int (int num1, string num2)
+{
+    let a int=5; 
+    return num1%num3;
+}
+
+operacion(a, "prueba"); 

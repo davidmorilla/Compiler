@@ -37,7 +37,7 @@ public class Compiler {
 	public final static String TOKENS_OUTPUT_FORMAT = "src/main/java/com/grupo22/compiler/output/tokens_output%d.txt";
 	public final static String PARSE_OUTPUT_FORMAT = "src/main/java/com/grupo22/compiler/output/parse_output%d.txt";
 
-	final static int CODE_FILE_NUMBER = 10; //Cambiar aquí el numero de codigo de ejemplo a parsear
+	final static int CODE_FILE_NUMBER = 12; //Cambiar aquí el numero de codigo de ejemplo a parsear
 
 	public static void main (String args[]) {
 		String CODE_FILE_NAME = String.format(CODE_FILE_NAME_FORMAT, CODE_FILE_NUMBER);
@@ -578,7 +578,7 @@ public class Compiler {
 				}
 				if(!temp.getTipo().equals("string")&&!temp.getTipo().equals("int"))
 				{
-					throw new Exception("Tipo no valido para get(no es ni int ni string)");
+					throw new Exception("Tipo no valido para get(no es ni int ni string) en la linea "+line[0]+".");
 				}
 				token=A_lex(br, pointer, line, false);
 				if(token.getCod().equals("PYC")){
@@ -1109,7 +1109,7 @@ public class Compiler {
 			if(resD.getValue()){
 				//<ASEM>
 				String tipoD = resD.getKey()[0];
-				if(!tipo.equals(tipoD)){throw new Exception("Los tipos no coinciden en la condición");}
+				if(!tipo.equals(tipoD)){throw new Exception("Los tipos no coinciden en la condición en la linea "+line[0]+".");}
 				Entry<String[],Boolean> resM=M(br,pointer,line,tipoD);
 				String tipoM = resM.getKey()[0];
 
@@ -1381,7 +1381,7 @@ public class Compiler {
 			parser+="43 ";
 			token=A_lex(br, pointer, line, false);
 			Entry<String[],Boolean> resE = E(br, pointer, line);
-			EntryTS id=TSControl.getVar(funcionTratada.hashCode());
+			EntryTS id=TSControl.getVar(funcionInvocada.hashCode());
 
 			if(resE.getValue()){
 				if(id.getTipoParamXX(CuentaParametros)!=null && id.getTipoParamXX(CuentaParametros).equals(resE.getKey()[0])) {
@@ -1484,8 +1484,9 @@ public class Compiler {
 									if(token.codigo.equals("LLAVE") && ((int) token.atributo==1)){
 										dentroFuncion=false;
 										funcionTratada=null;
-										token=A_lex(br, pointer, line, false);
 										TSControl.destroyTS();
+										token=A_lex(br, pointer, line, false);
+										System.out.println("Hace destroy ahora");
 										return new SimpleEntry<String[],Boolean>(devolverArray("null"),true);
 									}else{return new SimpleEntry<String[],Boolean>(devolverArray("errorSin"),false);}
 								}else{return new SimpleEntry<String[],Boolean>(devolverArray("errorSin"),false);}

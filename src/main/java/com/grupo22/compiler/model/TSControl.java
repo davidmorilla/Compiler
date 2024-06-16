@@ -64,7 +64,7 @@ public class TSControl {
 			throw new IllegalStateException("No se puede eliminar la tabla de símbolos global\n");
 		}
 		isGlobal=true;
-		currentTS=globalTS;;
+		currentTS=globalTS;
 	}
 	/** Imprime la tabla de símbolos actual en el buffer de escritura abierto
 	 */

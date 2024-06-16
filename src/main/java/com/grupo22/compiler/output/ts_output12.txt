@@ -1,0 +1,531 @@
+TABLA LOCAL DE LA FUNCION 'processLargeNumberOfParams' #1:
+* LEXEMA : 'param1'
+	Atributos:
+	+tipo:		'int'
+	+despl:		0
+* LEXEMA : 'param2'
+	Atributos:
+	+tipo:		'int'
+	+despl:		2
+* LEXEMA : 'param3'
+	Atributos:
+	+tipo:		'int'
+	+despl:		4
+* LEXEMA : 'param4'
+	Atributos:
+	+tipo:		'int'
+	+despl:		6
+* LEXEMA : 'param5'
+	Atributos:
+	+tipo:		'int'
+	+despl:		8
+* LEXEMA : 'param6'
+	Atributos:
+	+tipo:		'int'
+	+despl:		10
+* LEXEMA : 'param7'
+	Atributos:
+	+tipo:		'int'
+	+despl:		12
+* LEXEMA : 'param8'
+	Atributos:
+	+tipo:		'int'
+	+despl:		14
+* LEXEMA : 'param9'
+	Atributos:
+	+tipo:		'int'
+	+despl:		16
+* LEXEMA : 'param10'
+	Atributos:
+	+tipo:		'int'
+	+despl:		18
+* LEXEMA : 'param11'
+	Atributos:
+	+tipo:		'int'
+	+despl:		20
+* LEXEMA : 'param12'
+	Atributos:
+	+tipo:		'int'
+	+despl:		22
+* LEXEMA : 'param13'
+	Atributos:
+	+tipo:		'int'
+	+despl:		24
+* LEXEMA : 'param14'
+	Atributos:
+	+tipo:		'int'
+	+despl:		26
+* LEXEMA : 'param15'
+	Atributos:
+	+tipo:		'int'
+	+despl:		28
+* LEXEMA : 'param16'
+	Atributos:
+	+tipo:		'int'
+	+despl:		30
+* LEXEMA : 'param17'
+	Atributos:
+	+tipo:		'int'
+	+despl:		32
+* LEXEMA : 'param18'
+	Atributos:
+	+tipo:		'int'
+	+despl:		34
+* LEXEMA : 'param19'
+	Atributos:
+	+tipo:		'int'
+	+despl:		36
+* LEXEMA : 'param20'
+	Atributos:
+	+tipo:		'int'
+	+despl:		38
+* LEXEMA : 'param21'
+	Atributos:
+	+tipo:		'int'
+	+despl:		40
+* LEXEMA : 'param22'
+	Atributos:
+	+tipo:		'int'
+	+despl:		42
+* LEXEMA : 'param23'
+	Atributos:
+	+tipo:		'int'
+	+despl:		44
+* LEXEMA : 'param24'
+	Atributos:
+	+tipo:		'int'
+	+despl:		46
+* LEXEMA : 'param25'
+	Atributos:
+	+tipo:		'int'
+	+despl:		48
+* LEXEMA : 'param26'
+	Atributos:
+	+tipo:		'int'
+	+despl:		50
+* LEXEMA : 'param27'
+	Atributos:
+	+tipo:		'int'
+	+despl:		52
+* LEXEMA : 'param28'
+	Atributos:
+	+tipo:		'int'
+	+despl:		54
+* LEXEMA : 'param29'
+	Atributos:
+	+tipo:		'int'
+	+despl:		56
+* LEXEMA : 'param30'
+	Atributos:
+	+tipo:		'int'
+	+despl:		58
+* LEXEMA : 'param31'
+	Atributos:
+	+tipo:		'int'
+	+despl:		60
+* LEXEMA : 'param32'
+	Atributos:
+	+tipo:		'int'
+	+despl:		62
+* LEXEMA : 'param33'
+	Atributos:
+	+tipo:		'int'
+	+despl:		64
+* LEXEMA : 'param34'
+	Atributos:
+	+tipo:		'int'
+	+despl:		66
+* LEXEMA : 'param35'
+	Atributos:
+	+tipo:		'int'
+	+despl:		68
+* LEXEMA : 'param36'
+	Atributos:
+	+tipo:		'int'
+	+despl:		70
+* LEXEMA : 'param37'
+	Atributos:
+	+tipo:		'int'
+	+despl:		72
+* LEXEMA : 'param38'
+	Atributos:
+	+tipo:		'int'
+	+despl:		74
+* LEXEMA : 'param39'
+	Atributos:
+	+tipo:		'int'
+	+despl:		76
+* LEXEMA : 'param40'
+	Atributos:
+	+tipo:		'int'
+	+despl:		78
+* LEXEMA : 'param41'
+	Atributos:
+	+tipo:		'int'
+	+despl:		80
+* LEXEMA : 'param42'
+	Atributos:
+	+tipo:		'int'
+	+despl:		82
+* LEXEMA : 'param43'
+	Atributos:
+	+tipo:		'int'
+	+despl:		84
+* LEXEMA : 'param44'
+	Atributos:
+	+tipo:		'int'
+	+despl:		86
+* LEXEMA : 'param45'
+	Atributos:
+	+tipo:		'int'
+	+despl:		88
+* LEXEMA : 'param46'
+	Atributos:
+	+tipo:		'int'
+	+despl:		90
+* LEXEMA : 'param47'
+	Atributos:
+	+tipo:		'int'
+	+despl:		92
+* LEXEMA : 'param48'
+	Atributos:
+	+tipo:		'int'
+	+despl:		94
+* LEXEMA : 'param49'
+	Atributos:
+	+tipo:		'int'
+	+despl:		96
+* LEXEMA : 'param50'
+	Atributos:
+	+tipo:		'int'
+	+despl:		98
+* LEXEMA : 'param51'
+	Atributos:
+	+tipo:		'int'
+	+despl:		100
+* LEXEMA : 'param52'
+	Atributos:
+	+tipo:		'int'
+	+despl:		102
+* LEXEMA : 'param53'
+	Atributos:
+	+tipo:		'int'
+	+despl:		104
+* LEXEMA : 'param54'
+	Atributos:
+	+tipo:		'int'
+	+despl:		106
+* LEXEMA : 'param55'
+	Atributos:
+	+tipo:		'int'
+	+despl:		108
+* LEXEMA : 'param56'
+	Atributos:
+	+tipo:		'int'
+	+despl:		110
+* LEXEMA : 'param57'
+	Atributos:
+	+tipo:		'int'
+	+despl:		112
+* LEXEMA : 'param58'
+	Atributos:
+	+tipo:		'int'
+	+despl:		114
+* LEXEMA : 'param59'
+	Atributos:
+	+tipo:		'int'
+	+despl:		116
+* LEXEMA : 'param60'
+	Atributos:
+	+tipo:		'int'
+	+despl:		118
+* LEXEMA : 'param61'
+	Atributos:
+	+tipo:		'int'
+	+despl:		120
+* LEXEMA : 'param62'
+	Atributos:
+	+tipo:		'int'
+	+despl:		122
+* LEXEMA : 'param63'
+	Atributos:
+	+tipo:		'int'
+	+despl:		124
+* LEXEMA : 'param64'
+	Atributos:
+	+tipo:		'int'
+	+despl:		126
+* LEXEMA : 'param65'
+	Atributos:
+	+tipo:		'int'
+	+despl:		128
+* LEXEMA : 'param66'
+	Atributos:
+	+tipo:		'int'
+	+despl:		130
+* LEXEMA : 'param67'
+	Atributos:
+	+tipo:		'int'
+	+despl:		132
+* LEXEMA : 'param68'
+	Atributos:
+	+tipo:		'int'
+	+despl:		134
+* LEXEMA : 'param69'
+	Atributos:
+	+tipo:		'int'
+	+despl:		136
+* LEXEMA : 'param70'
+	Atributos:
+	+tipo:		'int'
+	+despl:		138
+* LEXEMA : 'param71'
+	Atributos:
+	+tipo:		'int'
+	+despl:		140
+* LEXEMA : 'param72'
+	Atributos:
+	+tipo:		'int'
+	+despl:		142
+* LEXEMA : 'param73'
+	Atributos:
+	+tipo:		'int'
+	+despl:		144
+* LEXEMA : 'param74'
+	Atributos:
+	+tipo:		'int'
+	+despl:		146
+* LEXEMA : 'param75'
+	Atributos:
+	+tipo:		'int'
+	+despl:		148
+* LEXEMA : 'param76'
+	Atributos:
+	+tipo:		'int'
+	+despl:		150
+* LEXEMA : 'param77'
+	Atributos:
+	+tipo:		'int'
+	+despl:		152
+* LEXEMA : 'param78'
+	Atributos:
+	+tipo:		'int'
+	+despl:		154
+* LEXEMA : 'param79'
+	Atributos:
+	+tipo:		'int'
+	+despl:		156
+* LEXEMA : 'param80'
+	Atributos:
+	+tipo:		'int'
+	+despl:		158
+* LEXEMA : 'param81'
+	Atributos:
+	+tipo:		'int'
+	+despl:		160
+* LEXEMA : 'param82'
+	Atributos:
+	+tipo:		'int'
+	+despl:		162
+* LEXEMA : 'param83'
+	Atributos:
+	+tipo:		'int'
+	+despl:		164
+* LEXEMA : 'param84'
+	Atributos:
+	+tipo:		'int'
+	+despl:		166
+* LEXEMA : 'param85'
+	Atributos:
+	+tipo:		'int'
+	+despl:		168
+* LEXEMA : 'param86'
+	Atributos:
+	+tipo:		'int'
+	+despl:		170
+* LEXEMA : 'param87'
+	Atributos:
+	+tipo:		'int'
+	+despl:		172
+* LEXEMA : 'param88'
+	Atributos:
+	+tipo:		'int'
+	+despl:		174
+* LEXEMA : 'param89'
+	Atributos:
+	+tipo:		'int'
+	+despl:		176
+* LEXEMA : 'param90'
+	Atributos:
+	+tipo:		'int'
+	+despl:		178
+* LEXEMA : 'param91'
+	Atributos:
+	+tipo:		'int'
+	+despl:		180
+* LEXEMA : 'param92'
+	Atributos:
+	+tipo:		'int'
+	+despl:		182
+* LEXEMA : 'param93'
+	Atributos:
+	+tipo:		'int'
+	+despl:		184
+* LEXEMA : 'param94'
+	Atributos:
+	+tipo:		'int'
+	+despl:		186
+* LEXEMA : 'param95'
+	Atributos:
+	+tipo:		'int'
+	+despl:		188
+* LEXEMA : 'param96'
+	Atributos:
+	+tipo:		'int'
+	+despl:		190
+* LEXEMA : 'param97'
+	Atributos:
+	+tipo:		'int'
+	+despl:		192
+* LEXEMA : 'param98'
+	Atributos:
+	+tipo:		'int'
+	+despl:		194
+* LEXEMA : 'param99'
+	Atributos:
+	+tipo:		'int'
+	+despl:		196
+* LEXEMA : 'param100'
+	Atributos:
+	+tipo:		'int'
+	+despl:		198
+* LEXEMA : 'sum'
+	Atributos:
+	+tipo:		'int'
+	+despl:		200
+-------------------------------------------
+TABLA LOCAL DE LA FUNCION 'main' #2:
+* LEXEMA : 'args'
+	Atributos:
+	+tipo:		'string'
+	+despl:		0
+* LEXEMA : 'a'
+	Atributos:
+	+tipo:		'int'
+	+despl:		128
+-------------------------------------------
+TABLA GLOBAL #0:
+* LEXEMA : 'processLargeNumberOfParams'
+	Atributos:
+	+tipo:		'function'
+	+despl:		0
+	+numParam:		100
+	+tipoParam 1:		'int'
+	+tipoParam 2:		'int'
+	+tipoParam 3:		'int'
+	+tipoParam 4:		'int'
+	+tipoParam 5:		'int'
+	+tipoParam 6:		'int'
+	+tipoParam 7:		'int'
+	+tipoParam 8:		'int'
+	+tipoParam 9:		'int'
+	+tipoParam 10:		'int'
+	+tipoParam 11:		'int'
+	+tipoParam 12:		'int'
+	+tipoParam 13:		'int'
+	+tipoParam 14:		'int'
+	+tipoParam 15:		'int'
+	+tipoParam 16:		'int'
+	+tipoParam 17:		'int'
+	+tipoParam 18:		'int'
+	+tipoParam 19:		'int'
+	+tipoParam 20:		'int'
+	+tipoParam 21:		'int'
+	+tipoParam 22:		'int'
+	+tipoParam 23:		'int'
+	+tipoParam 24:		'int'
+	+tipoParam 25:		'int'
+	+tipoParam 26:		'int'
+	+tipoParam 27:		'int'
+	+tipoParam 28:		'int'
+	+tipoParam 29:		'int'
+	+tipoParam 30:		'int'
+	+tipoParam 31:		'int'
+	+tipoParam 32:		'int'
+	+tipoParam 33:		'int'
+	+tipoParam 34:		'int'
+	+tipoParam 35:		'int'
+	+tipoParam 36:		'int'
+	+tipoParam 37:		'int'
+	+tipoParam 38:		'int'
+	+tipoParam 39:		'int'
+	+tipoParam 40:		'int'
+	+tipoParam 41:		'int'
+	+tipoParam 42:		'int'
+	+tipoParam 43:		'int'
+	+tipoParam 44:		'int'
+	+tipoParam 45:		'int'
+	+tipoParam 46:		'int'
+	+tipoParam 47:		'int'
+	+tipoParam 48:		'int'
+	+tipoParam 49:		'int'
+	+tipoParam 50:		'int'
+	+tipoParam 51:		'int'
+	+tipoParam 52:		'int'
+	+tipoParam 53:		'int'
+	+tipoParam 54:		'int'
+	+tipoParam 55:		'int'
+	+tipoParam 56:		'int'
+	+tipoParam 57:		'int'
+	+tipoParam 58:		'int'
+	+tipoParam 59:		'int'
+	+tipoParam 60:		'int'
+	+tipoParam 61:		'int'
+	+tipoParam 62:		'int'
+	+tipoParam 63:		'int'
+	+tipoParam 64:		'int'
+	+tipoParam 65:		'int'
+	+tipoParam 66:		'int'
+	+tipoParam 67:		'int'
+	+tipoParam 68:		'int'
+	+tipoParam 69:		'int'
+	+tipoParam 70:		'int'
+	+tipoParam 71:		'int'
+	+tipoParam 72:		'int'
+	+tipoParam 73:		'int'
+	+tipoParam 74:		'int'
+	+tipoParam 75:		'int'
+	+tipoParam 76:		'int'
+	+tipoParam 77:		'int'
+	+tipoParam 78:		'int'
+	+tipoParam 79:		'int'
+	+tipoParam 80:		'int'
+	+tipoParam 81:		'int'
+	+tipoParam 82:		'int'
+	+tipoParam 83:		'int'
+	+tipoParam 84:		'int'
+	+tipoParam 85:		'int'
+	+tipoParam 86:		'int'
+	+tipoParam 87:		'int'
+	+tipoParam 88:		'int'
+	+tipoParam 89:		'int'
+	+tipoParam 90:		'int'
+	+tipoParam 91:		'int'
+	+tipoParam 92:		'int'
+	+tipoParam 93:		'int'
+	+tipoParam 94:		'int'
+	+tipoParam 95:		'int'
+	+tipoParam 96:		'int'
+	+tipoParam 97:		'int'
+	+tipoParam 98:		'int'
+	+tipoParam 99:		'int'
+	+tipoParam 100:		'int'
+	+tipoRetorno:		'int'
+* LEXEMA : 'main'
+	Atributos:
+	+tipo:		'function'
+	+despl:		0
+	+numParam:		1
+	+tipoParam 1:		'string'
+	+tipoRetorno:		'void'
+-------------------------------------------

@@ -1,20 +1,108 @@
-TABLA DE LA FUNCION 'LOCAL' #1:
+TABLA LOCAL DE LA FUNCION 'operacion' #1:
+* LEXEMA : 's'
+	Atributos:
+	+tipo:		'string'
+	+despl:		0
+* LEXEMA : 'RR'
+	Atributos:
+	+tipo:		'int'
+	+despl:		128
+* LEXEMA : '_s'
+	Atributos:
+	+tipo:		'boolean'
+	+despl:		130
 -------------------------------------------
-TABLA DE LA FUNCION 'LOCAL' #2:
+TABLA LOCAL DE LA FUNCION 'RRa' #2:
+* LEXEMA : 'n'
+	Atributos:
+	+tipo:		'int'
+	+despl:		0
+* LEXEMA : 'b'
+	Atributos:
+	+tipo:		'boolean'
+	+despl:		2
+* LEXEMA : 'kk'
+	Atributos:
+	+tipo:		'string'
+	+despl:		4
+* LEXEMA : 'log'
+	Atributos:
+	+tipo:		'boolean'
+	+despl:		132
 -------------------------------------------
-TABLA DE LA FUNCION 'LOCAL' #3:
+TABLA LOCAL DE LA FUNCION 'cadena' #3:
+* LEXEMA : 'xx'
+	Atributos:
+	+tipo:		'string'
+	+despl:		0
+-------------------------------------------
+TABLA LOCAL DE LA FUNCION 'cadena' #4:
 -------------------------------------------
 TABLA GLOBAL #0:
+* LEXEMA : 's'
+	Atributos:
+	+tipo:		'string'
+	+despl:		0
+* LEXEMA : 'a'
+	Atributos:
+	+tipo:		'int'
+	+despl:		128
+* LEXEMA : 'bb'
+	Atributos:
+	+tipo:		'boolean'
+	+despl:		130
 * LEXEMA : 'operacion'
 	Atributos:
-	+tipo:		'funcion'
-	+despl:		0
+	+tipo:		'function'
+	+despl:		132
+	+numParam:		2
+	+tipoParam 1:		'string'
+	+tipoParam 2:		'int'
+	+tipoRetorno:		'void'
+* LEXEMA : 'kk'
+	Atributos:
+	+tipo:		'int'
+	+despl:		132
+* LEXEMA : '_s'
+	Atributos:
+	+tipo:		'string'
+	+despl:		134
 * LEXEMA : 'RRa'
 	Atributos:
-	+tipo:		'funcion'
-	+despl:		0
+	+tipo:		'function'
+	+despl:		262
+	+numParam:		2
+	+tipoParam 1:		'int'
+	+tipoParam 2:		'boolean'
+	+tipoRetorno:		'int'
+* LEXEMA : 'num'
+	Atributos:
+	+tipo:		'int'
+	+despl:		262
+* LEXEMA : 'n2'
+	Atributos:
+	+tipo:		'int'
+	+despl:		264
+* LEXEMA : 'RR'
+	Atributos:
+	+tipo:		'int'
+	+despl:		266
+* LEXEMA : '_s1'
+	Atributos:
+	+tipo:		'int'
+	+despl:		268
 * LEXEMA : 'cadena'
 	Atributos:
-	+tipo:		'funcion'
-	+despl:		0
+	+tipo:		'function'
+	+despl:		270
+	+numParam:		0
+	+tipoRetorno:		'string'
+* LEXEMA : 'sM'
+	Atributos:
+	+tipo:		'int'
+	+despl:		270
+* LEXEMA : 'id'
+	Atributos:
+	+tipo:		'int'
+	+despl:		272
 -------------------------------------------

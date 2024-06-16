@@ -1,23 +1,32 @@
-TABLA LOCAL DE LA FUNCION 'a' #1:
-* LEXEMA : 'b'
+TABLA LOCAL DE LA FUNCION 'operacion' #1:
+* LEXEMA : 'num1'
 	Atributos:
 	+tipo:		'int'
 	+despl:		0
-* LEXEMA : 'aa'
+* LEXEMA : 'num2'
+	Atributos:
+	+tipo:		'string'
+	+despl:		2
+* LEXEMA : 'a'
 	Atributos:
 	+tipo:		'int'
-	+despl:		2
+	+despl:		130
 -------------------------------------------
 TABLA GLOBAL #0:
-* LEXEMA : 'a'
+* LEXEMA : 'operacion'
 	Atributos:
 	+tipo:		'function'
 	+despl:		0
-	+numParam:		1
+	+numParam:		2
 	+tipoParam 1:		'int'
+	+tipoParam 2:		'string'
 	+tipoRetorno:		'int'
-* LEXEMA : 'aa'
+* LEXEMA : 'num3'
 	Atributos:
 	+tipo:		'int'
 	+despl:		0
+* LEXEMA : 'a'
+	Atributos:
+	+tipo:		'int'
+	+despl:		2
 -------------------------------------------
