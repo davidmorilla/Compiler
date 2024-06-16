@@ -64,7 +64,7 @@ public class EntryTS {
      */
     public String getTipoParamXX(int index) {
     	System.out.println("linea 66 entryts: "+index);
-    	if(tipoParamXX.size()>=index) return null;
+    	if(numParam<=index) return null;
         return tipoParamXX.get(index);
     }
     /**

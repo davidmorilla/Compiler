@@ -5,7 +5,7 @@
 	let zv int;
 	put "Escriba \"tres\" números: ";
 	get v1; get v2; get v3;
-	if (v3 == 0) return;
+	if (v3 == 0) return true;
 	
 		if (((v1 == v2) && (v1 == v3))) /* NOT ((v1 igual a v2) AND (v1 distinto de v3)) */
 		{
@@ -24,24 +24,17 @@
 		}
 		
 	s = "El primer valor era ";
-		if (v1 == 0)
-		{
-			put (s); put v1; put ".\n";
-		}
-		else
-		{
-		put s; 
-		imprimeSuma(uno, UNO); 
-		put (".\n");
-	
-		}
-	potencia (v0, 4);
+	if (v1 == 0)
+	{
+		put (s); put v1; put ".\n";
+	}
+	else
+	{
+	put s; 
+	put (".\n");
+	}
 	let i int;
-	for (i);
 	
-	potencia (zv, 5);
-	imprimeSuma (i, num);
-	imprime ("", cadena(true), 666);
 	}
 	demo();
 	/* esto constituye la llamada a una función sin argumentos.

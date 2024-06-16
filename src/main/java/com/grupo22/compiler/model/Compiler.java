@@ -37,7 +37,7 @@ public class Compiler {
 	public final static String TOKENS_OUTPUT_FORMAT = "src/main/java/com/grupo22/compiler/output/tokens_output%d.txt";
 	public final static String PARSE_OUTPUT_FORMAT = "src/main/java/com/grupo22/compiler/output/parse_output%d.txt";
 
-	final static int CODE_FILE_NUMBER = 1; //Cambiar aquí el numero de codigo de ejemplo a parsear
+	final static int CODE_FILE_NUMBER = 5; //Cambiar aquí el numero de codigo de ejemplo a parsear
 
 	public static void main (String args[]) {
 		String CODE_FILE_NAME = String.format(CODE_FILE_NAME_FORMAT, CODE_FILE_NUMBER);
@@ -569,14 +569,9 @@ public class Compiler {
 			token=A_lex(br, pointer, line, false);
 			if(token.getCod().equals("TABLEID")){
 				EntryTS temp = TSControl.getVar((int) token.atributo);
-				if(temp==null)
+				if(temp.getTipo()==null)
 				{
-					temp = TSControl.getFromGlobal((int) token.atributo);
-					if(temp.getTipo()==null)
-					{
-						TSControl.setTipoGlobal((int) token.atributo, "int");
-					}
-					//return new SimpleEntry<String[],Boolean>(devolverArray("errorSem"),true);
+					TSControl.setTipoGlobal((int) token.atributo, "int");
 				}
 				if(!temp.getTipo().equals("string")&&!temp.getTipo().equals("int"))
 				{
@@ -617,7 +612,7 @@ public class Compiler {
 					throw new Exception("Return declarado fuera del ambito de la función.");
 				}
 				if(!resX.getKey()[0].equals(TSControl.getVar(funcionTratada.hashCode()).getTipoRetorno())) {
-					throw new Exception("El tipo del elemento devuelto no coincide  con el tipo de return de la funcion.");
+					throw new Exception("El tipo del elemento devuelto no coincide  con el tipo de return de la funcion en la linea "+line[0]+".");
 					//genError(31, line[0], funcionTratada +"#"+TSControl.getVar(funcionTratada.hashCode()).getTipoRetorno() +"#" +resX.getKey()[0] );
 					//return new SimpleEntry<String[],Boolean>(devolverArray("errorSem"),false);
 				}
@@ -1334,7 +1329,7 @@ public class Compiler {
 			parser+="41 ";
 			if(funcionInvocada==null)
 			{
-				throw new Exception("Se ha intentado usar una funcion con identificador de otro que no es de tipo function.");
+				throw new Exception("Se ha intentado usar una funcion con identificador de otro que no es de tipo function en la linea "+line[0]+".");
 			}
 			Entry<String[],Boolean> resE=E(br, pointer, line);
 			EntryTS id=TSControl.getVar(funcionInvocada.hashCode());

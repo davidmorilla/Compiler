@@ -1,8 +1,38 @@
-TABLA DE LA FUNCION 'LOCAL' #1:
+TABLA LOCAL DE LA FUNCION 'demo' #1:
+* LEXEMA : 'v1'
+	Atributos:
+	+tipo:		'int'
+	+despl:		0
+* LEXEMA : 'zv'
+	Atributos:
+	+tipo:		'int'
+	+despl:		2
+* LEXEMA : 's'
+	Atributos:
+	+tipo:		'string'
+	+despl:		4
+* LEXEMA : 'v0'
+	Atributos:
+	+tipo:		'int'
+	+despl:		132
+* LEXEMA : 'i'
+	Atributos:
+	+tipo:		'int'
+	+despl:		134
 -------------------------------------------
 TABLA GLOBAL #0:
 * LEXEMA : 'demo'
 	Atributos:
-	+tipo:		'funcion'
+	+tipo:		'function'
 	+despl:		0
+	+numParam:		0
+	+tipoRetorno:		'boolean'
+* LEXEMA : 'v2'
+	Atributos:
+	+tipo:		'int'
+	+despl:		0
+* LEXEMA : 'v3'
+	Atributos:
+	+tipo:		'int'
+	+despl:		2
 -------------------------------------------
