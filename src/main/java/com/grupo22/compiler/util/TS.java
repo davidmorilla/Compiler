@@ -37,7 +37,7 @@ public class TS {
 	 * @param nombre nombre (string) del identificador
 	 */
 	public void putSimboloLex(String nombre){
-		System.out.println("putsimbololex: " + nombre.hashCode());
+		//System.out.println("putsimbololex: " + nombre.hashCode());
 		__hm__ts__.put(nombre, nombre.hashCode());
 		__lex_to_name.put(nombre.hashCode(), nombre);
 
@@ -57,7 +57,7 @@ public class TS {
 		__hm__ts__.put(nombreVar, nombreVar.hashCode());
 		__lex_to_name.put(nombreVar.hashCode(), nombreVar);
 		simbolos.put(nombreVar.hashCode(),new EntryTS(nombreVar, nombreVar.hashCode(), despl, tipo));
-		System.out.println("holahola" + simbolos.toString());
+		//System.out.println("holahola" + simbolos.toString());
 		despl+=getTamTipo(tipo);
 		return 0;
 	}
@@ -90,7 +90,7 @@ public class TS {
 	 * @return el nombre de la variable
 	 */
 	public EntryTS getVar(int lexema){
-		System.out.println(simbolos.toString());
+		//System.out.println(simbolos.toString());
 		if(existe(lexema)) {
 			return simbolos.get(lexema);
 		} else if (__lex_to_name.containsKey(lexema)){
@@ -105,8 +105,8 @@ public class TS {
 	 * @return null si no existe y el nombre de la variable tambien.
 	 */
 	public String getVarName(int lexema){
-		System.out.println(__lex_to_name.toString());
-		System.out.println("98: " +getNombreTabla()+ __lex_to_name.get(lexema));
+		//System.out.println(__lex_to_name.toString());
+		//System.out.println("98: " +getNombreTabla()+ __lex_to_name.get(lexema));
 		return __lex_to_name.get(lexema);
 	}
 	/**
@@ -154,8 +154,8 @@ public class TS {
 	 */
 	public void setParameters(String nombreVar,String tipoRetorno, Integer numParam, List<String> tipoParamXX, String EtiqFuncion,String tipo){
 		//System.out.println(simbolos==null);
-		System.out.println(nombreVar==null);
-		System.out.println(simbolos.toString());
+		//System.out.println(nombreVar==null);
+		//System.out.println(simbolos.toString());
 		EntryTS entry=simbolos.get(nombreVar.hashCode());
 		if(tipoRetorno!=null){
 			entry.setTipoRetorno(tipoRetorno);

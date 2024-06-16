@@ -1,0 +1,7 @@
+function a int (int b){
+	let aa int = a(5);
+}
+
+aa=7;
+
+a(aa);

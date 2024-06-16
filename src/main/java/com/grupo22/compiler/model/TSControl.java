@@ -43,7 +43,7 @@ public class TSControl {
 		return isGlobal;
 	}
 	public void createTS(String nombreFuncion) throws IllegalStateException{
-		System.out.println("SE HA CREADO 1");
+		//System.out.println("SE HA CREADO 1");
 		if(isGlobal) {
 			currentTS=new TS(nombreFuncion);
 			isGlobal=false;
@@ -56,7 +56,7 @@ public class TSControl {
 	 *  @implSpec Automaticamente actualiza TS a la tabla de simbolos global e imprime en el buffer de escritura abierto la tabla de simbolos local que acaba de destruirse
 	 */
 	public void destroyTS() throws IllegalStateException{
-		System.out.println("SE HA BORRADO 1" +isGlobal);
+		//System.out.println("SE HA BORRADO 1" +isGlobal);
 
 		printTS();
 		//isGlobal=true;
@@ -161,7 +161,7 @@ public class TSControl {
 		currentTS.putSimboloLex(nombreVar);
 	}
 	public void putSimbolo(int lexema, String Tipo){
-		System.out.println("varname::" + currentTS.getVarName(lexema));
+		//System.out.println("varname::" + currentTS.getVarName(lexema));
 		currentTS.putSimbolo(currentTS.getVarName(lexema), Tipo);
 	}
 	

@@ -27,8 +27,8 @@ public class Compiler {
 	static boolean hayError=false;
 	static int hashFuncion=-1;
 	static ArrayList<String> TiposParametros;
-	static boolean dentroFuncion=false;
-	static boolean declaracionExplicita=false;
+	static boolean dentroFuncion;
+	static boolean declaracionExplicita;
 	static String funcionTratada;
 	static String funcionInvocada;
 	//static boolean invocada=false;
@@ -37,7 +37,7 @@ public class Compiler {
 	public final static String TOKENS_OUTPUT_FORMAT = "src/main/java/com/grupo22/compiler/output/tokens_output%d.txt";
 	public final static String PARSE_OUTPUT_FORMAT = "src/main/java/com/grupo22/compiler/output/parse_output%d.txt";
 
-	final static int CODE_FILE_NUMBER = 5; //Cambiar aquí el numero de codigo de ejemplo a parsear
+	final static int CODE_FILE_NUMBER = 10; //Cambiar aquí el numero de codigo de ejemplo a parsear
 
 	public static void main (String args[]) {
 		String CODE_FILE_NAME = String.format(CODE_FILE_NAME_FORMAT, CODE_FILE_NUMBER);
@@ -265,26 +265,26 @@ public class Compiler {
 			return genToken("TRUE","");
 		default: 
 			//if((TSControl.existeLex(palabra) ==-1 || (!TSControl.isGlobal() && TSControl.existeLex(palabra) == 0 )) { 
-			System.out.println("Comprobamos el estado de los tableid para "+palabra+" boolGlobal "+TSControl.isGlobal()+" existeLex "+TSControl.existeLex(palabra)+" declaracionExplicita "+declaracionExplicita);
+			//System.out.println("Comprobamos el estado de los tableid para "+palabra+" boolGlobal "+TSControl.isGlobal()+" existeLex "+TSControl.existeLex(palabra)+" declaracionExplicita "+declaracionExplicita);
 			if(!TSControl.isGlobal()&&(TSControl.existeLex(palabra)==0||TSControl.existeLex(palabra)==-1)&&declaracionExplicita) { 
 				//__hm__ts__.put(palabra,palabra.hashCode()); //modificado 3/01/23 21:23, anterior: __hm__ts__.put(palabra,contadovich++);
-				System.out.println("entra en la 1a con: "+palabra);
+				//System.out.println("entra en la 1a con: "+palabra);
 				TSControl.putSimbolo(palabra);
 			}
 			else if((!TSControl.isGlobal()&&TSControl.existeLex(palabra)==-1&&!declaracionExplicita)||((TSControl.isGlobal()&&TSControl.existeLex(palabra)==-1&&!declaracionExplicita)))
 			{
-				System.out.println("entra en la 2a con: "+palabra);
+				//System.out.println("entra en la 2a con: "+palabra);
 				TSControl.putSimboloEnGlobal(palabra,null);
 			}
 			else if(TSControl.isGlobal()&&TSControl.existeLex(palabra)==-1)
 			{
-				System.out.println("entra en la 3a con: "+palabra);
+				//System.out.println("entra en la 3a con: "+palabra);
 				TSControl.putSimbolo(palabra);				
 			}
 			else if((!TSControl.isGlobal()&&TSControl.existeLex(palabra)==1&&declaracionExplicita)||(TSControl.isGlobal()&&TSControl.existeLex(palabra)==0&&declaracionExplicita)){
 				genError(17, line, palabra);
 			}
-			System.out.println(palabra + palabra.hashCode());
+			//System.out.println(palabra + palabra.hashCode());
 			return genToken("TABLEID",palabra.hashCode());	//TABLEID TIENE QUE SER UN NUMERO!!
 		}
 	}
@@ -463,6 +463,8 @@ public class Compiler {
 		TSControl = new TSControl(CODE_FILE_NUMBER);
 		String funcionTratada=null;
 		String funcionInvocada=null;
+		dentroFuncion=false;
+		declaracionExplicita=false;
 		if(P(br, pointer, line).getValue()) {
 			return new SimpleEntry<String[], Boolean>(devolverArray("null"), true);
 		} else {
@@ -506,7 +508,7 @@ public class Compiler {
 	}
 
 	private static Entry<String[],Boolean> S(BufferedReader br, char[] pointer, int[] line) throws Exception {
-		System.out.println("el token en este primer momento es "+ token.getCod() +"con valor "+token.getAtr());
+		//System.out.println("el token en este primer momento es "+ token.getCod() +"con valor "+token.getAtr());
 		if(token.getCod().equals("TABLEID")){			
 			parser+="5 ";
 			EntryTS temp = TSControl.getVar((int) token.atributo);
@@ -514,6 +516,7 @@ public class Compiler {
 				//cebes
 				TSControl.putSimboloEnGlobal(temp.getNombreVar(), "funcion");
 			}*/
+			System.out.println("lexema del problema "+token.atributo);
 			if(temp.getTipo()==null)
 			{
 				TSControl.setTipoGlobal((int) token.atributo, "int");
@@ -523,13 +526,13 @@ public class Compiler {
 			}
 			token=A_lex(br, pointer, line, false);
 			Entry<String[],Boolean> resZ= Z(br,pointer,line);
-			System.out.println("despues de Z es "+ token.getCod());
-			System.out.println("los tipos son "+ resZ.getKey()[0] + " y "+temp.getTipoRetorno());
+			//System.out.println("despues de Z es "+ token.getCod());
+			//System.out.println("los tipos son "+ resZ.getKey()[0] + " y "+temp.getTipoRetorno());
 			if(resZ.getValue()) {
 				if(resZ.getKey()[0].equals(temp.getTipo()) || resZ.getKey()[0].equals("null") ) {
 					return new SimpleEntry<String[], Boolean>(devolverArray("null"), true);
 				}else {
-					System.out.println("el token en este momento es "+ token.getCod());
+					//System.out.println("el token en este momento es "+ token.getCod());
 					throw new Exception("Los tipos no son coincidentes en la linea "+line[0]);
 				}
 			}else {
@@ -606,8 +609,8 @@ public class Compiler {
 
 			if(resX.getValue()){
 				//Tipo de X no coincide con TipoRetorno
-				System.out.println("Comprobar funcion en S-8 : "+funcionTratada);
-				if(funcionTratada==null)
+				//System.out.println("Comprobar funcion en S-8 : "+funcionTratada);
+				if(TSControl.isGlobal())
 				{
 					throw new Exception("Return declarado fuera del ambito de la función.");
 				}
@@ -708,7 +711,7 @@ public class Compiler {
 				{
 					funcionInvocada=null;
 					token=A_lex(br, pointer, line, false);
-					System.out.println(token.codigo);
+					//System.out.println(token.codigo);
 					if(token.codigo.equals("PYC")){	
 						token=A_lex(br, pointer, line, false);
 						return new SimpleEntry<String[],Boolean>(devolverArray("function"),true);
@@ -828,7 +831,7 @@ public class Compiler {
 				int lexem=(int)token.getAtr();
 				//</ASEM>
 				token=A_lex(br, pointer, line, false);
-				System.out.println(token.toString());
+				//System.out.println(token.toString());
 				Entry <String[],Boolean> resT=T(br,pointer,line);
 				if(resT.getValue())
 				{
@@ -838,7 +841,7 @@ public class Compiler {
 						//<ASEM>
 						String tipoDeclarado = resT.getKey()[0];
 						String tipoAsignado = resW.getKey()[0];
-						System.out.println("Atr:"+token.atributo.equals(""));
+						//System.out.println("Atr:"+token.atributo.equals(""));
 						if(tipoAsignado.equals("null")) { //no hay asignacion solo declaracion
 							TSControl.putSimbolo(lexem, tipoDeclarado);
 						}else if(tipoDeclarado.equals(tipoAsignado)) {
@@ -987,7 +990,7 @@ public class Compiler {
 				if(resJ.getValue()){
 					//<ASEM>
 					String tipoJ = resJ.getKey()[0];
-					System.out.println("TIPOOOOOS:"+tipoJ + tipoG);
+					//System.out.println("TIPOOOOOS:"+tipoJ + tipoG);
 					if(tipoJ.equals("boolean")) {
 						if(!tipoG.equals("boolean"))
 						{		
@@ -1022,7 +1025,7 @@ public class Compiler {
 				if(tipoG.equals("boolean")) {
 					Entry<String[],Boolean> resJ=J(br,pointer,line);
 					String tipoJ = resJ.getKey()[0];
-					System.out.println("A ver que pasa tipo1 "+tipoG+" tipo2 "+tipoJ);
+					//System.out.println("A ver que pasa tipo1 "+tipoG+" tipo2 "+tipoJ);
 						return new SimpleEntry<String[],Boolean>(devolverArray("boolean"),true);
 				}else {
 					genError(30, line[0], resG.getKey()[0] + "#boolean");
@@ -1202,14 +1205,14 @@ public class Compiler {
 				//cebes
 				TSControl.putSimboloEnGlobal(temp.getNombreVar(), "funcion");
 			}*/
-			System.out.println("Prueba I:aqui entra");
+			//System.out.println("Prueba I:aqui entra");
 			//temp = TSControl.getFromGlobal((int) token.atributo);
 			if(temp.getTipo()==null)
 			{
 				TSControl.setTipoGlobal((int) token.atributo, "int");
 			}
 			//TSControl.destroyTS();
-			System.out.println("Prueba I: "+temp);
+			//System.out.println("Prueba I: "+temp);
 			if(temp.getTipo().equals("function")){
 				funcionInvocada=TSControl.getNameFromGlobal((int)token.getAtr());
 			}
@@ -1333,7 +1336,7 @@ public class Compiler {
 			}
 			Entry<String[],Boolean> resE=E(br, pointer, line);
 			EntryTS id=TSControl.getVar(funcionInvocada.hashCode());
-			System.out.println("funcion en curso "+ funcionInvocada);
+			//System.out.println("funcion en curso "+ funcionInvocada);
 			if(id.getTipoParamXX(CuentaParametros)!=null && id.getTipoParamXX(CuentaParametros).equals(resE.getKey()[0])) {
 				CuentaParametros++;
 				
@@ -1387,7 +1390,7 @@ public class Compiler {
 
 					//NO ENTIENDO BIEN ESTE ERROR
 					//HABER ESTUDIAO
-					System.out.println("CuentaParametros tiene valor: "+CuentaParametros);
+					//System.out.println("CuentaParametros tiene valor: "+CuentaParametros);
 					throw new Exception("La funcion no tiene tantos parametros originalmente o el tipo del argumento usado como parametro no es el correcto en linea "+line[0]);
 					//return new SimpleEntry<String[],Boolean>(devolverArray("errorSem"),false);
 				}
@@ -1400,7 +1403,7 @@ public class Compiler {
 			parser+="44 ";
 			EntryTS id=TSControl.getVar(funcionInvocada.hashCode());
 			if(id.getNumParam()==CuentaParametros) {
-				System.out.println("funcionInvocadaRecup aqui es: "+funcionInvocadaRecup+" y funcionInvocada es "+funcionInvocada);
+				//System.out.println("funcionInvocadaRecup aqui es: "+funcionInvocadaRecup+" y funcionInvocada es "+funcionInvocada);
 				funcionInvocada=funcionInvocadaRecup;
 				CuentaParametros=CuentaParametrosRecup;
 				return new SimpleEntry<String[],Boolean>(devolverArray("null"),true);
@@ -1427,7 +1430,7 @@ public class Compiler {
 			Entry<String[],Boolean> resE=E(br,pointer,line);
 			if(resE.getValue())
 			{
-				System.out.println("Prueba X: "+resE.getKey()[0]);
+				//System.out.println("Prueba X: "+resE.getKey()[0]);
 				return new SimpleEntry<String[],Boolean>(resE.getKey(),true);
 			}
 			else
@@ -1462,7 +1465,7 @@ public class Compiler {
 
 				//<ASEM>
 				String[] tipoRetorno = resH.getKey();
-				System.out.println("Prueba F: "+resH.getKey()[0]);
+				//System.out.println("Prueba F: "+resH.getKey()[0]);
 				TSControl.setParametersFunc(funcionTratada,tipoRetorno[0],null,null,null,null);	
 				//</ASEM>
 				declaracionExplicita=true;
@@ -1480,6 +1483,7 @@ public class Compiler {
 								if(C(br,pointer,line).getValue()){
 									if(token.codigo.equals("LLAVE") && ((int) token.atributo==1)){
 										dentroFuncion=false;
+										funcionTratada=null;
 										token=A_lex(br, pointer, line, false);
 										TSControl.destroyTS();
 										return new SimpleEntry<String[],Boolean>(devolverArray("null"),true);
@@ -1502,7 +1506,7 @@ public class Compiler {
 			parser+="48 ";
 			Entry<String[],Boolean> resT =T(br, pointer, line);
 			if(resT.getValue()) {
-				System.out.println("Prueba H: "+resT.getKey()[0]);
+				//System.out.println("Prueba H: "+resT.getKey()[0]);
 				return new SimpleEntry<String[],Boolean>(resT.getKey(),true);
 			}
 			else {
@@ -1533,16 +1537,16 @@ public class Compiler {
 			Entry<String[],Boolean> resT=T(br, pointer, line);
 			if(resT.getValue()){
 				if(token.codigo.equals("TABLEID")){
-					System.out.println("A ESTA EN GLOBAL:" + TSControl.isGlobal());
+					//System.out.println("A ESTA EN GLOBAL:" + TSControl.isGlobal());
 					//<ASEM>
 					String tipoParam = resT.getKey()[0];
 					CuentaParametros++;
-					System.out.println("NPARAM:"+CuentaParametros);
-					System.out.println("TPARAM:"+tipoParam);
+					//System.out.println("NPARAM:"+CuentaParametros);
+					//System.out.println("TPARAM:"+tipoParam);
 					TiposParametros.add(tipoParam);
-					System.out.println("lo que ocurre en A: "+funcionTratada);
+					//System.out.println("lo que ocurre en A: "+funcionTratada);
 					//TSControl.setParametersFunc(funcionTratada, null, CuentaParametros, TiposParametros, null, null);
-					System.out.println("lexemaa;" + token.getAtr());
+					//System.out.println("lexemaa;" + token.getAtr());
 					TSControl.putSimbolo((int)token.getAtr(), tipoParam);
 					//</ASEM>
 	
@@ -1590,8 +1594,8 @@ public class Compiler {
 				String tipoParam = resT.getKey()[0];
 				CuentaParametros++;
 				TiposParametros.add(tipoParam);
-				System.out.println("NPARAM:"+CuentaParametros);
-				System.out.println("TPARAM:"+tipoParam);
+				//System.out.println("NPARAM:"+CuentaParametros);
+				//System.out.println("TPARAM:"+tipoParam);
 				if(TiposParametros.size()>100) {
 					genError(34, line[0], TiposParametros.size()+"");
 					throw new Exception("PRODUCCION K: No puede haber mas de 100 parametros para una función");
@@ -1623,7 +1627,7 @@ public class Compiler {
 			//ASEM: 	paramTipos[i]=TiposParametros.get(i);
 			//ASEM: }
 			//ASEM: TSControl.setParametersFunc(funcionTratada[0],null,TiposParametros.size(),paramTipos,funcionTratada[0],null);
-			System.out.println("lo que ocurre en K: "+funcionTratada);
+			//System.out.println("lo que ocurre en K: "+funcionTratada);
 			TSControl.setParametersFunc(funcionTratada, null, CuentaParametros, TiposParametros, null, null);
 			return new SimpleEntry<String[],Boolean>(devolverArray("null"),true);
 		}
