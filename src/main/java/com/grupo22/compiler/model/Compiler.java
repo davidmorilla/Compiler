@@ -37,7 +37,7 @@ public class Compiler {
 	public final static String TOKENS_OUTPUT_FORMAT = "src/main/java/com/grupo22/compiler/output/tokens_output%d.txt";
 	public final static String PARSE_OUTPUT_FORMAT = "src/main/java/com/grupo22/compiler/output/parse_output%d.txt";
 
-	final static int CODE_FILE_NUMBER = 4; //Cambiar aquí el numero de codigo de ejemplo a parsear
+	final static int CODE_FILE_NUMBER = 1; //Cambiar aquí el numero de codigo de ejemplo a parsear
 
 	public static void main (String args[]) {
 		String CODE_FILE_NAME = String.format(CODE_FILE_NAME_FORMAT, CODE_FILE_NUMBER);
@@ -514,14 +514,9 @@ public class Compiler {
 				//cebes
 				TSControl.putSimboloEnGlobal(temp.getNombreVar(), "funcion");
 			}*/
-			if(temp==null)
+			if(temp.getTipo()==null)
 			{
-				temp = TSControl.getFromGlobal((int) token.atributo);
-				if(temp.getTipo()==null)
-				{
-					TSControl.setTipoGlobal((int) token.atributo, "int");
-				}
-				//return new SimpleEntry<String[],Boolean>(devolverArray("errorSem"),true);
+				TSControl.setTipoGlobal((int) token.atributo, "int");
 			}
 			if(temp.getTipo().equals("function")){
 				funcionInvocada=TSControl.getNameFromGlobal((int)token.getAtr());
@@ -1212,15 +1207,14 @@ public class Compiler {
 				//cebes
 				TSControl.putSimboloEnGlobal(temp.getNombreVar(), "funcion");
 			}*/
-			if(temp==null)
+			System.out.println("Prueba I:aqui entra");
+			//temp = TSControl.getFromGlobal((int) token.atributo);
+			if(temp.getTipo()==null)
 			{
-				temp = TSControl.getFromGlobal((int) token.atributo);
-				if(temp.getTipo()==null)
-				{
-					TSControl.setTipoGlobal((int) token.atributo, "int");
-				}
-				//return new SimpleEntry<String[],Boolean>(devolverArray("errorSem"),true);
+				TSControl.setTipoGlobal((int) token.atributo, "int");
 			}
+			//TSControl.destroyTS();
+			System.out.println("Prueba I: "+temp);
 			if(temp.getTipo().equals("function")){
 				funcionInvocada=TSControl.getNameFromGlobal((int)token.getAtr());
 			}
@@ -1398,7 +1392,8 @@ public class Compiler {
 
 					//NO ENTIENDO BIEN ESTE ERROR
 					//HABER ESTUDIAO
-					throw new Exception("La funcion no tiene tantos parametros originalmente o el tipo del argumento usado como parametro no es el correcto.");
+					System.out.println("CuentaParametros tiene valor: "+CuentaParametros);
+					throw new Exception("La funcion no tiene tantos parametros originalmente o el tipo del argumento usado como parametro no es el correcto en linea "+line[0]);
 					//return new SimpleEntry<String[],Boolean>(devolverArray("errorSem"),false);
 				}
 				if(Q(br, pointer, line,funcionInvocadaRecup,CuentaParametrosRecup).getValue()){

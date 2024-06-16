@@ -36,5 +36,5 @@ TABLA GLOBAL #0:
 * LEXEMA : 'num3'
 	Atributos:
 	+tipo:		'int'
-	+despl:		8
+	+despl:		6
 -------------------------------------------

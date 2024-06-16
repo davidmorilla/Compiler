@@ -10,4 +10,4 @@ function operacion int (int num1, string num2)
     return num1%num3;
 }
 
-operacion(a,operacion(a,b));
+operacion(a, operacion(a,b));
