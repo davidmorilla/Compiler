@@ -1,0 +1,18 @@
+TABLA LOCAL DE LA FUNCION 'a' #1:
+* LEXEMA : 'sum'
+	Atributos:
+	+tipo:		'int'
+	+despl:		0
+-------------------------------------------
+TABLA LOCAL DE LA FUNCION 'b' #2:
+* LEXEMA : 'sum'
+	Atributos:
+	+tipo:		'int'
+	+despl:		0
+* LEXEMA : 'sum2'
+	Atributos:
+	+tipo:		'int'
+	+despl:		2
+-------------------------------------------
+TABLA LOCAL DE LA FUNCION 'loes' #3:
+-------------------------------------------

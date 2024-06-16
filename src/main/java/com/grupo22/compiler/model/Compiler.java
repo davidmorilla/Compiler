@@ -37,7 +37,7 @@ public class Compiler {
 	public final static String TOKENS_OUTPUT_FORMAT = "src/main/java/com/grupo22/compiler/output/tokens_output%d.txt";
 	public final static String PARSE_OUTPUT_FORMAT = "src/main/java/com/grupo22/compiler/output/parse_output%d.txt";
 
-	final static int CODE_FILE_NUMBER = 12; //Cambiar aquí el numero de codigo de ejemplo a parsear
+	final static int CODE_FILE_NUMBER = 11; //Cambiar aquí el numero de codigo de ejemplo a parsear
 
 	public static void main (String args[]) {
 		String CODE_FILE_NAME = String.format(CODE_FILE_NAME_FORMAT, CODE_FILE_NUMBER);
@@ -706,13 +706,13 @@ public class Compiler {
 
 			//invocada=true;
 			token=A_lex(br, pointer, line, false);
-			if(L(br,pointer,line,funcionInvocada,CuentaParametros).getValue()){
+			if(L(br,pointer,line,null,CuentaParametros).getValue()){
 				if(token.getCod().equals("PARENT") && (int)token.getAtr()==1)
 				{
-					funcionInvocada=null;
 					token=A_lex(br, pointer, line, false);
 					//System.out.println(token.codigo);
 					if(token.codigo.equals("PYC")){	
+						funcionInvocada=null;
 						token=A_lex(br, pointer, line, false);
 						return new SimpleEntry<String[],Boolean>(devolverArray("function"),true);
 					}
@@ -1287,7 +1287,7 @@ public class Compiler {
 			//CuentaParametros=0;
 			if(L(br,pointer,line,funcionInvocada,CuentaParametros).getValue()){
 				if(token.codigo.equals("PARENT") && ((int) token.atributo==1)){
-					funcionInvocada=null;
+					//funcionInvocada=null;
 					token=A_lex(br, pointer, line, false);
 					return new SimpleEntry<String[],Boolean>(devolverArray("function"),true);
 				}
@@ -1328,6 +1328,7 @@ public class Compiler {
 
 	private static Entry<String[],Boolean> L(BufferedReader br, char[] pointer, int[] line,String funcionInvocadaRecup,int CuentaParametrosRecup) throws Exception {
 		CuentaParametros=0;
+		System.out.println("Para ver la funcionInvocadaRecup "+funcionInvocadaRecup);
 		if((token.codigo.equals("PARENT") && ((int) token.atributo==0))||token.codigo.equals("CAD")||token.codigo.equals("CTE")||token.codigo.equals("FALSE")||token.codigo.equals("TRUE")||token.codigo.equals("TABLEID")){
 			parser+="41 ";
 			if(funcionInvocada==null)
@@ -1335,6 +1336,7 @@ public class Compiler {
 				throw new Exception("Se ha intentado usar una funcion con identificador de otro que no es de tipo function en la linea "+line[0]+".");
 			}
 			Entry<String[],Boolean> resE=E(br, pointer, line);
+			System.out.println("funcionInvocada es "+funcionInvocada);
 			EntryTS id=TSControl.getVar(funcionInvocada.hashCode());
 			//System.out.println("funcion en curso "+ funcionInvocada);
 			if(id.getTipoParamXX(CuentaParametros)!=null && id.getTipoParamXX(CuentaParametros).equals(resE.getKey()[0])) {
@@ -1410,7 +1412,7 @@ public class Compiler {
 			}
 			else{
 				System.out.println("este20");
-				System.out.println("La funcion en cuestion es: "+funcionInvocada+" y la cuenta va por"+CuentaParametros+" cuando deberian ser "+id.getNumParam());
+				System.out.println("La funcion en cuestion es: "+funcionInvocada+" y la cuenta va por "+CuentaParametros+" cuando deberian ser "+id.getNumParam());
 				//TSControl.destroyTS();
 				throw new Exception("No se ha pasado el numero de parametros correcto para la funcion en cuestion.");
 				//genError(21, line[0], tokenToString(token) + "#,' o ')");
