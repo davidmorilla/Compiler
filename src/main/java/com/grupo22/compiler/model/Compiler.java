@@ -363,6 +363,21 @@ public class Compiler {
 			return null;
 		}
 	}
+	
+	private static void safeExit(int n) {
+		try {
+			System.err.println("Corrija los errores existentes.");
+			TSControl.closeWritingBuffer();
+			tokensW.close();
+			parseW.close();
+			br.close();
+			System.exit(n);
+		} catch (IOException e) {
+			e.printStackTrace();
+			System.exit(n);
+		}
+		
+	}
 	/**
 	 * Genera por la salida de error un error de tipo lexico, sintactico o semantico.
 	 * @param estado Tipo especÃ­fico de error 
@@ -428,7 +443,7 @@ public class Compiler {
 			System.err.println("Error semantico en linea "+line + ": El identificador debe ser una funcion");
 			break;
 		case 37: //error por definir
-			System.err.println("Error semantico en linea "+line + ": Error por definir");
+			System.err.println("Error semantico en linea "+line + ": EL 'return' se encuentra fuera del ámbito de una función.");
 			break;
 		}
 	}
@@ -481,7 +496,6 @@ public class Compiler {
 				}else{return new SimpleEntry<String[], Boolean>(devolverArray("errorSin"), false);}
 			}else{return new SimpleEntry<String[], Boolean>(devolverArray("errorSin"), false);}
 		}else if(token.codigo.equals("FINAL")){//CASO LANDA
-			//DestruirTabla();
 			parser+="4 ";
 			return new SimpleEntry<String[], Boolean>(devolverArray("null"), true);
 		}else{
@@ -491,15 +505,9 @@ public class Compiler {
 	}
 
 	private static Entry<String[],Boolean> S(BufferedReader br, char[] pointer, int[] line) throws Exception {
-		//System.out.println("el token en este primer momento es "+ token.getCod() +"con valor "+token.getAtr());
-		if(token.getCod().equals("TABLEID")){			
+		if(token.getCod().equals("TABLEID")){
 			parser+="5 ";
 			EntryTS temp = TSControl.getVar((int) token.atributo);
-			/*if(temp!=null) {
-				//cebes
-				TSControl.putSimboloEnGlobal(temp.getNombreVar(), "funcion");
-			}*/
-			System.out.println("lexema del problema "+token.atributo);
 			if(temp.getTipo()==null)
 			{
 				TSControl.setTipoGlobal((int) token.atributo, "int");
@@ -509,14 +517,13 @@ public class Compiler {
 			}
 			token=A_lex(br, pointer, line, false);
 			Entry<String[],Boolean> resZ= Z(br,pointer,line);
-			//System.out.println("despues de Z es "+ token.getCod());
-			//System.out.println("los tipos son "+ resZ.getKey()[0] + " y "+temp.getTipoRetorno());
 			if(resZ.getValue()) {
 				if(resZ.getKey()[0].equals(temp.getTipo()) || resZ.getKey()[0].equals("null") ) {
 					return new SimpleEntry<String[], Boolean>(devolverArray("null"), true);
 				}else {
-					//System.out.println("el token en este momento es "+ token.getCod());
-					throw new Exception("Los tipos no son coincidentes en la linea "+line[0]);
+					genError(30, line[0], resZ.getKey()[0] + "#" + temp.getTipo() );
+					safeExit(30);
+					throw new Exception();
 				}
 			}else {
 				return new SimpleEntry<String[],Boolean>(devolverArray("errorSin"),false);
@@ -537,12 +544,12 @@ public class Compiler {
 					}
 					else
 					{
-						throw new Exception("Tipos no validos para el PUT");
-						//return new SimpleEntry<String[],Boolean>(devolverArray("errorSem"),false);
+						genError(30, line[0], resE.getKey()[0] + "#string' o 'int" );
+						safeExit(30);
+						throw new Exception();
 					}
 				}
 				else{
-					System.out.println("este1");
 					genError(21, line[0], tokenToString(token)+ "#;");
 					return new SimpleEntry<String[],Boolean>(devolverArray("errorSin"),false);
 				}
@@ -561,7 +568,9 @@ public class Compiler {
 				}
 				if(!temp.getTipo().equals("string")&&!temp.getTipo().equals("int"))
 				{
-					throw new Exception("Tipo no valido para get(no es ni int ni string) en la linea "+line[0]+".");
+					genError(30, line[0], temp.getTipo() + "#string' o 'int" );
+					safeExit(30);
+					throw new Exception();
 				}
 				token=A_lex(br, pointer, line, false);
 				if(token.getCod().equals("PYC")){
@@ -570,15 +579,12 @@ public class Compiler {
 				}
 				else
 				{
-					System.out.println("este2");
 					genError(21, line[0], tokenToString(token)+ "#;");
-					//token=A_lex(br, pointer, line, false);
 					return new SimpleEntry<String[],Boolean>(devolverArray("errorSin"),false);
 				}
 			}
 			else
 			{
-				System.out.println("este3");
 				genError(21, line[0], tokenToString(token)+ "#variable");
 				return new SimpleEntry<String[],Boolean>(devolverArray("errorSin"),false);
 
@@ -592,15 +598,16 @@ public class Compiler {
 
 			if(resX.getValue()){
 				//Tipo de X no coincide con TipoRetorno
-				//System.out.println("Comprobar funcion en S-8 : "+funcionTratada);
 				if(TSControl.isGlobal())
 				{
-					throw new Exception("Return declarado fuera del ambito de la función.");
+					genError(37, line[0], "return" );
+					safeExit(37);
+					throw new Exception();
 				}
 				if(!resX.getKey()[0].equals(TSControl.getVar(funcionTratada.hashCode()).getTipoRetorno())) {
-					throw new Exception("El tipo del elemento devuelto no coincide  con el tipo de return de la funcion en la linea "+line[0]+".");
-					//genError(31, line[0], funcionTratada +"#"+TSControl.getVar(funcionTratada.hashCode()).getTipoRetorno() +"#" +resX.getKey()[0] );
-					//return new SimpleEntry<String[],Boolean>(devolverArray("errorSem"),false);
+					genError(31, line[0], funcionTratada + "#" + TSControl.getVar(funcionTratada.hashCode()).getTipoRetorno() + "#" + resX.getKey()[0] );
+					safeExit(31);
+					throw new Exception();
 				}
 
 				if(token.getCod().equals("PYC")){
@@ -617,7 +624,6 @@ public class Compiler {
 			}
 		}
 		else{
-			System.out.println("este5");
 			genError(21, line[0], tokenToString(token) + "#variable' o 'put' o 'get' o 'return");
 			return new SimpleEntry<String[],Boolean>(devolverArray("errorSin"),false);
 		}
@@ -635,7 +641,6 @@ public class Compiler {
 					token=A_lex(br, pointer, line, false);
 					return new SimpleEntry<String[],Boolean>(resE.getKey(),true);
 				}else{
-					System.out.println("este6");
 					genError(21, line[0], tokenToString(token)+ "#;");	
 					return new SimpleEntry<String[],Boolean>(devolverArray("errorSin"),false);
 				}
@@ -657,9 +662,9 @@ public class Compiler {
 					if(resE.getKey()[0].equals("int")) {
 						return new SimpleEntry<String[],Boolean>(devolverArray("int"),true);
 					} else {	//TIPO_ERROR
-						throw new Exception("No se puede usar una expresion que no acabe siendo de tipo entero para este tipo de asignación");
-						//genError(30, line[0], "int#" + resE.getKey()[0]);
-						//return new SimpleEntry<String[],Boolean>(devolverArray("errorSem"),false);
+						genError(30, line[0], "int#" + resE.getKey()[0]);
+						safeExit(30);
+						throw new Exception();
 					}
 				}
 				else{
@@ -693,20 +698,17 @@ public class Compiler {
 				if(token.getCod().equals("PARENT") && (int)token.getAtr()==1)
 				{
 					token=A_lex(br, pointer, line, false);
-					//System.out.println(token.codigo);
 					if(token.codigo.equals("PYC")){	
 						funcionInvocada=null;
 						token=A_lex(br, pointer, line, false);
 						return new SimpleEntry<String[],Boolean>(devolverArray("function"),true);
 					}
 					else{
-						System.out.println("este8");
 						genError(21, line[0], tokenToString(token)+ "#;");
 						return new SimpleEntry<String[],Boolean>(devolverArray("errorSin"),false);
 					}
 				}
 				else{
-					System.out.println("este9");
 					genError(21, line[0], tokenToString(token)+ "#)");
 					return new SimpleEntry<String[],Boolean>(devolverArray("errorSin"),false);
 				}
