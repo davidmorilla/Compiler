@@ -178,6 +178,9 @@ public class Compiler {
 								end=true;
 								pointer[0]=(char) br.read();
 							} else {
+								if(pointer[0] == '\n'){
+								line[0]++;
+								}
 								pointer[0]=pointer2;
 							}
 						} else {
