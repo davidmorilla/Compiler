@@ -69,7 +69,7 @@ public class Compiler {
 			token= A_lex(br,pointer, line,false);
 			Entry<String[], Boolean> resSin= U(br,pointer,line, CODE_FILE_NUMBER);
 			if(!resSin.getValue()){
-				System.err.println("Corrija los errores existentes. Linea: "+ line[0] +"Mientras se trataba el token: "+ token.getCod()+"\nParser: "+parser);
+				System.err.println("Corrija los errores existentes. Linea: "+ line[0] +". Mientras se trataba el token: "+ token.getCod()+"\nParser: "+parser);
 			}else{
 				System.out.println("Codigo valido hasta la linea:"+ line[0] + "\n" + parser);
 			}
@@ -178,9 +178,6 @@ public class Compiler {
 								end=true;
 								pointer[0]=(char) br.read();
 							} else {
-								if(pointer[0] == '\n'){
-								line[0]++;
-								}
 								pointer[0]=pointer2;
 							}
 						} else {
@@ -267,42 +264,25 @@ public class Compiler {
 		case "true": 
 			return genToken("TRUE","");
 		default: 
-			//if((TSControl.existeLex(palabra) ==-1 || (!TSControl.isGlobal() && TSControl.existeLex(palabra) == 0 )) { 
-			//System.out.println("Comprobamos el estado de los tableid para "+palabra+" boolGlobal "+TSControl.isGlobal()+" existeLex "+TSControl.existeLex(palabra)+" declaracionExplicita "+declaracionExplicita);
 			if(!TSControl.isGlobal()&&(TSControl.existeLex(palabra)==0||TSControl.existeLex(palabra)==-1)&&declaracionExplicita) { 
-				//__hm__ts__.put(palabra,palabra.hashCode()); //modificado 3/01/23 21:23, anterior: __hm__ts__.put(palabra,contadovich++);
-				//System.out.println("entra en la 1a con: "+palabra);
 				TSControl.putSimbolo(palabra);
 			}
 			else if((!TSControl.isGlobal()&&TSControl.existeLex(palabra)==-1&&!declaracionExplicita)||((TSControl.isGlobal()&&TSControl.existeLex(palabra)==-1&&!declaracionExplicita)))
 			{
-				//System.out.println("entra en la 2a con: "+palabra);
 				TSControl.putSimboloEnGlobal(palabra,null);
 			}
 			else if(TSControl.isGlobal()&&TSControl.existeLex(palabra)==-1)
 			{
-				//System.out.println("entra en la 3a con: "+palabra);
 				TSControl.putSimbolo(palabra);				
 			}
 			else if((!TSControl.isGlobal()&&TSControl.existeLex(palabra)==1&&declaracionExplicita)||(TSControl.isGlobal()&&TSControl.existeLex(palabra)==0&&declaracionExplicita)){
 				genError(17, line, palabra);
 			}
-			//System.out.println(palabra + palabra.hashCode());
 			return genToken("TABLEID",palabra.hashCode());	//TABLEID TIENE QUE SER UN NUMERO!!
 		}
 	}
 
-	/* 	private static void imprime__hm__ts__(HashMap<String,Integer> __hm__ts__, int id) {
-		try {
-			tablaSW.write("#"+id+":\n");
-			for(Entry<String, Integer> entry : __hm__ts__.entrySet()) {
-				tablaSW.write("*'"+entry.getKey()+"'\n+despl:"+entry.getValue()+"\n");
-			}
-		} catch (IOException e) {
-			return;
-		}
-	}
-	 */
+
 	private static Token genToken(String code,Object valor) {
 		try {
 			tokensW.write("<"+code+","+valor+">\n");
