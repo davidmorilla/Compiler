@@ -1,0 +1,8 @@
+function id string ( boolean id ) { 
+  let id3 int = 5 % 4 ;
+  put id3 ;
+  let id2 string;
+  return id2 ;
+}
+let b boolean;
+id(b);

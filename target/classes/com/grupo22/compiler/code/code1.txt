@@ -1,15 +1,14 @@
 let   a int   ;
 let b     int  ;
 let number int ;
-let bool boolean = true&&a; 
+let bool boolean = true&&false; 
 let st string = "hola";
 put  "Introduce el primer operando " ;
 put "Introduce el segundo operando";get
     b;
-function operacion int (int num1, string num2)
+    
+function operacion int (int operacion, string num2)
 {
-function operacion2 boolen(int a){}
-
     let a int=5; 
     return num1%num3;
 }
