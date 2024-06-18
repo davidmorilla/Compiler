@@ -73,11 +73,11 @@ public class TS {
 		if(tipo==null){return 0;}
 		switch(tipo){
 		case "boolean":
-			return 2;
+			return 1;
 		case "int":
-			return 2;
+			return 1;
 		case "string":
-			return 128;
+			return 64;
 		case "function":
 			return 0;
 		default:

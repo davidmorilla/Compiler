@@ -1,56 +1,38 @@
-TABLA LOCAL DE LA FUNCION 'myFunc1' #1:
-* LEXEMA : 'id1'
-	Atributos:
-	+tipo:		'int'
-	+despl:		0
-* LEXEMA : 'id2'
+TABLA LOCAL DE LA FUNCION 'ff' #1:
+* LEXEMA : 'ss'
 	Atributos:
 	+tipo:		'boolean'
-	+despl:		2
-* LEXEMA : 'id'
-	Atributos:
-	+tipo:		'int'
-	+despl:		4
+	+despl:		0
 -------------------------------------------
 TABLA GLOBAL #0:
-* LEXEMA : 'myFunc1'
-	Atributos:
-	+tipo:		'function'
-	+despl:		0
-	+numParam:		2
-	+tipoParam 1:		'int'
-	+tipoParam 2:		'boolean'
-	+tipoRetorno:		'int'
-* LEXEMA : 'id'
+* LEXEMA : 'n1'
 	Atributos:
 	+tipo:		'int'
 	+despl:		0
-* LEXEMA : 'id2'
+* LEXEMA : 'l1'
 	Atributos:
-	+tipo:		'int'
+	+tipo:		'boolean'
+	+despl:		1
+* LEXEMA : 'cad'
+	Atributos:
+	+tipo:		'string'
 	+despl:		2
-* LEXEMA : 'id3'
+* LEXEMA : 'n2'
 	Atributos:
 	+tipo:		'int'
-	+despl:		4
-* LEXEMA : 'id4'
+	+despl:		66
+* LEXEMA : 'l2'
+	Atributos:
+	+tipo:		'boolean'
+	+despl:		67
+* LEXEMA : 'ff'
+	Atributos:
+	+tipo:		'function
+	+numParam:		1
+	+tipoParam 1:		'boolean'
+	+tipoRetorno:		'boolean'
+* LEXEMA : 'varglobal'
 	Atributos:
 	+tipo:		'int'
-	+despl:		6
-* LEXEMA : 'id5'
-	Atributos:
-	+tipo:		'int'
-	+despl:		8
-* LEXEMA : 'id6'
-	Atributos:
-	+tipo:		'boolean'
-	+despl:		10
-* LEXEMA : 'id7'
-	Atributos:
-	+tipo:		'boolean'
-	+despl:		12
-* LEXEMA : 'exp'
-	Atributos:
-	+tipo:		'boolean'
-	+despl:		14
+	+despl:		68
 -------------------------------------------

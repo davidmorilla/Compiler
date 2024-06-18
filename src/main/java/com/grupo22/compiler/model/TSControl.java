@@ -78,7 +78,11 @@ public class TSControl {
 			}
 
 			for(Integer var : currentTS.getLexemas()) {
-				TSBufferedWriter.write("* LEXEMA : '"+currentTS.getVar(var).getNombreVar()+"'\n\tAtributos:\n\t+tipo:\t\t'"+currentTS.getVar(var).getTipo()+"'\n\t+despl:\t\t"+currentTS.getVar(var).getDespl()+"\n");
+				if(currentTS.getVar(var).getTipo().equals("function") ) {
+					TSBufferedWriter.write("* LEXEMA : '"+currentTS.getVar(var).getNombreVar()+"'\n\tAtributos:\n\t+tipo:\t\t'"+currentTS.getVar(var).getTipo()+"\n");
+				}else {
+					TSBufferedWriter.write("* LEXEMA : '"+currentTS.getVar(var).getNombreVar()+"'\n\tAtributos:\n\t+tipo:\t\t'"+currentTS.getVar(var).getTipo()+"'\n\t+despl:\t\t"+currentTS.getVar(var).getDespl()+"\n");
+				}
 				int np=currentTS.getVar(var).getNumParam();
 				if(np!=-1){
 					TSBufferedWriter.write("\t+numParam:\t\t" + np + "\n");
