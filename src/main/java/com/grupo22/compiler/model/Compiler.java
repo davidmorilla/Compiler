@@ -695,7 +695,7 @@ public class Compiler {
 
 			//invocada=true;
 			token=A_lex(br, pointer, line, false);
-			if(L(br,pointer,line,null,CuentaParametros).getValue()){
+			if(L(br,pointer,line,funcionInvocada,0).getValue()){
 				if(token.getCod().equals("PARENT") && (int)token.getAtr()==1)
 				{
 					token=A_lex(br, pointer, line, false);
@@ -1204,7 +1204,7 @@ public class Compiler {
 			parser+="36 ";
 			token=A_lex(br, pointer, line, false);
 			//CuentaParametros=0;
-			if(L(br,pointer,line,funcionInvocada,CuentaParametros).getValue()){
+			if(L(br,pointer,line,funcionInvocada,0).getValue()){
 				if(token.codigo.equals("PARENT") && ((int) token.atributo==1)){
 					//funcionInvocada=null;
 					token=A_lex(br, pointer, line, false);
@@ -1245,26 +1245,31 @@ public class Compiler {
 		}
 	}
 
-	private static Entry<String[],Boolean> L(BufferedReader br, char[] pointer, int[] line,String funcionInvocadaRecup,int CuentaParametrosRecup) throws Exception {
+	private static Entry<String[],Boolean> L(BufferedReader br, char[] pointer, int[] line,String funcionInvocadaAct,int CuentaParametrosAct) throws Exception {
 		CuentaParametros=0;
-		System.out.println("Para ver la funcionInvocadaRecup "+funcionInvocadaRecup);
+		System.out.println("Para ver la funcionInvocadaAct "+funcionInvocadaAct);
 		if((token.codigo.equals("PARENT") && ((int) token.atributo==0))||token.codigo.equals("CAD")||token.codigo.equals("CTE")||token.codigo.equals("FALSE")||token.codigo.equals("TRUE")||token.codigo.equals("TABLEID")){
 			parser+="41 ";
-			if(funcionInvocada==null)
+			if(funcionInvocadaAct==null)
 			{
 				genError(36,line[0], "");
 				safeExit(36);
 				throw new CompilationErrorException();
-				}
+			}
 			Entry<String[],Boolean> resE=E(br, pointer, line);
-			System.out.println("funcionInvocada es "+funcionInvocada);
-			EntryTS id=TSControl.getVar(funcionInvocada.hashCode());
+			System.out.println("funcionInvocadaAct es "+funcionInvocadaAct);
+			EntryTS id=TSControl.getVar(funcionInvocadaAct.hashCode());
 			//System.out.println("funcion en curso "+ funcionInvocada);
-			if(id.getTipoParamXX(CuentaParametros)!=null && id.getTipoParamXX(CuentaParametros).equals(resE.getKey()[0])) {
-				CuentaParametros++;
+			if(id.getTipoParamXX(CuentaParametrosAct)==null){
+				genError(33, line[0], funcionInvocadaAct);		
+				safeExit(33);
+				throw new CompilationErrorException();
+			}
+			if(id.getTipoParamXX(CuentaParametrosAct)!=null && id.getTipoParamXX(CuentaParametrosAct).equals(resE.getKey()[0])) {
+				CuentaParametrosAct++;
 				
 			} else{
-				genError(32, line[0],CuentaParametros +"#" + funcionTratada+"#"+ id.getTipoParamXX(CuentaParametros)+ "#" +resE.getKey()[0] );
+				genError(32, line[0],CuentaParametrosAct +"#" + funcionInvocadaAct+"#"+ id.getTipoParamXX(CuentaParametrosAct)+ "#" +resE.getKey()[0] );
 				safeExit(32);
 				throw new CompilationErrorException();
 				//return new SimpleEntry<String[],Boolean>(devolverArray("errorSem"),false);
@@ -1272,29 +1277,30 @@ public class Compiler {
 
 
 			if(resE.getValue()){
-				if(Q(br, pointer, line,funcionInvocadaRecup,CuentaParametrosRecup).getValue()){
+				if(Q(br, pointer, line,funcionInvocadaAct,CuentaParametrosAct).getValue()){
 					return new SimpleEntry<String[],Boolean>(devolverArray("null"),true);
 				}else{return new SimpleEntry<String[],Boolean>(devolverArray("errorSin"),false);}
 			}else{return new SimpleEntry<String[],Boolean>(devolverArray("errorSin"),false);}
 		}
 		else if(token.codigo.equals("PARENT") && ((int) token.atributo==1)){
 			parser+="42 ";
-			if(funcionInvocada==null)
+			if(funcionInvocadaAct==null)
 			{
 				genError(36,line[0], "");
 				safeExit(36);
 				throw new CompilationErrorException();
 				
 			}
-			EntryTS id=TSControl.getVar(funcionInvocada.hashCode());
+			EntryTS id=TSControl.getVar(funcionInvocadaAct.hashCode());
 			if(id.getNumParam()>0) {
-				genError(33, line[0], funcionInvocada);		
+				System.out.println("aqui1");
+				genError(33, line[0], funcionInvocadaAct);		
 				safeExit(33);
 				throw new CompilationErrorException();
 				//return new SimpleEntry<String[],Boolean>(devolverArray("errorSem"),true);			
 			}
-			funcionInvocada=funcionInvocadaRecup;
-			CuentaParametros=CuentaParametrosRecup;
+			//funcionInvocada=funcionInvocadaRecup;
+			//CuentaParametros=CuentaParametrosRecup;
 			return new SimpleEntry<String[],Boolean>(devolverArray("null"),true);
 		}
 		else{
@@ -1304,42 +1310,48 @@ public class Compiler {
 		}
 	}
 
-	private static Entry<String[],Boolean> Q(BufferedReader br, char[] pointer, int[] line, String funcionInvocadaRecup,int CuentaParametrosRecup) throws Exception {
+	private static Entry<String[],Boolean> Q(BufferedReader br, char[] pointer, int[] line, String funcionInvocadaAct,int CuentaParametrosAct) throws Exception {
 		if(token.codigo.equals("COMA")){
 			parser+="43 ";
 			token=A_lex(br, pointer, line, false);
 			Entry<String[],Boolean> resE = E(br, pointer, line);
-			EntryTS id=TSControl.getVar(funcionInvocada.hashCode());
+			EntryTS id=TSControl.getVar(funcionInvocadaAct.hashCode());
 
 			if(resE.getValue()){
-				if(id.getTipoParamXX(CuentaParametros)!=null && id.getTipoParamXX(CuentaParametros).equals(resE.getKey()[0])) {
-					CuentaParametros++;		
+				if(id.getTipoParamXX(CuentaParametrosAct)==null){
+					genError(33, line[0], funcionInvocadaAct);		
+					safeExit(33);
+					throw new CompilationErrorException();
+				}
+				if(id.getTipoParamXX(CuentaParametrosAct)!=null && id.getTipoParamXX(CuentaParametrosAct).equals(resE.getKey()[0])) {
+					CuentaParametrosAct++;		
 				} else 	{
 
 					//NO ENTIENDO BIEN ESTE ERROR
 					//HABER ESTUDIAO
 					//System.out.println("CuentaParametros tiene valor: "+CuentaParametros);
-					genError(32, line[0],CuentaParametros +"#" + funcionTratada+"#"+ id.getTipoParamXX(CuentaParametros)+ "#" +resE.getKey()[0] );
+					genError(32, line[0],CuentaParametrosAct +"#" + funcionInvocadaAct+"#"+ id.getTipoParamXX(CuentaParametrosAct)+ "#" +resE.getKey()[0] );
 					safeExit(32);
 					throw new CompilationErrorException();
 					//return new SimpleEntry<String[],Boolean>(devolverArray("errorSem"),false);
 				}
-				if(Q(br, pointer, line,funcionInvocadaRecup,CuentaParametrosRecup).getValue()){
+				if(Q(br, pointer, line,funcionInvocadaAct,CuentaParametrosAct).getValue()){
 					return new SimpleEntry<String[],Boolean>(devolverArray("null"),true);
 				}else{return new SimpleEntry<String[],Boolean>(devolverArray("errorSin"),false);}
 			}else{return new SimpleEntry<String[],Boolean>(devolverArray("errorSin"),false);}
 		}
 		else if(token.codigo.equals("PARENT") && ((int) token.atributo==1)){
 			parser+="44 ";
-			EntryTS id=TSControl.getVar(funcionInvocada.hashCode());
-			if(id.getNumParam()==CuentaParametros) {
+			EntryTS id=TSControl.getVar(funcionInvocadaAct.hashCode());
+			if(id.getNumParam()==CuentaParametrosAct) {
 				//System.out.println("funcionInvocadaRecup aqui es: "+funcionInvocadaRecup+" y funcionInvocada es "+funcionInvocada);
-				funcionInvocada=funcionInvocadaRecup;
-				CuentaParametros=CuentaParametrosRecup;
+				//funcionInvocada=funcionInvocadaRecup;
+				//CuentaParametros=CuentaParametrosRecup;
 				return new SimpleEntry<String[],Boolean>(devolverArray("null"),true);
 			}
 			else{
-				genError(33, line[0], funcionInvocada);		
+				System.out.println("aqui2");
+				genError(33, line[0], funcionInvocadaAct);		
 				safeExit(33);
 				throw new CompilationErrorException();
 			}
