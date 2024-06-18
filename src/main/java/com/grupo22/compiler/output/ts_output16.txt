@@ -1,0 +1,10 @@
+TABLA LOCAL DE LA FUNCION 'id2' #1:
+* LEXEMA : 'id'
+	Atributos:
+	+tipo:		'boolean'
+	+despl:		0
+* LEXEMA : 'id1'
+	Atributos:
+	+tipo:		'string'
+	+despl:		2
+-------------------------------------------

@@ -1,16 +1,16 @@
-function id int ( boolean id , string id1 ) { 
-  if ( id ( id , id ) ) { 
-    let id boolean = id ;
+function id2 int ( boolean id , string id1 ) { 
+  if ( id2 ( id , id1 ) ==1) { 
+    let ida boolean = id ;
     if ( id ) { 
-      put id ; 
-      get id ; 
-      return id ; 
+      put id1 ; 
+      get id1 ; 
+      return id2(id,id1) ; 
     } else { 
-      let id int = id % id ; 
-      return id ; 
+      let idx string = id1 ; 
+      return 3 ; 
     } 
   } else { 
-    let id string = id ; 
-    return id ; 
+    let idx1 string = id1 ; 
+    return 2 ; 
   } 
 }

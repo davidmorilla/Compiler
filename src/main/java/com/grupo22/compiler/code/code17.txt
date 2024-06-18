@@ -1,0 +1,18 @@
+function a int (int sum) {
+    return sum;
+    }
+
+    function b int (int sum, boolean sum2) {
+    sum%=3;
+    return sum;
+    }
+    
+    function c boolean(int d1, string s1, boolean b1){
+        return (d1%5==3)&&b1;
+    }
+    let d1 int;
+    let s1 string;
+    let b1 boolean;
+    function loes boolean (void){
+    return c(d1,"hola",false)==c((a(b(a(5),false))),s1,c(d1,s1,b1));
+    }

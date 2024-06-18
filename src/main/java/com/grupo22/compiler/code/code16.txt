@@ -1,0 +1,6 @@
+function id2 int ( boolean id , string id1 ) { 
+    return 2 ; 
+  } 
+  let id boolean;
+    	id2 ( id , id);
+  

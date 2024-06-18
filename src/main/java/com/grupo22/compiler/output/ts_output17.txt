@@ -1,0 +1,76 @@
+TABLA LOCAL DE LA FUNCION 'a' #1:
+* LEXEMA : 'sum'
+	Atributos:
+	+tipo:		'int'
+	+despl:		0
+-------------------------------------------
+TABLA LOCAL DE LA FUNCION 'b' #2:
+* LEXEMA : 'sum'
+	Atributos:
+	+tipo:		'int'
+	+despl:		0
+* LEXEMA : 'sum2'
+	Atributos:
+	+tipo:		'boolean'
+	+despl:		2
+-------------------------------------------
+TABLA LOCAL DE LA FUNCION 'c' #3:
+* LEXEMA : 'd1'
+	Atributos:
+	+tipo:		'int'
+	+despl:		0
+* LEXEMA : 's1'
+	Atributos:
+	+tipo:		'string'
+	+despl:		2
+* LEXEMA : 'b1'
+	Atributos:
+	+tipo:		'boolean'
+	+despl:		130
+-------------------------------------------
+TABLA LOCAL DE LA FUNCION 'loes' #4:
+-------------------------------------------
+TABLA GLOBAL #0:
+* LEXEMA : 'a'
+	Atributos:
+	+tipo:		'function'
+	+despl:		0
+	+numParam:		1
+	+tipoParam 1:		'int'
+	+tipoRetorno:		'int'
+* LEXEMA : 'b'
+	Atributos:
+	+tipo:		'function'
+	+despl:		0
+	+numParam:		2
+	+tipoParam 1:		'int'
+	+tipoParam 2:		'boolean'
+	+tipoRetorno:		'int'
+* LEXEMA : 'c'
+	Atributos:
+	+tipo:		'function'
+	+despl:		0
+	+numParam:		3
+	+tipoParam 1:		'int'
+	+tipoParam 2:		'string'
+	+tipoParam 3:		'boolean'
+	+tipoRetorno:		'boolean'
+* LEXEMA : 'd1'
+	Atributos:
+	+tipo:		'int'
+	+despl:		0
+* LEXEMA : 's1'
+	Atributos:
+	+tipo:		'string'
+	+despl:		2
+* LEXEMA : 'b1'
+	Atributos:
+	+tipo:		'boolean'
+	+despl:		130
+* LEXEMA : 'loes'
+	Atributos:
+	+tipo:		'function'
+	+despl:		132
+	+numParam:		0
+	+tipoRetorno:		'boolean'
+-------------------------------------------
