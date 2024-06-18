@@ -38,7 +38,7 @@ public class Compiler {
 	public final static String TOKENS_OUTPUT_FORMAT = "src/main/java/com/grupo22/compiler/output/tokens_output%d.txt";
 	public final static String PARSE_OUTPUT_FORMAT = "src/main/java/com/grupo22/compiler/output/parse_output%d.txt";
 
-	final static int CODE_FILE_NUMBER = 11; //Cambiar aquí el numero de codigo de ejemplo a parsear
+	final static int CODE_FILE_NUMBER = 1; //Cambiar aquí el numero de codigo de ejemplo a parsear
 
 	public static void main (String args[]) {
 		String CODE_FILE_NAME = String.format(CODE_FILE_NAME_FORMAT, CODE_FILE_NUMBER);
@@ -53,7 +53,8 @@ public class Compiler {
 			br = new BufferedReader(fileReader);
 			char[] pointer ={ (char) br.read()};
 			int[] line={1};
-			A_sint_sem(br,pointer,line, CODE_FILE_NUMBER);
+			TSControl = new TSControl(CODE_FILE_NUMBER);
+			A_sint_sem(br,pointer,line);
 			parseW.write(parser);
 			TSControl.printTS();
 			TSControl.closeWritingBuffer();
@@ -65,12 +66,13 @@ public class Compiler {
 		}
 	}
 
-	private static void A_sint_sem(BufferedReader br, char[] pointer, int[] line, int CODE_FILE_NUMBER) {
+	private static void A_sint_sem(BufferedReader br, char[] pointer, int[] line) {
 		try {
 			token= A_lex(br,pointer, line,false);
-			Entry<String[], Boolean> resSin= U(br,pointer,line, CODE_FILE_NUMBER);
+			Entry<String[], Boolean> resSin= U(br,pointer,line);
 			if(!resSin.getValue()){
-				System.err.println("Corrija los errores existentes. Linea: "+ line[0] +". Mientras se trataba el token: "+ token.getCod()+"\nParser: "+parser);
+
+				System.err.println("Corrija los errores existentes.");
 			}else{
 				System.out.println("Codigo valido hasta la linea:"+ line[0] + "\n" + parser);
 			}
@@ -364,7 +366,7 @@ public class Compiler {
 			return null;
 		}
 	}
-	
+
 	private static void safeExit(int n) {
 		try {
 			System.err.println("Corrija los errores existentes.");
@@ -377,7 +379,7 @@ public class Compiler {
 			e.printStackTrace();
 			System.exit(n);
 		}
-		
+
 	}
 	/**
 	 * Genera por la salida de error un error de tipo lexico, sintactico o semantico.
@@ -448,18 +450,8 @@ public class Compiler {
 			break;
 		}
 	}
-	private static Entry<String[], Boolean> recuperacionError(BufferedReader br, char[] pointer, int[] line) throws Exception {
-		while(!token.getCod().equals("PYC") && !token.getCod().equals("FINAL")){
-			token=A_lex(br, pointer, line, false);
-		}
-		if(token.getCod().equals("PYC"))
-			token=A_lex(br, pointer, line, false);
-		return token.getCod().equals("FINAL")? new SimpleEntry<String[],Boolean>(devolverArray("null"),false): new SimpleEntry<String[],Boolean>(P(br, pointer, line).getKey(),false);
-	}
-
-	private static Entry<String[],Boolean> U(BufferedReader br, char[] pointer, int[] line, int CODE_FILE_NUMBER) throws Exception {
+	private static Entry<String[],Boolean> U(BufferedReader br, char[] pointer, int[] line) throws Exception {
 		parser+="1 ";
-		TSControl = new TSControl(CODE_FILE_NUMBER);
 		String funcionTratada=null;
 		String funcionInvocada=null;
 		dentroFuncion=false;
@@ -729,8 +721,8 @@ public class Compiler {
 		}
 	}
 
-	
-	
+
+
 	private static Entry<String[],Boolean> W(BufferedReader br, char[] pointer, int[] line) throws Exception {
 		if(token.codigo.equals("ASIG") && (int)token.getAtr()==0){
 			parser+="13 ";
@@ -751,7 +743,9 @@ public class Compiler {
 			if(resE.getKey()[0].equals("int"))
 				return new SimpleEntry<String[],Boolean>(devolverArray("int"),true);
 			else {
-				return new SimpleEntry<String[],Boolean>(devolverArray("errorSin"),false);
+				genError(30, line[0], resE.getKey()[0] + "#int");
+				safeExit(30);
+				throw new CompilationErrorException();
 			}
 		}else if(token.getCod().equals("PYC")){//CASO LAMBDA
 			parser+="15 ";
@@ -793,6 +787,7 @@ public class Compiler {
 						if((token.getCod().equals("LLAVE") && (int) token.getAtr()==0) || token.getCod().equals("TABLEID") || token.getCod().equals("PUT") || token.getCod().equals("GET") ||token.getCod().equals("RET")) {
 							return Y(br,pointer,line);
 						}else {
+							genError(21, line[0], tokenToString(token)+ "#'{' o 'variable' o 'put' o 'get' o 'return");
 							return new SimpleEntry<String[],Boolean>(devolverArray("errorSin"), false);
 						}
 					}else{
@@ -808,6 +803,7 @@ public class Compiler {
 					return new SimpleEntry<String[],Boolean>(devolverArray("errorSin"), false);
 				}
 			}else{
+				genError(21, line[0], tokenToString(token)+ "#(");
 				return new SimpleEntry<String[],Boolean>(devolverArray("errorSin"), false);
 			}
 		}else if(token.codigo.equals("LET")){
@@ -863,7 +859,7 @@ public class Compiler {
 				System.out.println("este14");
 				genError(21, line[0], tokenToString(token) + "#variable");
 				return new SimpleEntry<String[],Boolean>(devolverArray("errorSin"),false);
-				
+
 			}
 		}else {
 			parser+="18 ";
@@ -887,25 +883,26 @@ public class Compiler {
 					if(resV.getValue()) {
 						return new SimpleEntry<String[],Boolean>(devolverArray("null"),true);
 
-					} else {return new SimpleEntry<String[],Boolean>(devolverArray("errorSin"),false);}
+					} else {
+						return new SimpleEntry<String[],Boolean>(devolverArray("errorSin"),false);
+					}
 
 				}else{
 					System.out.println("este15");
 					genError(21, line[0], tokenToString(token) + "#}");
 					return new SimpleEntry<String[],Boolean>(devolverArray("errorSin"),false);
 				}
-
-
-
-
-
-
-			}else{return new SimpleEntry<String[],Boolean>(devolverArray("errorSin"),false);}
+			}else{
+				return new SimpleEntry<String[],Boolean>(devolverArray("errorSin"),false);
+			}
 		}else{
 			if(token.getCod().equals("TABLEID") ||token.getCod().equals("PUT") ||token.getCod().equals("GET") ||token.getCod().equals("RET")){
 				parser+="20 ";
 				return S(br,pointer,line);
-			}else{return new SimpleEntry<String[],Boolean>(devolverArray("errorSin"),false);}
+			}else{
+				genError(21, line[0], tokenToString(token)+ "#'variable' o 'put' o 'get' o 'return");
+				return new SimpleEntry<String[],Boolean>(devolverArray("errorSin"),false);
+			}
 		}
 	}
 
@@ -932,16 +929,21 @@ public class Compiler {
 						}else {
 							return new SimpleEntry<String[],Boolean>(devolverArray(tipoG),true);
 						}
-					}else{return new SimpleEntry<String[],Boolean>(devolverArray(tipoG),true);}
+					}else{
+						return new SimpleEntry<String[],Boolean>(devolverArray(tipoG),true);
+					}
 				}
 				else{
 					return new SimpleEntry<String[],Boolean>(devolverArray("errorSin"),false);
-
 				}
-
-			}else {return new SimpleEntry<String[],Boolean>(devolverArray("errorSin"),false);}
+			}else {
+				return new SimpleEntry<String[],Boolean>(devolverArray("errorSin"),false);
+			}
 		}
-		else{return new SimpleEntry<String[],Boolean>(devolverArray("errorSin"),false);}
+		else{
+			genError(21, line[0], tokenToString(token) + "#'(' o 'string' o 'cte' o 'true' o 'false' o 'variable");
+			return new SimpleEntry<String[],Boolean>(devolverArray("errorSin"),false);
+		}
 
 	}
 
@@ -959,7 +961,7 @@ public class Compiler {
 					Entry<String[],Boolean> resJ=J(br,pointer,line);
 					String tipoJ = resJ.getKey()[0];
 					//System.out.println("A ver que pasa tipo1 "+tipoG+" tipo2 "+tipoJ);
-						return new SimpleEntry<String[],Boolean>(devolverArray("boolean"),true);
+					return new SimpleEntry<String[],Boolean>(devolverArray("boolean"),true);
 				}else {
 					genError(30, line[0], resG.getKey()[0] + "#boolean");
 					safeExit(30);
@@ -967,13 +969,16 @@ public class Compiler {
 				}
 				//</ASEM>
 
-			}else{return new SimpleEntry<String[],Boolean>(devolverArray("errorSin"),false);}
+			}else{
+				return new SimpleEntry<String[],Boolean>(devolverArray("errorSin"),false);
+			}
 		}
 		else if((token.codigo.equals("PARENT") && ((int) token.atributo ==1))||token.codigo.equals("COMA")||token.codigo.equals("PYC")){
 			parser+="23 ";
 			return new SimpleEntry<String[],Boolean>(devolverArray("null"),true);
 		}
 		else{
+			genError(21, line[0], tokenToString(token) + "#'&&' o ')' o ',' o ';'");
 			return new SimpleEntry<String[],Boolean>(devolverArray("errorSin"),false);
 		}
 	}
@@ -1021,19 +1026,19 @@ public class Compiler {
 					genError(30,line[0], tipoD + "#" + tipo);
 					safeExit(30);
 					throw new CompilationErrorException();
-					}
+				}
 				Entry<String[],Boolean> resM=M(br,pointer,line,tipoD);
 				String tipoM = resM.getKey()[0];
 
 				if(resM.getValue()) {
 					if(tipoM.equals("null") || tipoD.equals(tipoM)) {
 						return new SimpleEntry<String[],Boolean>(devolverArray(tipoD),true);
-						
+
 					} else {
 						genError(30,line[0], tipoM + "#" + tipoD);
 						safeExit(30);
 						throw new CompilationErrorException();
-						}
+					}
 				}else {
 					return new SimpleEntry<String[],Boolean>(devolverArray("errorSin"),false);			
 				}
@@ -1044,14 +1049,16 @@ public class Compiler {
 			parser+="26 ";
 			return new SimpleEntry<String[],Boolean>(devolverArray("null"),true);
 		}
-		else{return new SimpleEntry<String[],Boolean>(devolverArray("errorSin"),false);}
+		else{
+			genError(21, line[0], tokenToString(token) + "#'==' o ')' o '&&' o ',' o ';'");
+			return new SimpleEntry<String[],Boolean>(devolverArray("errorSin"),false);
+			}
 	}
-	/*
-	 deprecated
 
-	 */
+	
 	private static Entry<String[],Boolean> D(BufferedReader br, char[] pointer, int[] line) throws Exception {
-		if((token.codigo.equals("PARENT") && ((int) token.atributo ==0))||token.codigo.equals("CAD")||token.codigo.equals("CTE")||token.codigo.equals("FALSE")||token.codigo.equals("TABLEID")||token.codigo.equals("TRUE")){
+		if((token.codigo.equals("PARENT") && ((int) token.atributo ==0))||token.codigo.equals("CAD")
+			||token.codigo.equals("CTE")||token.codigo.equals("FALSE")||token.codigo.equals("TABLEID")||token.codigo.equals("TRUE")){
 			parser+="27 ";
 			Entry<String[],Boolean> resI=I(br,pointer,line);
 			if(resI.getValue())
@@ -1078,6 +1085,7 @@ public class Compiler {
 			}
 		}
 		else{
+			genError(21, line[0], tokenToString(token) + "#'(' o 'string' o 'cte' o 'false' o 'true' o 'variable'");
 			return new SimpleEntry<String[],Boolean>(devolverArray("errorSin"),false);
 
 		}
@@ -1164,6 +1172,7 @@ public class Compiler {
 				token=A_lex(br, pointer, line,false);
 				return new SimpleEntry<String[],Boolean>(resE.getKey(),true);	
 			}else{
+				genError(21, line[0], tokenToString(token) + "#')'");
 				return new SimpleEntry<String[],Boolean>(devolverArray("errorSin"),false); 				
 				//ASEM: genError(21, line[0], tokenToString(token) + "#')");
 				//continua
@@ -1210,15 +1219,23 @@ public class Compiler {
 					token=A_lex(br, pointer, line, false);
 					return new SimpleEntry<String[],Boolean>(devolverArray("function"),true);
 				}
-				else{return new SimpleEntry<String[],Boolean>(devolverArray("errorSin"),false);}
+				else{
+					genError(21, line[0], tokenToString(token) + "#')'");
+					return new SimpleEntry<String[],Boolean>(devolverArray("errorSin"),false);
+					}
 			}
-			else{return new SimpleEntry<String[],Boolean>(devolverArray("errorSin"),false);}
+			else{
+				return new SimpleEntry<String[],Boolean>(devolverArray("errorSin"),false);
+				}
 		}
 		else if(token.codigo.equals("MOD")||token.codigo.equals("AND")||(token.codigo.equals("PARENT") && ((int) token.atributo==1))||token.codigo.equals("COMA")||token.codigo.equals("PYC")||token.codigo.equals("EQ")){
 			parser+="37 ";
 			return new SimpleEntry<String[],Boolean>(devolverArray("null"),true);
 		}
-		else{return new SimpleEntry<String[],Boolean>(devolverArray("errorSin"),false);}
+		else{
+			genError(21, line[0], tokenToString(token) + "#'(' o '%' o '&&' o ')' o ',' o ';' o '=='");
+			return new SimpleEntry<String[],Boolean>(devolverArray("errorSin"),false);
+			}
 	}
 
 	private static Entry<String[],Boolean> T(BufferedReader br, char[] pointer, int[] line) throws Exception {
@@ -1267,20 +1284,24 @@ public class Compiler {
 			}
 			if(id.getTipoParamXX(CuentaParametrosAct)!=null && id.getTipoParamXX(CuentaParametrosAct).equals(resE.getKey()[0])) {
 				CuentaParametrosAct++;
-				
+
 			} else{
 				genError(32, line[0],CuentaParametrosAct +"#" + funcionInvocadaAct+"#"+ id.getTipoParamXX(CuentaParametrosAct)+ "#" +resE.getKey()[0] );
 				safeExit(32);
 				throw new CompilationErrorException();
 				//return new SimpleEntry<String[],Boolean>(devolverArray("errorSem"),false);
-				}
+			}
 
 
 			if(resE.getValue()){
 				if(Q(br, pointer, line,funcionInvocadaAct,CuentaParametrosAct).getValue()){
 					return new SimpleEntry<String[],Boolean>(devolverArray("null"),true);
-				}else{return new SimpleEntry<String[],Boolean>(devolverArray("errorSin"),false);}
-			}else{return new SimpleEntry<String[],Boolean>(devolverArray("errorSin"),false);}
+				}else{
+					return new SimpleEntry<String[],Boolean>(devolverArray("errorSin"),false);
+					}
+			}else{
+				return new SimpleEntry<String[],Boolean>(devolverArray("errorSin"),false);
+				}
 		}
 		else if(token.codigo.equals("PARENT") && ((int) token.atributo==1)){
 			parser+="42 ";
@@ -1289,7 +1310,7 @@ public class Compiler {
 				genError(36,line[0], "");
 				safeExit(36);
 				throw new CompilationErrorException();
-				
+
 			}
 			EntryTS id=TSControl.getVar(funcionInvocadaAct.hashCode());
 			if(id.getNumParam()>0) {
@@ -1337,8 +1358,12 @@ public class Compiler {
 				}
 				if(Q(br, pointer, line,funcionInvocadaAct,CuentaParametrosAct).getValue()){
 					return new SimpleEntry<String[],Boolean>(devolverArray("null"),true);
-				}else{return new SimpleEntry<String[],Boolean>(devolverArray("errorSin"),false);}
-			}else{return new SimpleEntry<String[],Boolean>(devolverArray("errorSin"),false);}
+				}else{
+					return new SimpleEntry<String[],Boolean>(devolverArray("errorSin"),false);
+					}
+			}else{
+				return new SimpleEntry<String[],Boolean>(devolverArray("errorSin"),false);
+				}
 		}
 		else if(token.codigo.equals("PARENT") && ((int) token.atributo==1)){
 			parser+="44 ";
@@ -1356,15 +1381,16 @@ public class Compiler {
 				throw new CompilationErrorException();
 			}
 		}
-		else
-		{
+		else {
+			genError(21, line[0], tokenToString(token) + "#')'");
 			return new SimpleEntry<String[],Boolean>(devolverArray("errorSin"),false);
 		}
 	}
 
 	private static Entry<String[],Boolean> X(BufferedReader br, char[] pointer, int[] line)throws Exception {
 
-		if((token.codigo.equals("PARENT") && ((int) token.atributo ==0))||token.codigo.equals("CAD")||token.codigo.equals("CTE")||token.codigo.equals("FALSE")||token.codigo.equals("TABLEID")||token.codigo.equals("TRUE")){
+		if((token.codigo.equals("PARENT") && ((int) token.atributo ==0))||token.codigo.equals("CAD")||token.codigo.equals("CTE")
+				||token.codigo.equals("FALSE")||token.codigo.equals("TABLEID")||token.codigo.equals("TRUE")){
 			parser+="45 ";
 			Entry<String[],Boolean> resE=E(br,pointer,line);
 			if(resE.getValue())
@@ -1372,14 +1398,14 @@ public class Compiler {
 				//System.out.println("Prueba X: "+resE.getKey()[0]);
 				return new SimpleEntry<String[],Boolean>(resE.getKey(),true);
 			}
-			else
-			{
+			else{
 				return new SimpleEntry<String[],Boolean>(devolverArray("errorSin"),false);
 			}
 		} else if (token.codigo.equals("PYC")){
 			parser+="46 ";
 			return new SimpleEntry<String[],Boolean>(devolverArray("void"),true);
 		}else {
+			genError(21, line[0], tokenToString(token) + "#'(' o 'string' o 'cte' o 'false' o 'true' o 'variable'");
 			return new SimpleEntry<String[],Boolean>(devolverArray("errorSin"),false);
 		}
 
@@ -1427,14 +1453,27 @@ public class Compiler {
 										token=A_lex(br, pointer, line, false);
 										System.out.println("Hace destroy ahora");
 										return new SimpleEntry<String[],Boolean>(devolverArray("null"),true);
-									}else{return new SimpleEntry<String[],Boolean>(devolverArray("errorSin"),false);}
-								}else{return new SimpleEntry<String[],Boolean>(devolverArray("errorSin"),false);}
-							}else{return new SimpleEntry<String[],Boolean>(devolverArray("errorSin"),false);}
-						}else{return new SimpleEntry<String[],Boolean>(devolverArray("errorSin"),false);}
-					}else{return new SimpleEntry<String[],Boolean>(devolverArray("errorSin"),false);}
-				}else{return new SimpleEntry<String[],Boolean>(devolverArray("errorSin"),false);}
-			}else{return new SimpleEntry<String[],Boolean>(devolverArray("errorSin"),false);}
-		}else {return new SimpleEntry<String[],Boolean>(devolverArray("errorSin"),false);}
+									}else{
+										genError(21, line[0], tokenToString(token) + "#'}'");
+										return new SimpleEntry<String[],Boolean>(devolverArray("errorSin"),false);}
+								}else{
+									return new SimpleEntry<String[],Boolean>(devolverArray("errorSin"),false);}
+							}else{
+								genError(21, line[0], tokenToString(token) + "#'{'");
+								return new SimpleEntry<String[],Boolean>(devolverArray("errorSin"),false);}
+						}else{
+							genError(21, line[0], tokenToString(token) + "#')'");
+							return new SimpleEntry<String[],Boolean>(devolverArray("errorSin"),false);}
+					}else{
+						return new SimpleEntry<String[],Boolean>(devolverArray("errorSin"),false);}
+				}else{
+					genError(21, line[0], tokenToString(token) + "#'('");
+					return new SimpleEntry<String[],Boolean>(devolverArray("errorSin"),false);}
+			}else{
+				return new SimpleEntry<String[],Boolean>(devolverArray("errorSin"),false);}
+		}else {
+			genError(21, line[0], tokenToString(token) + "#'variable'");
+			return new SimpleEntry<String[],Boolean>(devolverArray("errorSin"),false);}
 	}
 
 	private static Entry<String[],Boolean> H(BufferedReader br, char[] pointer, int[] line) throws Exception {
@@ -1453,6 +1492,7 @@ public class Compiler {
 				return new SimpleEntry<String[],Boolean>(devolverArray("errorSin"),false);
 			}
 		}else {
+			genError(21, line[0], tokenToString(token) + "#'void' o 'int' o 'boolean' o 'string'");
 			return new SimpleEntry<String[],Boolean>(devolverArray("errorSin"),false);
 		}
 	}
@@ -1489,15 +1529,15 @@ public class Compiler {
 					//System.out.println("lexemaa;" + token.getAtr());
 					TSControl.putSimbolo((int)token.getAtr(), tipoParam);
 					//</ASEM>
-	
+
 					token=A_lex(br, pointer, line, false);
-	
+
 					if(K(br, pointer, line).getValue()) {
 						return new SimpleEntry<String[],Boolean>(devolverArray("null"),true);
 					}else {
 						return new SimpleEntry<String[],Boolean>(devolverArray("errorSin"),false);
 					}
-	
+
 				}else{
 					System.out.println("este21");
 					genError(21, line[0],tokenToString(token) + "#variable");
@@ -1596,11 +1636,12 @@ public class Compiler {
 			}else{
 				return new SimpleEntry<String[],Boolean>(devolverArray("errorSin"),false);
 			}	
-		}else{
+		}else{	
+			genError(21, line[0], tokenToString(token) + "#'{' o 'get' o 'variable' o 'if' o 'let' o 'put' o 'return'");
 			return new SimpleEntry<String[],Boolean>(devolverArray("errorSin"),false);
 		}
 	}			
-	
+
 	private static Entry<String[],Boolean> V(BufferedReader br, char[] pointer, int[] line) throws Exception {
 		if(token.codigo.equals("ELSE")) {
 			parser+="56 ";
@@ -1613,12 +1654,14 @@ public class Compiler {
 						token=A_lex(br, pointer, line, false);
 						return new SimpleEntry<String[],Boolean>(devolverArray("null"),true);
 					} else {
+						genError(21, line[0], tokenToString(token) + "#'}'");
 						return new SimpleEntry<String[],Boolean>(devolverArray("errorSin"),false);
 					}
 				}else {
 					return new SimpleEntry<String[],Boolean>(devolverArray("errorSin"),false);
 				}
 			} else {
+				genError(21, line[0], tokenToString(token) + "#{");
 				return new SimpleEntry<String[],Boolean>(devolverArray("errorSin"),false);
 			}
 		} else if(token.codigo.equals("FUNC") || token.codigo.equals("IF") || token.codigo.equals("TABLEID") || token.codigo.equals("PUT") || token.codigo.equals("GET") || 
@@ -1627,6 +1670,8 @@ public class Compiler {
 			return new SimpleEntry<String[],Boolean>(devolverArray("null"),true);
 
 		} else {
+			
+			genError(21, line[0], tokenToString(token) + "else' o 'function' o 'if' o 'variable' o 'put' o 'get' o 'return' o 'let' o '{");
 			return new SimpleEntry<String[],Boolean>(devolverArray("errorSin"),false);
 		}
 
