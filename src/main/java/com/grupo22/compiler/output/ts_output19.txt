@@ -1,0 +1,85 @@
+TABLA LOCAL DE LA FUNCION 'n' #1:
+* LEXEMA : 'n'
+	Atributos:
+	+tipo:		'int'
+	+despl:		0
+* LEXEMA : 'ba'
+	Atributos:
+	+tipo:		'int'
+	+despl:		2
+-------------------------------------------
+TABLA LOCAL DE LA FUNCION 'isEven' #2:
+* LEXEMA : 'n'
+	Atributos:
+	+tipo:		'int'
+	+despl:		0
+-------------------------------------------
+TABLA LOCAL DE LA FUNCION 'testEven' #3:
+* LEXEMA : 'result'
+	Atributos:
+	+tipo:		'boolean'
+	+despl:		0
+-------------------------------------------
+TABLA LOCAL DE LA FUNCION 'main' #4:
+-------------------------------------------
+TABLA LOCAL DE LA FUNCION 'fibonacci' #5:
+* LEXEMA : 'n'
+	Atributos:
+	+tipo:		'int'
+	+despl:		0
+-------------------------------------------
+TABLA LOCAL DE LA FUNCION 'printFibonacci' #6:
+* LEXEMA : 'count'
+	Atributos:
+	+tipo:		'int'
+	+despl:		0
+* LEXEMA : 'num'
+	Atributos:
+	+tipo:		'int'
+	+despl:		2
+-------------------------------------------
+TABLA LOCAL DE LA FUNCION 'main' #7:
+-------------------------------------------
+TABLA GLOBAL #0:
+* LEXEMA : 'n'
+	Atributos:
+	+tipo:		'function'
+	+despl:		0
+	+numParam:		2
+	+tipoParam 1:		'int'
+	+tipoParam 2:		'int'
+	+tipoRetorno:		'int'
+* LEXEMA : 'isEven'
+	Atributos:
+	+tipo:		'function'
+	+despl:		0
+	+numParam:		1
+	+tipoParam 1:		'int'
+	+tipoRetorno:		'boolean'
+* LEXEMA : 'testEven'
+	Atributos:
+	+tipo:		'function'
+	+despl:		0
+	+numParam:		0
+	+tipoRetorno:		'void'
+* LEXEMA : 'main'
+	Atributos:
+	+tipo:		'function'
+	+despl:		0
+	+numParam:		0
+	+tipoRetorno:		'void'
+* LEXEMA : 'fibonacci'
+	Atributos:
+	+tipo:		'function'
+	+despl:		0
+	+numParam:		1
+	+tipoParam 1:		'int'
+	+tipoRetorno:		'int'
+* LEXEMA : 'printFibonacci'
+	Atributos:
+	+tipo:		'function'
+	+despl:		0
+	+numParam:		1
+	+tipoParam 1:		'int'
+	+tipoRetorno:		'void'
+-------------------------------------------

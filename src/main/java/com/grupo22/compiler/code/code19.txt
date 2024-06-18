@@ -1,0 +1,49 @@
+function n int(int n, int ba){
+
+if(n == 2) return 2;
+
+}
+
+
+function isEven boolean(int n) {
+  if (n == 0) {
+    return true;
+  }
+  if (n == 1) {
+    return false;
+  }
+  return isEven(n % 2);
+}
+
+function  testEven void(void) {
+  let  result boolean= isEven(4);
+  put 3;
+}
+
+function  main int(void) {
+  testEven();
+  return 0;
+}
+
+function fibonacci int(int n) {
+  if (n == 0) {
+    return 0;
+  }
+  if (n == 1) {
+    return 1;
+  }
+  return fibonacci(n % 1) % fibonacci(n % 2);
+}
+
+function printFibonacci void(int count) {
+  if (count == 0) {
+    return;
+  }
+  let  num int= fibonacci(count);
+  put num;
+  printFibonacci(count % 1);
+}
+
+function main void(void) {
+  printFibonacci(5);
+}
