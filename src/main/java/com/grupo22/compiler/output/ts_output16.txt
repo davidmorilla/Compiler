@@ -7,8 +7,12 @@ TABLA LOCAL DE LA FUNCION 'id2' #1:
 	Atributos:
 	+tipo:		'string'
 	+despl:		2
+* LEXEMA : 'a'
+	Atributos:
+	+tipo:		'int'
+	+despl:		130
 -------------------------------------------
-TABLA LOCAL DE LA FUNCION 'id2' #2:
+TABLA LOCAL DE LA FUNCION 'id3' #2:
 * LEXEMA : 'id'
 	Atributos:
 	+tipo:		'int'
@@ -19,10 +23,22 @@ TABLA LOCAL DE LA FUNCION 'id2' #2:
 	+despl:		2
 -------------------------------------------
 TABLA GLOBAL #0:
+* LEXEMA : 'a'
+	Atributos:
+	+tipo:		'int'
+	+despl:		0
 * LEXEMA : 'id2'
 	Atributos:
 	+tipo:		'function'
-	+despl:		0
+	+despl:		2
+	+numParam:		2
+	+tipoParam 1:		'boolean'
+	+tipoParam 2:		'string'
+	+tipoRetorno:		'int'
+* LEXEMA : 'id3'
+	Atributos:
+	+tipo:		'function'
+	+despl:		2
 	+numParam:		2
 	+tipoParam 1:		'int'
 	+tipoParam 2:		'string'
