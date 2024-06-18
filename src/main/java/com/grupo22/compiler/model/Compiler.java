@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Map.Entry;
 import java.util.Scanner;
 
+import com.grupo22.compiler.util.CompilationErrorException;
 import com.grupo22.compiler.util.EntryTS;
 import com.grupo22.compiler.util.Token;
 public class Compiler {
@@ -440,7 +441,7 @@ public class Compiler {
 			System.err.println("Error semantico en linea "+line + ": la condición dentro de un if debe ser de tipo booleano y no de tipo " + error);
 			break;
 		case 36: 
-			System.err.println("Error semantico en linea "+line + ": El identificador debe ser una funcion");
+			System.err.println("Error semantico en linea "+line + ": se usa una función como variable o se usa una variable como función.");
 			break;
 		case 37: //error por definir
 			System.err.println("Error semantico en linea "+line + ": EL 'return' se encuentra fuera del ámbito de una función.");
@@ -523,7 +524,7 @@ public class Compiler {
 				}else {
 					genError(30, line[0], resZ.getKey()[0] + "#" + temp.getTipo() );
 					safeExit(30);
-					throw new Exception();
+					throw new CompilationErrorException();
 				}
 			}else {
 				return new SimpleEntry<String[],Boolean>(devolverArray("errorSin"),false);
@@ -546,7 +547,7 @@ public class Compiler {
 					{
 						genError(30, line[0], resE.getKey()[0] + "#string' o 'int" );
 						safeExit(30);
-						throw new Exception();
+						throw new CompilationErrorException();
 					}
 				}
 				else{
@@ -570,7 +571,7 @@ public class Compiler {
 				{
 					genError(30, line[0], temp.getTipo() + "#string' o 'int" );
 					safeExit(30);
-					throw new Exception();
+					throw new CompilationErrorException();
 				}
 				token=A_lex(br, pointer, line, false);
 				if(token.getCod().equals("PYC")){
@@ -602,12 +603,12 @@ public class Compiler {
 				{
 					genError(37, line[0], "return" );
 					safeExit(37);
-					throw new Exception();
+					throw new CompilationErrorException();
 				}
 				if(!resX.getKey()[0].equals(TSControl.getVar(funcionTratada.hashCode()).getTipoRetorno())) {
 					genError(31, line[0], funcionTratada + "#" + TSControl.getVar(funcionTratada.hashCode()).getTipoRetorno() + "#" + resX.getKey()[0] );
 					safeExit(31);
-					throw new Exception();
+					throw new CompilationErrorException();
 				}
 
 				if(token.getCod().equals("PYC")){
@@ -664,7 +665,7 @@ public class Compiler {
 					} else {	//TIPO_ERROR
 						genError(30, line[0], "int#" + resE.getKey()[0]);
 						safeExit(30);
-						throw new Exception();
+						throw new CompilationErrorException();
 					}
 				}
 				else{
@@ -728,6 +729,8 @@ public class Compiler {
 		}
 	}
 
+	
+	
 	private static Entry<String[],Boolean> W(BufferedReader br, char[] pointer, int[] line) throws Exception {
 		if(token.codigo.equals("ASIG") && (int)token.getAtr()==0){
 			parser+="13 ";
@@ -777,7 +780,8 @@ public class Compiler {
 					String tipoCondicion = resE.getKey()[0];
 					if(!tipoCondicion.equals("boolean")){
 						genError(35, line[0], tipoCondicion);
-						throw new Exception("PRODUCCION B: La condición debe ser de tipo booleano");
+						safeExit(35);
+						throw new CompilationErrorException();
 
 
 					}
@@ -833,7 +837,8 @@ public class Compiler {
 							TSControl.putSimbolo(lexem, tipoDeclarado);
 						}else {
 							genError(30, line[0], tipoDeclarado +"#"+ tipoAsignado);
-							throw new Exception("PRODUCCION B: El tipo declarado no cuadra con el tipo asignado");
+							safeExit(30);
+							throw new CompilationErrorException();
 						}
 						//</ASEM>
 
@@ -858,39 +863,7 @@ public class Compiler {
 				System.out.println("este14");
 				genError(21, line[0], tokenToString(token) + "#variable");
 				return new SimpleEntry<String[],Boolean>(devolverArray("errorSin"),false);
-				/*
-				//continua
-				int lexem=(int)token.atributo;
-				token=A_lex(br, pointer, line, false);
-				String [] resT=T(br,pointer,line).getKey();
-				if(!resT[0].equals("errorSin"))
-				{
-					String [] resW=W(br,pointer,line).getKey();
-					if(!resW[0].equals("errorSin"))
-					{
-						if(!resT[0].equals(resW[0]) && !resW[0].equals("null")) {
-							genError(30, line[0], resT[0]+ "#"+resW[0]);
-							return new SimpleEntry<>(devolverArray("errorSem"), false);
-						}else {//AniADETIPO
-							TSControl.putSimbolo(TSControl.getVarName(lexem), resT[0]);
-						}
-						if(token.getCod().equals("PYC")){
-							token=A_lex(br, pointer, line, false);
-							return new SimpleEntry<String[],Boolean>(devolverArray("null"),true);
-						}else{
-							genError(21, line[0], tokenToString(token)+ "#;");
-							//continua
-							token=A_lex(br, pointer, line, false);
-							return new SimpleEntry<String[],Boolean>(devolverArray("null"),true);
-						}
-					}
-					else{
-						return new SimpleEntry<String[],Boolean>(devolverArray("errorSin"),false);
-					}
-				}
-				else{
-					return new SimpleEntry<String[],Boolean>(devolverArray("errorSin"),false);
-				}*/
+				
 			}
 		}else {
 			parser+="18 ";
@@ -915,33 +888,7 @@ public class Compiler {
 						return new SimpleEntry<String[],Boolean>(devolverArray("null"),true);
 
 					} else {return new SimpleEntry<String[],Boolean>(devolverArray("errorSin"),false);}
-					/*
-					if(token.getCod().equals("ELSE"))
-					{
-						token=A_lex(br, pointer, line, false);
-						if(token.codigo.equals("LLAVE") && ((int) token.atributo ==0))
-						{
-							token=A_lex(br, pointer, line, false);
-							if(C(br,pointer,line).getValue())
-							{
-								if(token.codigo.equals("LLAVE") && ((int) token.atributo ==1))
-								{
-									token=A_lex(br, pointer, line, false);
-									return new SimpleEntry<String[],Boolean>(devolverArray("null"),true);
-								}else{
-									genError(21, line[0],tokenToString(token) + "#}");
-									return new SimpleEntry<String[],Boolean>(devolverArray("errorSin"),false);
-								}
-							}else{return new SimpleEntry<String[],Boolean>(devolverArray("errorSin"),false);}
-						}else{
-							genError(21, line[0], tokenToString(token)+ "#{");
-							return new SimpleEntry<String[],Boolean>(devolverArray("errorSin"),false);
-						}
-					}else{
-						genError(21, line[0], tokenToString(token)+ "#else");
-						return new SimpleEntry<String[],Boolean>(devolverArray("errorSin"),false);
-					}
-					 */
+
 				}else{
 					System.out.println("este15");
 					genError(21, line[0], tokenToString(token) + "#}");
@@ -978,9 +925,10 @@ public class Compiler {
 					//System.out.println("TIPOOOOOS:"+tipoJ + tipoG);
 					if(tipoJ.equals("boolean")) {
 						if(!tipoG.equals("boolean"))
-						{		
+						{
 							genError(30, line[0], tipoG + "#boolean");
-							throw new Exception();
+							safeExit(30);
+							throw new CompilationErrorException();
 						}else {
 							return new SimpleEntry<String[],Boolean>(devolverArray(tipoG),true);
 						}
@@ -1014,7 +962,8 @@ public class Compiler {
 						return new SimpleEntry<String[],Boolean>(devolverArray("boolean"),true);
 				}else {
 					genError(30, line[0], resG.getKey()[0] + "#boolean");
-					throw new Exception();
+					safeExit(30);
+					throw new CompilationErrorException();
 				}
 				//</ASEM>
 
@@ -1047,8 +996,9 @@ public class Compiler {
 				}else if(tipoM.equals("null")) {
 					return new SimpleEntry<String[],Boolean>(devolverArray(tipoD),true);
 				}else {
-					genError(37,line[0], "");
-					throw new Exception();
+					genError(30,line[0], tipoM + "#" + tipoD);
+					safeExit(30);
+					throw new CompilationErrorException();
 				}
 				//</ASEM>
 			}else{
@@ -1059,7 +1009,6 @@ public class Compiler {
 		}
 	}
 
-	/* MDAVID
 	private static Entry<String[],Boolean> M(BufferedReader br, char[] pointer, int[] line, String tipo) throws Exception {
 		if(token.codigo.equals("EQ")){
 			parser+="25 ";
@@ -1068,33 +1017,11 @@ public class Compiler {
 			if(resD.getValue()){
 				//<ASEM>
 				String tipoD = resD.getKey()[0];
-				if(tipoD.equals(tipo)) {
-					Entry<String[],Boolean> resM=M(br,pointer,line, "boolean");
-					String tipoM = resM.getKey()[0];
-					return new SimpleEntry<String[],Boolean>(devolverArray(tipoM),true);
-				}else {
-					genError(30, line[0],tipoD+"#"+ tipo);
-					throw new Exception();
-				}
-				//</ASEM>
-			}else {return new SimpleEntry<String[],Boolean>(devolverArray("errorSin"),false);}
-		}
-		else if((token.codigo.equals("PARENT") && ((int) token.atributo ==1))||token.codigo.equals("AND")||token.codigo.equals("COMA")||token.codigo.equals("PYC")){
-			parser+="26 ";
-			return new SimpleEntry<String[],Boolean>(devolverArray("null"),true);
-		}
-		else{return new SimpleEntry<String[],Boolean>(devolverArray("errorSin"),false);}
-	}
-	 */
-	private static Entry<String[],Boolean> M(BufferedReader br, char[] pointer, int[] line, String tipo) throws Exception {
-		if(token.codigo.equals("EQ")){
-			parser+="25 ";
-			token=A_lex(br, pointer, line, false);
-			Entry<String[],Boolean> resD=D(br,pointer,line);
-			if(resD.getValue()){
-				//<ASEM>
-				String tipoD = resD.getKey()[0];
-				if(!tipo.equals(tipoD)){throw new Exception("Los tipos no coinciden en la condición en la linea "+line[0]+".");}
+				if(!tipo.equals(tipoD)){
+					genError(30,line[0], tipoD + "#" + tipo);
+					safeExit(30);
+					throw new CompilationErrorException();
+					}
 				Entry<String[],Boolean> resM=M(br,pointer,line,tipoD);
 				String tipoM = resM.getKey()[0];
 
@@ -1102,7 +1029,11 @@ public class Compiler {
 					if(tipoM.equals("null") || tipoD.equals(tipoM)) {
 						return new SimpleEntry<String[],Boolean>(devolverArray(tipoD),true);
 						
-					} else {throw new Exception("Los tipos no coinciden en la condición");}
+					} else {
+						genError(30,line[0], tipoM + "#" + tipoD);
+						safeExit(30);
+						throw new CompilationErrorException();
+						}
 				}else {
 					return new SimpleEntry<String[],Boolean>(devolverArray("errorSin"),false);			
 				}
@@ -1136,8 +1067,9 @@ public class Compiler {
 					if(tipoN.equals("null") || (tipoI.equals("int") && tipoN.equals("int"))){
 						return new SimpleEntry<String[],Boolean>(devolverArray(tipoI),true);
 					}else {
-						genError(30, line[0], resI.getKey()[0] +"#int");
-						throw new Exception();
+						genError(30, line[0], tipoI +"' o '"+tipoN +"#int");
+						safeExit(30);
+						throw new CompilationErrorException();
 					}
 					//</ASEM>	
 				}
@@ -1164,7 +1096,8 @@ public class Compiler {
 					return new SimpleEntry<String[],Boolean>(devolverArray("int"),true);
 				}else {
 					genError(30, line[0], tipoI+"#int");
-					throw new Exception();
+					safeExit(30);
+					throw new CompilationErrorException();
 				}
 				//</ASEM>
 			}
@@ -1216,8 +1149,9 @@ public class Compiler {
 					//return new SimpleEntry<String[],Boolean>(devolverArray("errorSem"),false);
 				}
 				else{
-					throw new Exception("Se trata un identificador como si fuera de funcion sin serlo o no se trata como funcion cuando lo es.");
-					//return new SimpleEntry<String[],Boolean>(devolverArray("errorSem"),false);
+					genError(36,line[0], "");
+					safeExit(36);
+					throw new CompilationErrorException();//return new SimpleEntry<String[],Boolean>(devolverArray("errorSem"),false);
 				}				
 			}
 			return new SimpleEntry<String[],Boolean>(devolverArray("null"),false); 	
@@ -1318,8 +1252,10 @@ public class Compiler {
 			parser+="41 ";
 			if(funcionInvocada==null)
 			{
-				throw new Exception("Se ha intentado usar una funcion con identificador de otro que no es de tipo function en la linea "+line[0]+".");
-			}
+				genError(36,line[0], "");
+				safeExit(36);
+				throw new CompilationErrorException();
+				}
 			Entry<String[],Boolean> resE=E(br, pointer, line);
 			System.out.println("funcionInvocada es "+funcionInvocada);
 			EntryTS id=TSControl.getVar(funcionInvocada.hashCode());
@@ -1328,8 +1264,9 @@ public class Compiler {
 				CuentaParametros++;
 				
 			} else{
-				//genError(32, line[0],CuentaParametros +"#" + funcionTratada+"#"+ id.getTipoParamXX(CuentaParametros)+ "#" +resE.getKey()[0] );
-				throw new Exception("La funcion no tiene tantos parametros originalmente o el tipo del argumento usado como parametro no es el correcto.");
+				genError(32, line[0],CuentaParametros +"#" + funcionTratada+"#"+ id.getTipoParamXX(CuentaParametros)+ "#" +resE.getKey()[0] );
+				safeExit(32);
+				throw new CompilationErrorException();
 				//return new SimpleEntry<String[],Boolean>(devolverArray("errorSem"),false);
 				}
 
@@ -1344,12 +1281,16 @@ public class Compiler {
 			parser+="42 ";
 			if(funcionInvocada==null)
 			{
-				throw new Exception("Se ha intentado usar una funcion con identificador de otro que no es de tipo function.");
+				genError(36,line[0], "");
+				safeExit(36);
+				throw new CompilationErrorException();
+				
 			}
 			EntryTS id=TSControl.getVar(funcionInvocada.hashCode());
 			if(id.getNumParam()>0) {
-				genError(33, line[0], funcionInvocada);
-				throw new Exception("No se han especificado los parametros necesarios para la función.");
+				genError(33, line[0], funcionInvocada);		
+				safeExit(33);
+				throw new CompilationErrorException();
 				//return new SimpleEntry<String[],Boolean>(devolverArray("errorSem"),true);			
 			}
 			funcionInvocada=funcionInvocadaRecup;
@@ -1378,7 +1319,9 @@ public class Compiler {
 					//NO ENTIENDO BIEN ESTE ERROR
 					//HABER ESTUDIAO
 					//System.out.println("CuentaParametros tiene valor: "+CuentaParametros);
-					throw new Exception("La funcion no tiene tantos parametros originalmente o el tipo del argumento usado como parametro no es el correcto en linea "+line[0]);
+					genError(32, line[0],CuentaParametros +"#" + funcionTratada+"#"+ id.getTipoParamXX(CuentaParametros)+ "#" +resE.getKey()[0] );
+					safeExit(32);
+					throw new CompilationErrorException();
 					//return new SimpleEntry<String[],Boolean>(devolverArray("errorSem"),false);
 				}
 				if(Q(br, pointer, line,funcionInvocadaRecup,CuentaParametrosRecup).getValue()){
@@ -1396,12 +1339,9 @@ public class Compiler {
 				return new SimpleEntry<String[],Boolean>(devolverArray("null"),true);
 			}
 			else{
-				System.out.println("este20");
-				System.out.println("La funcion en cuestion es: "+funcionInvocada+" y la cuenta va por "+CuentaParametros+" cuando deberian ser "+id.getNumParam());
-				//TSControl.destroyTS();
-				throw new Exception("No se ha pasado el numero de parametros correcto para la funcion en cuestion.");
-				//genError(21, line[0], tokenToString(token) + "#,' o ')");
-				//return new SimpleEntry<String[],Boolean>(devolverArray("errorSem"),false);
+				genError(33, line[0], funcionInvocada);		
+				safeExit(33);
+				throw new CompilationErrorException();
 			}
 		}
 		else
@@ -1586,7 +1526,8 @@ public class Compiler {
 				//System.out.println("TPARAM:"+tipoParam);
 				if(TiposParametros.size()>100) {
 					genError(34, line[0], TiposParametros.size()+"");
-					throw new Exception("PRODUCCION K: No puede haber mas de 100 parametros para una función");
+					safeExit(34);
+					throw new CompilationErrorException();
 				}
 
 				TSControl.setParametersFunc(funcionTratada, null, CuentaParametros, TiposParametros, null, null);
