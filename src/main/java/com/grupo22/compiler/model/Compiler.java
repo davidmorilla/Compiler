@@ -10,8 +10,18 @@ import com.grupo22.compiler.util.EntryTS;
 import com.grupo22.compiler.util.Token;
 public class Compiler {
 	
-	
-	final static int CODE_FILE_NUMBER = 1; //Cambiar aquí el numero de codigo de ejemplo a parsear
+	/*
+	 En nuestro proyecto la clase Compiler.java es la encargada de iniciar el procesado del código. Para ello, 
+	 se debe crear en la carpeta ‘code’ un fichero de texto con el formato de nombre ‘codeN.txt’, dónde N representa
+	 un número entero positivo. A continuación, es necesario asignar el número del archivo que se quiere procesar a 
+	 la variable final CODE_FILE_NUMBER. Una vez hecho esto, puede compilarse y ejecutar el código. Tras la ejecución,
+	 si hay errores, éstos se imprimirán por consola, mientras que si el código era correcto, se generarán 3 archivos 
+	 en la carpeta ‘output’ del proyecto. Un fichero parse_outputN.txt, que contendrá el parse del código. Otro fichero 
+	 llamado tokens_outputN.txt que contendrá todos los tokens creados. Y por último, un fichero ts_outputN.txt que contendrá
+	 el volcado de las tablas de símbolos creadas. De nuevo, N representa el número que se asignó a la variable final CODE_FILE_NUMBER.
+
+	 */
+	final static int CODE_FILE_NUMBER = 1; //Cambiar aquí el numero de codigo del ejemplo a parsear
 	
 	static int contadovich=0;
 	static BufferedWriter tokensW;
