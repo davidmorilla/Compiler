@@ -1,10 +1,6 @@
-TABLA LOCAL DE LA FUNCION suma # 1 :
-* LEXEMA : 'a'
-	Atributos :
-	+tipo :		'int'
-	+despl:		0
+TABLA GLOBAL # 0 :
 * LEXEMA : 'b'
 	Atributos :
-	+tipo :		'int'
-	+despl:		1
+	+tipo :		'boolean'
+	+despl:		0
 -------------------------------------------

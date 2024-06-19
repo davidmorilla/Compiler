@@ -983,23 +983,17 @@ public class Compiler {
 			String tipoG = resG.getKey()[0];
 			//</ASEM>
 			if(resG.getValue()){
-				Entry<String[],Boolean> resJ=J(br,pointer,line);
+				Entry<String[],Boolean> resJ=J(br,pointer,line,tipoG);
 				if(resJ.getValue()){
 					//<ASEM>
 					String tipoJ = resJ.getKey()[0];
 					//System.out.println("TIPOOOOOS:"+tipoJ + tipoG);
-					if(tipoJ.equals("boolean")) {
-						if(!tipoG.equals("boolean"))
-						{
-							genError(30, line[0], tipoG + "#boolean");
-							safeExit(30);
-							throw new CompilationErrorException();
-						}else {
-							return new SimpleEntry<String[],Boolean>(devolverArray(tipoG),true);
-						}
-					}else{
-						return new SimpleEntry<String[],Boolean>(devolverArray(tipoG),true);
+					if(tipoJ.equals("null")) {
+						return new SimpleEntry<String[],Boolean>(devolverArray(tipoJ),true);
+					}else {
+						return new SimpleEntry<String[],Boolean>(devolverArray(tipoG),true);					
 					}
+					
 				}
 				else{
 					return new SimpleEntry<String[],Boolean>(devolverArray("errorSin"),false);
@@ -1015,7 +1009,7 @@ public class Compiler {
 
 	}
 
-	private static Entry<String[],Boolean> J(BufferedReader br, char[] pointer, int[] line) throws Exception {
+	private static Entry<String[],Boolean> J(BufferedReader br, char[] pointer, int[] line,String tipo) throws Exception {
 		if(token.codigo.equals("AND")){
 			parser+="22 ";
 			token=A_lex(br, pointer, line, false);
@@ -1025,18 +1019,21 @@ public class Compiler {
 			{
 				//<ASEM>
 				String tipoG = resG.getKey()[0];
-				if(tipoG.equals("boolean")) {
-					Entry<String[],Boolean> resJ=J(br,pointer,line);
-					String tipoJ = resJ.getKey()[0];
-					//System.out.println("A ver que pasa tipo1 "+tipoG+" tipo2 "+tipoJ);
-					return new SimpleEntry<String[],Boolean>(devolverArray("boolean"),true);
-				}else {
-					genError(30, line[0], resG.getKey()[0] + "#boolean");
+				if(!tipo.equals("boolean")||!tipoG.equals("boolean"))
+				{
+					genError(30,line[0], tipoG + "#" + tipo);
 					safeExit(30);
 					throw new CompilationErrorException();
 				}
+				Entry<String[],Boolean> resJ=J(br,pointer,line,"boolean");
+				if(resJ.getValue())
+				{
+					return new SimpleEntry<String[],Boolean>(devolverArray("boolean"),true);
+				}
+				else{
+					return new SimpleEntry<String[],Boolean>(devolverArray("errorSin"),false);
+				}
 				//</ASEM>
-
 			}else{
 				return new SimpleEntry<String[],Boolean>(devolverArray("errorSin"),false);
 			}
@@ -1064,14 +1061,10 @@ public class Compiler {
 			if(resM.getValue()){
 				//<ASEM>
 				String tipoM = resM.getKey()[0];
-				if(tipoM.equals(tipoD)) {
-					return new SimpleEntry<String[],Boolean>(devolverArray("boolean"),true);
-				}else if(tipoM.equals("null")) {
+				if(tipoM.equals("null")) {
 					return new SimpleEntry<String[],Boolean>(devolverArray(tipoD),true);
 				}else {
-					genError(30,line[0], tipoM + "#" + tipoD);
-					safeExit(30);
-					throw new CompilationErrorException();
+					return new SimpleEntry<String[],Boolean>(devolverArray(tipoM),true);					
 				}
 				//</ASEM>
 			}else{
@@ -1095,18 +1088,11 @@ public class Compiler {
 					safeExit(30);
 					throw new CompilationErrorException();
 				}
-				Entry<String[],Boolean> resM=M(br,pointer,line,tipoD);
+				Entry<String[],Boolean> resM=M(br,pointer,line,"boolean");
 				String tipoM = resM.getKey()[0];
 
 				if(resM.getValue()) {
-					if(tipoM.equals("null") || tipoD.equals(tipoM)) {
-						return new SimpleEntry<String[],Boolean>(devolverArray(tipoD),true);
-
-					} else {
-						genError(30,line[0], tipoM + "#" + tipoD);
-						safeExit(30);
-						throw new CompilationErrorException();
-					}
+					return new SimpleEntry<String[],Boolean>(devolverArray("boolean"),false);			
 				}else {
 					return new SimpleEntry<String[],Boolean>(devolverArray("errorSin"),false);			
 				}
@@ -1132,19 +1118,18 @@ public class Compiler {
 			if(resI.getValue())
 			{	
 				String tipoI = resI.getKey()[0];
-				Entry<String[],Boolean> resN=N(br,pointer,line);
+				Entry<String[],Boolean> resN=N(br,pointer,line,tipoI);
 				if(!resN.getValue()){
 					return new SimpleEntry<String[],Boolean>(devolverArray("errorSin"),false);
 				}
 				else{
 					//<ASEM>
-					String tipoN = resN.getKey()[0];
-					if(tipoN.equals("null") || (tipoI.equals("int") && tipoN.equals("int"))){
+					if(resN.getKey()[0].equals("null")){		
 						return new SimpleEntry<String[],Boolean>(devolverArray(tipoI),true);
-					}else {
-						genError(30, line[0], tipoI +"' o '"+tipoN +"#int");
-						safeExit(30);
-						throw new CompilationErrorException();
+					}
+					else
+					{
+						return new SimpleEntry<String[],Boolean>(resN.getKey(),true);
 					}
 					//</ASEM>	
 				}
@@ -1159,7 +1144,7 @@ public class Compiler {
 		}
 	}
 
-	private static Entry<String[],Boolean> N(BufferedReader br, char[] pointer, int[] line) throws Exception {
+	private static Entry<String[],Boolean> N(BufferedReader br, char[] pointer, int[] line, String tipo) throws Exception {
 		if(token.codigo.equals("MOD")){
 			parser+="28 ";
 			token=A_lex(br, pointer, line, false);
@@ -1168,17 +1153,15 @@ public class Compiler {
 			if(resI.getValue())
 			{
 				String tipoI = resI.getKey()[0];
-				Entry<String[],Boolean> resN=N(br,pointer,line);
+				if(!tipo.equals("int")||!tipoI.equals("int"))
+				{
+					genError(30, line[0], tipoI+"#int");
+					safeExit(30);
+					throw new CompilationErrorException();
+				}
+				Entry<String[],Boolean> resN=N(br,pointer,line,"int");
 				if(resN.getValue()){
-					if(tipoI.equals("int")) {
-						return new SimpleEntry<String[],Boolean>(devolverArray("int"),true);
-					}
-					else
-					{					
-						genError(30, line[0], tipoI+"#int");
-						safeExit(30);
-						throw new CompilationErrorException();
-					}
+					return new SimpleEntry<String[],Boolean>(devolverArray("int"),true);
 				}
 				else{
 					return new SimpleEntry<String[],Boolean>(devolverArray("errorSin"),false);
