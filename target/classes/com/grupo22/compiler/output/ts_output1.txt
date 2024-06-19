@@ -1,18 +1,35 @@
-TABLA GLOBAL #0:
+TABLA LOCAL DE LA FUNCION func # 1 :
+* LEXEMA : 'a'
+	Atributos :
+	+tipo :		'boolean'
+	+despl:		0
 * LEXEMA : 'b'
-	Atributos:
-	+tipo:		'boolean'
+	Atributos :
+	+tipo :		'boolean'
+	+despl:		1
+-------------------------------------------
+TABLA GLOBAL # 0 :
+* LEXEMA : 'b'
+	Atributos :
+	+tipo :		'boolean'
 	+despl:		0
 * LEXEMA : 'x'
-	Atributos:
-	+tipo:		'int'
+	Atributos :
+	+tipo :		'int'
 	+despl:		1
 * LEXEMA : 'z'
-	Atributos:
-	+tipo:		'int'
+	Atributos :
+	+tipo :		'int'
 	+despl:		2
+* LEXEMA : 'func'
+	Atributos :
+	+tipo :		'function'
+	+numParam :		2
+		+tipoParam1 :		'boolean'
+		+tipoParam2 :		'boolean'
+	+tipoRetorno :		'int'
 * LEXEMA : 'y'
-	Atributos:
-	+tipo:		'int'
+	Atributos :
+	+tipo :		'int'
 	+despl:		3
 -------------------------------------------

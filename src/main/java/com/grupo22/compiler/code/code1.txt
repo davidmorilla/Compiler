@@ -3,6 +3,8 @@
 	let	b boolean	;let x int;
 get x;put x;get z;
 put x%z;
+function func int (boolean a, boolean b){
+}
 b=x==z;if (b) z =
   x % 7
     % z

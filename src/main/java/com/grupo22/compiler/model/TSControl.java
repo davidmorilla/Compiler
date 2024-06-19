@@ -72,24 +72,24 @@ public class TSControl {
 		//por implementar
 		try {
 			if(isGlobal){
-				TSBufferedWriter.write("TABLA GLOBAL #0:\n");
+				TSBufferedWriter.write("TABLA GLOBAL # 0 :\n");
 			} else{
-				TSBufferedWriter.write("TABLA LOCAL DE LA FUNCION '"+ currentTS.getNombreTabla()+"' #"+contadorTS+":\n");
+				TSBufferedWriter.write("TABLA LOCAL DE LA FUNCION "+ currentTS.getNombreTabla()+" # "+contadorTS+" :\n");
 			}
 
 			for(Integer var : currentTS.getLexemas()) {
 				if(currentTS.getVar(var).getTipo().equals("function") ) {
-					TSBufferedWriter.write("* LEXEMA : '"+currentTS.getVar(var).getNombreVar()+"'\n\tAtributos:\n\t+tipo:\t\t'"+currentTS.getVar(var).getTipo()+"\n");
+					TSBufferedWriter.write("* LEXEMA : '"+currentTS.getVar(var).getNombreVar()+"'\n\tAtributos :\n\t+tipo :\t\t'"+currentTS.getVar(var).getTipo()+"'\n");
 				}else {
-					TSBufferedWriter.write("* LEXEMA : '"+currentTS.getVar(var).getNombreVar()+"'\n\tAtributos:\n\t+tipo:\t\t'"+currentTS.getVar(var).getTipo()+"'\n\t+despl:\t\t"+currentTS.getVar(var).getDespl()+"\n");
+					TSBufferedWriter.write("* LEXEMA : '"+currentTS.getVar(var).getNombreVar()+"'\n\tAtributos :\n\t+tipo :\t\t'"+currentTS.getVar(var).getTipo()+"'\n\t+despl:\t\t"+currentTS.getVar(var).getDespl()+"\n");
 				}
 				int np=currentTS.getVar(var).getNumParam();
 				if(np!=-1){
-					TSBufferedWriter.write("\t+numParam:\t\t" + np + "\n");
+					TSBufferedWriter.write("\t+numParam :\t\t" + np + "\n");
 					for(int i=0; i<np; i++){
-						TSBufferedWriter.write("\t+tipoParam " + (i+1) +":\t\t'" + currentTS.getVar(var).getTipoParamXX(i) + "'\n");
+						TSBufferedWriter.write("\t\t+tipoParam" + (i+1) +" :\t\t'" + currentTS.getVar(var).getTipoParamXX(i) + "'\n");
 					}
-					TSBufferedWriter.write("\t+tipoRetorno:\t\t'"+ currentTS.getVar(var).getTipoRetorno() + "'\n");
+					TSBufferedWriter.write("\t+tipoRetorno :\t\t'"+ currentTS.getVar(var).getTipoRetorno() + "'\n");
 				}
 			}
 			TSBufferedWriter.write("-------------------------------------------\n");
