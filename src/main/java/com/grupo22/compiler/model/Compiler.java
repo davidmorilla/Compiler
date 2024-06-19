@@ -1159,22 +1159,23 @@ public class Compiler {
 			parser+="28 ";
 			token=A_lex(br, pointer, line, false);
 			Entry<String[],Boolean> resI=I(br,pointer,line);
-			if(resI.getValue()){
 				//<ASEM>
 				String tipoI = resI.getKey()[0];
-				if(tipoI.equals("int")) {
 					Entry<String[],Boolean> resN=N(br,pointer,line);
-					return new SimpleEntry<String[],Boolean>(devolverArray("int"),true);
-				}else {
-					genError(30, line[0], tipoI+"#int");
-					safeExit(30);
-					throw new CompilationErrorException();
-				}
-				//</ASEM>
-			}
-			else{
-				return new SimpleEntry<String[],Boolean>(devolverArray("errorSin"),false);
-			}
+					if(resN.getValue()){
+						if(tipoI.equals("int")) {
+							return new SimpleEntry<String[],Boolean>(devolverArray("int"),true);
+						}
+						else
+						{					
+							genError(30, line[0], tipoI+"#int");
+							safeExit(30);
+							throw new CompilationErrorException();
+						}
+					}
+					else{
+						return new SimpleEntry<String[],Boolean>(devolverArray("errorSin"),false);
+					}
 		}
 		else if((token.codigo.equals("PARENT") && ((int) token.atributo ==1))||token.codigo.equals("AND")||token.codigo.equals("COMA")||token.codigo.equals("PYC")||token.codigo.equals("EQ")){
 			parser+="29 ";
