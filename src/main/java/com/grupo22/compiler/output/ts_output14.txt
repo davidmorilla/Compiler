@@ -1,26 +1,21 @@
-TABLA LOCAL DE LA FUNCION 'id' #1:
-* LEXEMA : 'id'
-	Atributos:
-	+tipo:		'boolean'
-	+despl:		0
+TABLA LOCAL DE LA FUNCION id # 1 :
 * LEXEMA : 'id3'
-	Atributos:
-	+tipo:		'int'
-	+despl:		1
+	Atributos :
+	+tipo :		'int'
+	+despl:		0
 * LEXEMA : 'id2'
-	Atributos:
-	+tipo:		'string'
-	+despl:		2
+	Atributos :
+	+tipo :		'string'
+	+despl:		1
 -------------------------------------------
-TABLA GLOBAL #0:
+TABLA GLOBAL # 0 :
 * LEXEMA : 'id'
-	Atributos:
-	+tipo:		'function
-	+numParam:		1
-	+tipoParam 1:		'boolean'
-	+tipoRetorno:		'string'
+	Atributos :
+	+tipo :		'function'
+	+numParam :		0
+	+tipoRetorno :		'string'
 * LEXEMA : 'b'
-	Atributos:
-	+tipo:		'boolean'
+	Atributos :
+	+tipo :		'boolean'
 	+despl:		0
 -------------------------------------------

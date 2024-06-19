@@ -38,7 +38,7 @@ public class Compiler {
 	public final static String TOKENS_OUTPUT_FORMAT = "src/main/java/com/grupo22/compiler/output/tokens_output%d.txt";
 	public final static String PARSE_OUTPUT_FORMAT = "src/main/java/com/grupo22/compiler/output/parse_output%d.txt";
 
-	final static int CODE_FILE_NUMBER = 1; //Cambiar aquí el numero de codigo de ejemplo a parsear
+	final static int CODE_FILE_NUMBER = 14; //Cambiar aquí el numero de codigo de ejemplo a parsear
 
 	public static void main (String args[]) {
 		String CODE_FILE_NAME = String.format(CODE_FILE_NAME_FORMAT, CODE_FILE_NUMBER);
@@ -53,7 +53,6 @@ public class Compiler {
 			br = new BufferedReader(fileReader);
 			char[] pointer ={ (char) br.read()};
 			int[] line={1};
-			TSControl = new TSControl(CODE_FILE_NUMBER);
 			A_sint_sem(br,pointer,line);
 			parseW.write(parser);
 			TSControl.printTS();
@@ -68,7 +67,7 @@ public class Compiler {
 
 	private static void A_sint_sem(BufferedReader br, char[] pointer, int[] line) {
 		try {
-			token= A_lex(br,pointer, line,false);
+			
 			Entry<String[], Boolean> resSin= U(br,pointer,line);
 			if(!resSin.getValue()){
 
@@ -512,6 +511,8 @@ public class Compiler {
 		}
 	}
 	private static Entry<String[],Boolean> U(BufferedReader br, char[] pointer, int[] line) throws Exception {
+		TSControl = new TSControl(CODE_FILE_NUMBER);
+		token= A_lex(br,pointer, line,false);
 		parser+="1 ";
 		String funcionTratada=null;
 		String funcionInvocada=null;
@@ -1331,7 +1332,7 @@ public class Compiler {
 	}
 
 	private static Entry<String[],Boolean> L(BufferedReader br, char[] pointer, int[] line,String funcionInvocadaAct,int CuentaParametrosAct) throws Exception {
-		CuentaParametros=0;
+		//CuentaParametros=0;
 		//System.out.println("Para ver la funcionInvocadaAct "+funcionInvocadaAct);
 		if((token.codigo.equals("PARENT") && ((int) token.atributo==0))||token.codigo.equals("CAD")||token.codigo.equals("CTE")||token.codigo.equals("FALSE")||token.codigo.equals("TRUE")||token.codigo.equals("TABLEID")){
 			parser+="41 ";

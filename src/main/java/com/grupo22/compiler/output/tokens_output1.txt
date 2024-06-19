@@ -11,5 +11,3 @@
 <EQ,>
 <CTE,3>
 <PARENT,1>
-<PYC,>
-<FINAL,>

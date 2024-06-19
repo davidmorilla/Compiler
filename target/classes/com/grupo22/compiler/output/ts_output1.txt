@@ -1,6 +1,0 @@
-TABLA GLOBAL # 0 :
-* LEXEMA : 'b'
-	Atributos :
-	+tipo :		'boolean'
-	+despl:		0
--------------------------------------------

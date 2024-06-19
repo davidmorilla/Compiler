@@ -1,72 +1,72 @@
-TABLA LOCAL DE LA FUNCION 'a' #1:
+TABLA LOCAL DE LA FUNCION a # 1 :
 * LEXEMA : 'sum'
-	Atributos:
-	+tipo:		'int'
+	Atributos :
+	+tipo :		'int'
 	+despl:		0
 -------------------------------------------
-TABLA LOCAL DE LA FUNCION 'b' #2:
+TABLA LOCAL DE LA FUNCION b # 2 :
 * LEXEMA : 'sum'
-	Atributos:
-	+tipo:		'int'
+	Atributos :
+	+tipo :		'int'
 	+despl:		0
 * LEXEMA : 'sum2'
-	Atributos:
-	+tipo:		'boolean'
+	Atributos :
+	+tipo :		'boolean'
 	+despl:		1
 -------------------------------------------
-TABLA LOCAL DE LA FUNCION 'c' #3:
+TABLA LOCAL DE LA FUNCION c # 3 :
 * LEXEMA : 'd1'
-	Atributos:
-	+tipo:		'int'
+	Atributos :
+	+tipo :		'int'
 	+despl:		0
 * LEXEMA : 's1'
-	Atributos:
-	+tipo:		'string'
+	Atributos :
+	+tipo :		'string'
 	+despl:		1
 * LEXEMA : 'b1'
-	Atributos:
-	+tipo:		'boolean'
+	Atributos :
+	+tipo :		'boolean'
 	+despl:		65
 -------------------------------------------
-TABLA LOCAL DE LA FUNCION 'loes' #4:
+TABLA LOCAL DE LA FUNCION loes # 4 :
 -------------------------------------------
-TABLA GLOBAL #0:
+TABLA GLOBAL # 0 :
 * LEXEMA : 'a'
-	Atributos:
-	+tipo:		'function
-	+numParam:		1
-	+tipoParam 1:		'int'
-	+tipoRetorno:		'int'
+	Atributos :
+	+tipo :		'function'
+	+numParam :		1
+		+tipoParam1 :		'int'
+	+tipoRetorno :		'int'
 * LEXEMA : 'b'
-	Atributos:
-	+tipo:		'function
-	+numParam:		2
-	+tipoParam 1:		'int'
-	+tipoParam 2:		'boolean'
-	+tipoRetorno:		'int'
+	Atributos :
+	+tipo :		'function'
+	+numParam :		2
+		+tipoParam1 :		'int'
+		+tipoParam2 :		'boolean'
+	+tipoRetorno :		'int'
 * LEXEMA : 'c'
-	Atributos:
-	+tipo:		'function
-	+numParam:		3
-	+tipoParam 1:		'int'
-	+tipoParam 2:		'string'
-	+tipoParam 3:		'boolean'
-	+tipoRetorno:		'boolean'
+	Atributos :
+	+tipo :		'function'
+	+numParam :		3
+		+tipoParam1 :		'int'
+		+tipoParam2 :		'string'
+		+tipoParam3 :		'boolean'
+	+tipoRetorno :		'boolean'
 * LEXEMA : 'd1'
-	Atributos:
-	+tipo:		'int'
+	Atributos :
+	+tipo :		'int'
 	+despl:		0
 * LEXEMA : 's1'
-	Atributos:
-	+tipo:		'string'
+	Atributos :
+	+tipo :		'string'
 	+despl:		1
 * LEXEMA : 'b1'
-	Atributos:
-	+tipo:		'boolean'
+	Atributos :
+	+tipo :		'boolean'
 	+despl:		65
 * LEXEMA : 'loes'
-	Atributos:
-	+tipo:		'function
-	+numParam:		0
-	+tipoRetorno:		'boolean'
+	Atributos :
+	+tipo :		'function'
+	+numParam :		0
+	+tipoRetorno :		'boolean'
 -------------------------------------------
