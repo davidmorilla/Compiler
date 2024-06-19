@@ -504,7 +504,7 @@ public class Compiler {
 			System.err.println("Error semantico en linea "+line + ": la condición dentro de un if debe ser de tipo booleano y no de tipo " + error);
 			break;
 		case 36: 
-			System.err.println("Error semantico en linea "+line + ": se usa una función como variable o se usa una variable como función.");
+			System.err.println("Error semantico en linea "+line + ": (" + error +") se usa una función como variable o se usa una variable como función o se invoca a una función que no ha sido declarada.");
 			break;
 		case 37: //error por definir
 			System.err.println("Error semantico en linea "+line + ": EL 'return' se encuentra fuera del ámbito de una función.");
@@ -570,6 +570,11 @@ public class Compiler {
 			if(temp.getTipo().equals("function")){
 				funcionInvocada=TSControl.getNameFromGlobal((int)token.getAtr());
 			}
+			else
+			{
+				funcionInvocada=null;
+			}
+			
 			token=A_lex(br, pointer, line, false);
 			Entry<String[],Boolean> resZ= Z(br,pointer,line);
 			if(resZ.getValue()) {
@@ -1213,6 +1218,10 @@ public class Compiler {
 			if(temp.getTipo().equals("function")){
 				funcionInvocada=TSControl.getNameFromGlobal((int)token.getAtr());
 			}
+			else
+			{
+				funcionInvocada=null;
+			}
 			token=A_lex(br, pointer, line, false);
 
 			//SI O FALLA, PETA
@@ -1228,7 +1237,7 @@ public class Compiler {
 					//return new SimpleEntry<String[],Boolean>(devolverArray("errorSem"),false);
 				}
 				else{
-					genError(36,line[0], "");
+					genError(36,line[0], temp.getNombreVar());
 					safeExit(36);
 					throw new CompilationErrorException();//return new SimpleEntry<String[],Boolean>(devolverArray("errorSem"),false);
 				}				
@@ -1291,6 +1300,7 @@ public class Compiler {
 			if(L(br,pointer,line,funcionInvocada,0).getValue()){
 				if(token.codigo.equals("PARENT") && ((int) token.atributo==1)){
 					//funcionInvocada=null;
+					System.out.println(funcionInvocada);
 					token=A_lex(br, pointer, line, false);
 					return new SimpleEntry<String[],Boolean>(devolverArray("function"),true);
 				}
@@ -1389,7 +1399,7 @@ public class Compiler {
 			}
 			EntryTS id=TSControl.getVar(funcionInvocadaAct.hashCode());
 			if(id.getNumParam()>0) {
-				System.out.println("aqui1");
+				//System.out.println("aqui1");
 				genError(33, line[0], funcionInvocadaAct);		
 				safeExit(33);
 				throw new CompilationErrorException();
@@ -1400,7 +1410,7 @@ public class Compiler {
 			return new SimpleEntry<String[],Boolean>(devolverArray("null"),true);
 		}
 		else{
-			System.out.println("este19");
+			//System.out.println("este19");
 			genError(21, line[0], tokenToString(token) + "#(' o ')' o 'false' o 'true' o 'cadena' o 'constante' o 'variable");
 			return new SimpleEntry<String[],Boolean>(devolverArray("errorSin"),false);
 		}
@@ -1450,7 +1460,7 @@ public class Compiler {
 				return new SimpleEntry<String[],Boolean>(devolverArray("null"),true);
 			}
 			else{
-				System.out.println("aqui2");
+				//System.out.println("aqui2");
 				genError(33, line[0], funcionInvocadaAct);		
 				safeExit(33);
 				throw new CompilationErrorException();
@@ -1527,7 +1537,7 @@ public class Compiler {
 										funcionTratada=null;
 										TSControl.destroyTS();
 										token=A_lex(br, pointer, line, false);
-										System.out.println("Hace destroy ahora");
+										//System.out.println("Hace destroy ahora");
 										return new SimpleEntry<String[],Boolean>(devolverArray("null"),true);
 									}else{
 										genError(21, line[0], tokenToString(token) + "#'}'");
@@ -1615,7 +1625,7 @@ public class Compiler {
 					}
 
 				}else{
-					System.out.println("este21");
+					//System.out.println("este21");
 					genError(21, line[0],tokenToString(token) + "#variable");
 					return new SimpleEntry<String[],Boolean>(devolverArray("errorSin"),false);
 				}
@@ -1670,7 +1680,7 @@ public class Compiler {
 					return new SimpleEntry<String[],Boolean>(devolverArray("errorSin"),false);
 				}
 			}else{ 
-				System.out.println("este22");
+				//System.out.println("este22");
 				genError(21, line[0],tokenToString(token) + "#variable");
 				return new SimpleEntry<String[],Boolean>(devolverArray("errorSin"),false);
 			}	
@@ -1689,7 +1699,7 @@ public class Compiler {
 			return new SimpleEntry<String[],Boolean>(devolverArray("null"),true);
 		}
 		else{
-			System.out.println("este23");
+			//System.out.println("este23");
 			genError(21, line[0], tokenToString(token) + "#,' o '(");
 			return new SimpleEntry<String[],Boolean>(devolverArray("errorSin"),false);
 		}
