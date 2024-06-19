@@ -989,9 +989,9 @@ public class Compiler {
 					String tipoJ = resJ.getKey()[0];
 					//System.out.println("TIPOOOOOS:"+tipoJ + tipoG);
 					if(tipoJ.equals("null")) {
-						return new SimpleEntry<String[],Boolean>(devolverArray(tipoJ),true);
+						return new SimpleEntry<String[],Boolean>(devolverArray(tipoG),true);
 					}else {
-						return new SimpleEntry<String[],Boolean>(devolverArray(tipoG),true);					
+						return new SimpleEntry<String[],Boolean>(devolverArray(tipoJ),true);					
 					}
 					
 				}
@@ -1092,7 +1092,7 @@ public class Compiler {
 				String tipoM = resM.getKey()[0];
 
 				if(resM.getValue()) {
-					return new SimpleEntry<String[],Boolean>(devolverArray("boolean"),false);			
+					return new SimpleEntry<String[],Boolean>(devolverArray("boolean"),true);			
 				}else {
 					return new SimpleEntry<String[],Boolean>(devolverArray("errorSin"),false);			
 				}
