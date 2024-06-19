@@ -1161,21 +1161,21 @@ public class Compiler {
 			Entry<String[],Boolean> resI=I(br,pointer,line);
 				//<ASEM>
 				String tipoI = resI.getKey()[0];
-					Entry<String[],Boolean> resN=N(br,pointer,line);
-					if(resN.getValue()){
-						if(tipoI.equals("int")) {
-							return new SimpleEntry<String[],Boolean>(devolverArray("int"),true);
-						}
-						else
-						{					
-							genError(30, line[0], tipoI+"#int");
-							safeExit(30);
-							throw new CompilationErrorException();
-						}
+				Entry<String[],Boolean> resN=N(br,pointer,line);
+				if(resN.getValue()){
+					if(tipoI.equals("int")) {
+						return new SimpleEntry<String[],Boolean>(devolverArray("int"),true);
 					}
-					else{
-						return new SimpleEntry<String[],Boolean>(devolverArray("errorSin"),false);
+					else
+					{					
+						genError(30, line[0], tipoI+"#int");
+						safeExit(30);
+						throw new CompilationErrorException();
 					}
+				}
+				else{
+					return new SimpleEntry<String[],Boolean>(devolverArray("errorSin"),false);
+				}
 		}
 		else if((token.codigo.equals("PARENT") && ((int) token.atributo ==1))||token.codigo.equals("AND")||token.codigo.equals("COMA")||token.codigo.equals("PYC")||token.codigo.equals("EQ")){
 			parser+="29 ";
