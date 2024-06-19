@@ -480,7 +480,7 @@ public class Compiler {
 			break;	
 		case 21: //debe venir en otro simbolo
 			if(error.split("#")[0].equals("eof")){
-				System.err.println("Error sintactico en linea "+line + ": el programa acaba sin haber cerrado todas las condiciones.");
+				System.err.println("Error sintactico en linea "+line + ": el programa acaba sin haber cerrado todas las sentencias o condiciones.");
 			}else{
 				System.err.println("Error sintactico en linea "+line + ": el simbolo '" + error.split("#")[0] + "' es incorrecto en esa posicion. Deberia haber '"+error.split("#")[1] + "'.");
 			}
