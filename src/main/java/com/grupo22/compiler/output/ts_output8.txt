@@ -1,6 +1,77 @@
+TABLA LOCAL DE LA FUNCION 'f1' #1:
+* LEXEMA : 'f1'
+	Atributos:
+	+tipo:		'int'
+	+despl:		0
+* LEXEMA : 's1'
+	Atributos:
+	+tipo:		'string'
+	+despl:		1
+* LEXEMA : 'b1'
+	Atributos:
+	+tipo:		'boolean'
+	+despl:		65
+-------------------------------------------
+TABLA LOCAL DE LA FUNCION 'f2' #2:
+* LEXEMA : 'f2'
+	Atributos:
+	+tipo:		'int'
+	+despl:		0
+* LEXEMA : 'b2'
+	Atributos:
+	+tipo:		'boolean'
+	+despl:		1
+-------------------------------------------
 TABLA GLOBAL #0:
 * LEXEMA : 'z'
 	Atributos:
-	+tipo:		'boolean'
+	+tipo:		'int'
 	+despl:		0
+* LEXEMA : 'boolean_2'
+	Atributos:
+	+tipo:		'boolean'
+	+despl:		1
+* LEXEMA : 'x'
+	Atributos:
+	+tipo:		'int'
+	+despl:		2
+* LEXEMA : 'ss'
+	Atributos:
+	+tipo:		'string'
+	+despl:		3
+* LEXEMA : 'xx'
+	Atributos:
+	+tipo:		'int'
+	+despl:		67
+* LEXEMA : 'boolean_1'
+	Atributos:
+	+tipo:		'boolean'
+	+despl:		68
+* LEXEMA : 'f1'
+	Atributos:
+	+tipo:		'function
+	+numParam:		3
+	+tipoParam 1:		'int'
+	+tipoParam 2:		'string'
+	+tipoParam 3:		'boolean'
+	+tipoRetorno:		'int'
+* LEXEMA : 'zzz'
+	Atributos:
+	+tipo:		'int'
+	+despl:		69
+* LEXEMA : 'integer'
+	Atributos:
+	+tipo:		'int'
+	+despl:		70
+* LEXEMA : 'f2'
+	Atributos:
+	+tipo:		'function
+	+numParam:		2
+	+tipoParam 1:		'int'
+	+tipoParam 2:		'boolean'
+	+tipoRetorno:		'boolean'
+* LEXEMA : 'y'
+	Atributos:
+	+tipo:		'int'
+	+despl:		71
 -------------------------------------------

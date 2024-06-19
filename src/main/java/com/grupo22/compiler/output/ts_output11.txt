@@ -12,30 +12,27 @@ TABLA LOCAL DE LA FUNCION 'b' #2:
 * LEXEMA : 'sum2'
 	Atributos:
 	+tipo:		'int'
-	+despl:		2
+	+despl:		1
 -------------------------------------------
 TABLA LOCAL DE LA FUNCION 'loes' #3:
 -------------------------------------------
 TABLA GLOBAL #0:
 * LEXEMA : 'a'
 	Atributos:
-	+tipo:		'function'
-	+despl:		0
+	+tipo:		'function
 	+numParam:		1
 	+tipoParam 1:		'int'
 	+tipoRetorno:		'int'
 * LEXEMA : 'b'
 	Atributos:
-	+tipo:		'function'
-	+despl:		0
+	+tipo:		'function
 	+numParam:		2
 	+tipoParam 1:		'int'
 	+tipoParam 2:		'int'
 	+tipoRetorno:		'int'
 * LEXEMA : 'loes'
 	Atributos:
-	+tipo:		'function'
-	+despl:		0
+	+tipo:		'function
 	+numParam:		0
 	+tipoRetorno:		'boolean'
 -------------------------------------------

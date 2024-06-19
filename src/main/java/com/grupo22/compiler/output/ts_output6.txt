@@ -6,11 +6,11 @@ TABLA LOCAL DE LA FUNCION 'operacion' #1:
 * LEXEMA : 'RR'
 	Atributos:
 	+tipo:		'int'
-	+despl:		128
+	+despl:		64
 * LEXEMA : '_s'
 	Atributos:
 	+tipo:		'boolean'
-	+despl:		130
+	+despl:		65
 -------------------------------------------
 TABLA LOCAL DE LA FUNCION 'RRa' #2:
 * LEXEMA : 'n'
@@ -20,15 +20,15 @@ TABLA LOCAL DE LA FUNCION 'RRa' #2:
 * LEXEMA : 'b'
 	Atributos:
 	+tipo:		'boolean'
-	+despl:		2
+	+despl:		1
 * LEXEMA : 'kk'
 	Atributos:
 	+tipo:		'string'
-	+despl:		4
+	+despl:		2
 * LEXEMA : 'log'
 	Atributos:
 	+tipo:		'boolean'
-	+despl:		132
+	+despl:		66
 -------------------------------------------
 TABLA LOCAL DE LA FUNCION 'cadena' #3:
 * LEXEMA : 'xx'
@@ -46,15 +46,14 @@ TABLA GLOBAL #0:
 * LEXEMA : 'a'
 	Atributos:
 	+tipo:		'int'
-	+despl:		128
+	+despl:		64
 * LEXEMA : 'bb'
 	Atributos:
 	+tipo:		'boolean'
-	+despl:		130
+	+despl:		65
 * LEXEMA : 'operacion'
 	Atributos:
-	+tipo:		'function'
-	+despl:		132
+	+tipo:		'function
 	+numParam:		2
 	+tipoParam 1:		'string'
 	+tipoParam 2:		'int'
@@ -62,15 +61,14 @@ TABLA GLOBAL #0:
 * LEXEMA : 'kk'
 	Atributos:
 	+tipo:		'int'
-	+despl:		132
+	+despl:		66
 * LEXEMA : '_s'
 	Atributos:
 	+tipo:		'string'
-	+despl:		134
+	+despl:		67
 * LEXEMA : 'RRa'
 	Atributos:
-	+tipo:		'function'
-	+despl:		262
+	+tipo:		'function
 	+numParam:		2
 	+tipoParam 1:		'int'
 	+tipoParam 2:		'boolean'
@@ -78,31 +76,30 @@ TABLA GLOBAL #0:
 * LEXEMA : 'num'
 	Atributos:
 	+tipo:		'int'
-	+despl:		262
+	+despl:		131
 * LEXEMA : 'n2'
 	Atributos:
 	+tipo:		'int'
-	+despl:		264
+	+despl:		132
 * LEXEMA : 'RR'
 	Atributos:
 	+tipo:		'int'
-	+despl:		266
+	+despl:		133
 * LEXEMA : '_s1'
 	Atributos:
 	+tipo:		'int'
-	+despl:		268
+	+despl:		134
 * LEXEMA : 'cadena'
 	Atributos:
-	+tipo:		'function'
-	+despl:		270
+	+tipo:		'function
 	+numParam:		0
 	+tipoRetorno:		'string'
 * LEXEMA : 'sM'
 	Atributos:
 	+tipo:		'int'
-	+despl:		270
+	+despl:		135
 * LEXEMA : 'id'
 	Atributos:
 	+tipo:		'int'
-	+despl:		272
+	+despl:		136
 -------------------------------------------

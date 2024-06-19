@@ -266,37 +266,87 @@ public class Compiler {
 			return genToken("FALSE","");
 		case "true": 
 			return genToken("TRUE","");
-		default: 
+		default: /*
 			System.out.println("entra 270");
 			System.out.println(TSControl.isGlobal() + (TSControl.existeLex(palabra) + palabra + declaracionExplicita ));
-			if(!TSControl.isGlobal()&&(TSControl.existeLex(palabra)==0||TSControl.existeLex(palabra)==-1)&&declaracionExplicita) { 
+			if(((!TSControl.isGlobal()&&TSControl.existeLex(palabra)<=0)||(TSControl.isGlobal()&&TSControl.existeLex(palabra)==-1))&&declaracionExplicita) { 
 				System.out.println("entra 271");
 				System.out.println(TSControl.isGlobal() + (TSControl.existeLex(palabra) + palabra ));
 				TSControl.putSimbolo(palabra);
 			}
-			else if((!TSControl.isGlobal()&&TSControl.existeLex(palabra)==-1&&!declaracionExplicita)||((TSControl.isGlobal()&&TSControl.existeLex(palabra)==-1&&!declaracionExplicita)))
+			else if(TSControl.existeLex(palabra)==-1&&!declaracionExplicita)
 			{
 				System.out.println("entra 275");
 				System.out.println(TSControl.isGlobal() + palabra );
 				TSControl.putSimboloEnGlobal(palabra,null);
 			}
-			else if(TSControl.isGlobal()&&TSControl.existeLex(palabra)==-1)
-			{
-				System.out.println("entra 278");
-				TSControl.putSimbolo(palabra);				
-			}
-			else if((!TSControl.isGlobal()&&TSControl.existeLex(palabra)==1&&declaracionExplicita)||(TSControl.isGlobal()&&TSControl.existeLex(palabra)==0&&declaracionExplicita)){
+			else if(((!TSControl.isGlobal()&&TSControl.existeLex(palabra)==1)||(TSControl.isGlobal()&&TSControl.existeLex(palabra)==0))&&declaracionExplicita){
 			//else {
 				System.out.println("entra 291");
 				System.out.println(TSControl.isGlobal() + (TSControl.existeLex(palabra) + palabra + declaracionExplicita ));
 			genError(17, line, palabra);
 			}
-			
+			*/
+			aux(line, palabra);
 			return genToken("TABLEID",palabra.hashCode());	//TABLEID TIENE QUE SER UN NUMERO!!
 		}
 	}
 
+	private static void aux(int line, String palabra) {
 
+		boolean isGlobal = TSControl.isGlobal();
+		int existeLex = TSControl.existeLex(palabra);
+		if(isGlobal) {
+			if(declaracionExplicita) {
+				if(existeLex==-1) {
+					System.out.println(302);
+					TSControl.putSimbolo(palabra);//
+				}else if(existeLex==0) {
+					System.out.println(305);
+					genError(17, line, palabra);
+				}else { // existeLex == 1
+					System.out.println(308);
+					genError(17, line, palabra);
+				}
+			} else { // declaracionExplicita == false
+				if(existeLex==-1) {
+					System.out.println(313);
+					TSControl.putSimbolo(palabra,null);
+				}else if(existeLex==0) {
+					System.out.println(316);
+					//nada
+				}else { // existeLex == 1
+					System.out.println(319);
+					//nada
+				}
+			}
+		}else { // !isGlobal
+			if(declaracionExplicita) {
+				if(existeLex==-1) {
+					System.out.println(326);
+					TSControl.putSimbolo(palabra);
+				}else if(existeLex==0) {
+					System.out.println(329);
+					TSControl.putSimbolo(palabra);
+				}else { // existeLex == 1
+					System.out.println(332);
+					genError(17, line, palabra);
+				}
+			} else { // declaracionExplicita == false
+				if(existeLex==-1) {
+					System.out.println(337);
+					TSControl.putSimboloEnGlobal(palabra, null);
+				}else if(existeLex==0) {
+					System.out.println(340);
+					//nada
+				}else { // existeLex == 1
+					System.out.println(343);
+					//nada
+				}
+			}
+		}
+	}
+	
 	private static Token genToken(String code,Object valor) {
 		try {
 			tokensW.write("<"+code+","+valor+">\n");
@@ -479,6 +529,7 @@ public class Compiler {
 
 		if(token.getCod().equals("FUNC")){
 			parser+="2 ";
+			declaracionExplicita=true;
 			token=A_lex(br, pointer, line, true);
 			TSControl.createTS("LOCAL");	//ASEM:  CreaTabla( )
 			CuentaParametros = 0;			//ASEM:  CuentaParametrosDec:=0
@@ -1432,6 +1483,7 @@ public class Compiler {
 			hashFuncion=(int)token.atributo;
 			EntryTS ent= TSControl.getFromGlobal(hashFuncion);
 			funcionTratada = ent.getNombreVar();//COGEMOS EL NOMBRE DE LA FUNCION
+			TSControl.putSimboloEnGlobal(funcionTratada, "function");
 			TSControl.setNombreTabla(funcionTratada);
 			TSControl.setTipoGlobal(funcionTratada.hashCode(),"function");
 			//</ASEM>

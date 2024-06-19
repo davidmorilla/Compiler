@@ -5,14 +5,13 @@ TABLA LOCAL DE LA FUNCION 'nombrefuncion' #1:
 	+despl:		0
 -------------------------------------------
 TABLA GLOBAL #0:
-* LEXEMA : 'RR'
+* LEXEMA : 'x'
 	Atributos:
 	+tipo:		'int'
 	+despl:		0
 * LEXEMA : 'nombrefuncion'
 	Atributos:
-	+tipo:		'funcion'
-	+despl:		2
+	+tipo:		'function
 	+numParam:		1
 	+tipoParam 1:		'int'
 	+tipoRetorno:		'void'

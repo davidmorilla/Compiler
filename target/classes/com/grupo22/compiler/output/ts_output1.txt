@@ -1,38 +1,18 @@
-TABLA LOCAL DE LA FUNCION 'ff' #1:
-* LEXEMA : 'ss'
-	Atributos:
-	+tipo:		'boolean'
-	+despl:		0
--------------------------------------------
 TABLA GLOBAL #0:
-* LEXEMA : 'n1'
+* LEXEMA : 'b'
 	Atributos:
-	+tipo:		'int'
+	+tipo:		'boolean'
 	+despl:		0
-* LEXEMA : 'l1'
+* LEXEMA : 'x'
 	Atributos:
-	+tipo:		'boolean'
+	+tipo:		'int'
 	+despl:		1
-* LEXEMA : 'cad'
+* LEXEMA : 'z'
 	Atributos:
-	+tipo:		'string'
+	+tipo:		'int'
 	+despl:		2
-* LEXEMA : 'n2'
+* LEXEMA : 'y'
 	Atributos:
 	+tipo:		'int'
-	+despl:		66
-* LEXEMA : 'l2'
-	Atributos:
-	+tipo:		'boolean'
-	+despl:		67
-* LEXEMA : 'ff'
-	Atributos:
-	+tipo:		'function
-	+numParam:		1
-	+tipoParam 1:		'boolean'
-	+tipoRetorno:		'boolean'
-* LEXEMA : 'varglobal'
-	Atributos:
-	+tipo:		'int'
-	+despl:		68
+	+despl:		3
 -------------------------------------------

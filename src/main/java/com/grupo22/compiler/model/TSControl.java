@@ -162,7 +162,9 @@ public class TSControl {
 		currentTS.putSimbolo(nombreVar, Tipo);
 	}
 	public void putSimbolo(String nombreVar){
+		System.out.println(currentTS.toString() + "\n Llamamos a currentTS.putSimboloLex(String)");
 		currentTS.putSimboloLex(nombreVar);
+		System.out.println(currentTS.toString());
 	}
 	public void putSimbolo(int lexema, String Tipo){
 		//System.out.println("varname::" + currentTS.getVarName(lexema));

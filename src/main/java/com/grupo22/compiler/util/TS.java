@@ -40,8 +40,8 @@ public class TS {
 		//System.out.println("putsimbololex: " + nombre.hashCode());
 		__hm__ts__.put(nombre, nombre.hashCode());
 		__lex_to_name.put(nombre.hashCode(), nombre);
-
 	}
+	
 	/**
 	 * Introduce la variable en la TS que se encuentre (local si es dentro de una funcion y global si es fuera de ella).
 	 * @param nombreVar nombre (string) de la variable
@@ -178,12 +178,13 @@ public class TS {
 	
 	public void setTipo(int lexema,String tipo){
 		EntryTS entry=simbolos.get(lexema);
+		System.out.println("Entry null ->"+entry);
 		entry.setTipo(tipo);
 		simbolos.put(lexema, entry);
 		despl+=getTamTipo(tipo);
 	}
 
 	public String toString() {
-		return __lex_to_name.toString();
+		return __lex_to_name.toString()+simbolos.toString();
 	}
 }

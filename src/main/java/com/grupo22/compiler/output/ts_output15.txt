@@ -6,25 +6,24 @@ TABLA LOCAL DE LA FUNCION 'id2' #1:
 * LEXEMA : 'id1'
 	Atributos:
 	+tipo:		'string'
-	+despl:		2
+	+despl:		1
 * LEXEMA : 'ida'
 	Atributos:
 	+tipo:		'boolean'
-	+despl:		130
+	+despl:		65
 * LEXEMA : 'idx'
 	Atributos:
 	+tipo:		'string'
-	+despl:		132
+	+despl:		66
 * LEXEMA : 'idx1'
 	Atributos:
 	+tipo:		'string'
-	+despl:		260
+	+despl:		130
 -------------------------------------------
 TABLA GLOBAL #0:
 * LEXEMA : 'id2'
 	Atributos:
-	+tipo:		'function'
-	+despl:		0
+	+tipo:		'function
 	+numParam:		2
 	+tipoParam 1:		'boolean'
 	+tipoParam 2:		'string'

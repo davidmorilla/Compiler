@@ -1,2 +1,88 @@
+TABLA LOCAL DE LA FUNCION 'FactorialRecursivo' #1:
+* LEXEMA : 'n'
+	Atributos:
+	+tipo:		'int'
+	+despl:		0
+-------------------------------------------
+TABLA LOCAL DE LA FUNCION 'salto' #2:
+-------------------------------------------
+TABLA LOCAL DE LA FUNCION 'FactorialDo' #3:
+* LEXEMA : 'n'
+	Atributos:
+	+tipo:		'int'
+	+despl:		0
+* LEXEMA : 'factorial'
+	Atributos:
+	+tipo:		'int'
+	+despl:		1
+-------------------------------------------
+TABLA LOCAL DE LA FUNCION 'FactorialWhile' #4:
+* LEXEMA : 'factorial'
+	Atributos:
+	+tipo:		'int'
+	+despl:		0
+* LEXEMA : 'i'
+	Atributos:
+	+tipo:		'int'
+	+despl:		1
+-------------------------------------------
+TABLA LOCAL DE LA FUNCION 'FactorialFor' #5:
+* LEXEMA : 'n'
+	Atributos:
+	+tipo:		'int'
+	+despl:		0
+* LEXEMA : 'i'
+	Atributos:
+	+tipo:		'int'
+	+despl:		1
+* LEXEMA : 'factorial'
+	Atributos:
+	+tipo:		'int'
+	+despl:		2
+-------------------------------------------
 TABLA GLOBAL #0:
+* LEXEMA : 'd'
+	Atributos:
+	+tipo:		'int'
+	+despl:		0
+* LEXEMA : 's'
+	Atributos:
+	+tipo:		'string'
+	+despl:		1
+* LEXEMA : 'FactorialRecursivo'
+	Atributos:
+	+tipo:		'function
+	+numParam:		1
+	+tipoParam 1:		'int'
+	+tipoRetorno:		'int'
+* LEXEMA : 'uno'
+	Atributos:
+	+tipo:		'int'
+	+despl:		65
+* LEXEMA : 'UNO'
+	Atributos:
+	+tipo:		'int'
+	+despl:		66
+* LEXEMA : 'salto'
+	Atributos:
+	+tipo:		'function
+	+numParam:		0
+	+tipoRetorno:		'string'
+* LEXEMA : 'FactorialDo'
+	Atributos:
+	+tipo:		'function
+	+numParam:		1
+	+tipoParam 1:		'int'
+	+tipoRetorno:		'int'
+* LEXEMA : 'FactorialWhile'
+	Atributos:
+	+tipo:		'function
+	+numParam:		0
+	+tipoRetorno:		'int'
+* LEXEMA : 'FactorialFor'
+	Atributos:
+	+tipo:		'function
+	+numParam:		1
+	+tipoParam 1:		'int'
+	+tipoRetorno:		'int'
 -------------------------------------------

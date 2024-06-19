@@ -6,13 +6,12 @@ TABLA LOCAL DE LA FUNCION 'a' #1:
 * LEXEMA : 'aa'
 	Atributos:
 	+tipo:		'int'
-	+despl:		2
+	+despl:		1
 -------------------------------------------
 TABLA GLOBAL #0:
 * LEXEMA : 'a'
 	Atributos:
-	+tipo:		'function'
-	+despl:		0
+	+tipo:		'function
 	+numParam:		1
 	+tipoParam 1:		'int'
 	+tipoRetorno:		'int'

@@ -1,0 +1,70 @@
+TABLA LOCAL DE LA FUNCION 'ff' #1:
+* LEXEMA : 'ss'
+	Atributos:
+	+tipo:		'boolean'
+	+despl:		0
+-------------------------------------------
+TABLA GLOBAL #0:
+* LEXEMA : 'n1'
+	Atributos:
+	+tipo:		'int'
+	+despl:		0
+* LEXEMA : 'n2'
+	Atributos:
+	+tipo:		'int'
+	+despl:		1
+* LEXEMA : 'l1'
+	Atributos:
+	+tipo:		'boolean'
+	+despl:		2
+* LEXEMA : 'l2'
+	Atributos:
+	+tipo:		'boolean'
+	+despl:		3
+* LEXEMA : 'cad'
+	Atributos:
+	+tipo:		'string'
+	+despl:		4
+* LEXEMA : 'aa_aa'
+	Atributos:
+	+tipo:		'int'
+	+despl:		68
+* LEXEMA : 'iiii'
+	Atributos:
+	+tipo:		'int'
+	+despl:		69
+* LEXEMA : 's64'
+	Atributos:
+	+tipo:		'string'
+	+despl:		70
+* LEXEMA : 'boo'
+	Atributos:
+	+tipo:		'boolean'
+	+despl:		134
+* LEXEMA : 'booo'
+	Atributos:
+	+tipo:		'boolean'
+	+despl:		135
+* LEXEMA : 'aaaaa'
+	Atributos:
+	+tipo:		'int'
+	+despl:		136
+* LEXEMA : 'iiiii'
+	Atributos:
+	+tipo:		'int'
+	+despl:		137
+* LEXEMA : 'a1b2c3'
+	Atributos:
+	+tipo:		'boolean'
+	+despl:		138
+* LEXEMA : 'ff'
+	Atributos:
+	+tipo:		'function
+	+numParam:		1
+	+tipoParam 1:		'boolean'
+	+tipoRetorno:		'boolean'
+* LEXEMA : 'varglobal'
+	Atributos:
+	+tipo:		'int'
+	+despl:		139
+-------------------------------------------

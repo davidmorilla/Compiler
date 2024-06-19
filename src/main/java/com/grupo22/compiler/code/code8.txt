@@ -42,4 +42,4 @@ x =
 	;
 	
 
-put (f1 (x, f2 (3, boolean_2)));
+put (f1 (5,"hola",f2 (3, boolean_2)));

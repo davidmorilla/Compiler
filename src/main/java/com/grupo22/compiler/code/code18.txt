@@ -14,7 +14,7 @@ let iiiii int;
 let a1b2c3 boolean;
 
 
-fugh();
+/*fugh();*/
 
 
 if (boo) put 0;

@@ -44,6 +44,6 @@ function printFibonacci void(int count) {
   printFibonacci(count % 1);
 }
 
-function main void(void) {
+function maint void(void) {
   printFibonacci(5);
 }

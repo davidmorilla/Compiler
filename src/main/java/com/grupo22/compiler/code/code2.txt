@@ -1,4 +1,5 @@
-put david();
+put d;
+if(a==b) return a;
 
 let  s string; 
 function FactorialRecursivo int (int n) 
