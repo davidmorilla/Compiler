@@ -38,7 +38,7 @@ public class Compiler {
 	public final static String TOKENS_OUTPUT_FORMAT = "src/main/java/com/grupo22/compiler/output/tokens_output%d.txt";
 	public final static String PARSE_OUTPUT_FORMAT = "src/main/java/com/grupo22/compiler/output/parse_output%d.txt";
 
-	final static int CODE_FILE_NUMBER = 14; //Cambiar aquí el numero de codigo de ejemplo a parsear
+	final static int CODE_FILE_NUMBER = 1; //Cambiar aquí el numero de codigo de ejemplo a parsear
 
 	public static void main (String args[]) {
 		String CODE_FILE_NAME = String.format(CODE_FILE_NAME_FORMAT, CODE_FILE_NUMBER);
@@ -491,7 +491,7 @@ public class Compiler {
 			System.err.println("Error semantico en linea "+line + ": el tipo de retorno '" + error.split("#")[1] +"' de la funcion '" + error.split("#")[0] + "' no coincide con el tipo devuelto '" + error.split("#")[2] + "'" );
 			break;
 		case 32:
-			System.err.println("Error semantico en linea "+line + ": el tipo de entrada '" + error.split("#")[2] +"' de la posicion: " + error.split("#")[0] +"' de la funcion '" + error.split("#")[1] + "' no coincide con el tipo introducido '" + error.split("#")[3] + "'" );
+			System.err.println("Error semantico en linea "+line + ": el tipo de entrada '" + error.split("#")[2] +"' de la posicion: '" + error.split("#")[0] +"' de la funcion '" + error.split("#")[1] + "' no coincide con el tipo introducido '" + error.split("#")[3] + "'" );
 			break;
 		case 33: 
 			System.err.println("Error semantico en linea "+line + ": el numero de parametros con el que se invoca a la funcion '" + error + "' es incorrecto." );
@@ -1355,7 +1355,7 @@ public class Compiler {
 				CuentaParametrosAct++;
 
 			} else{
-				genError(32, line[0],CuentaParametrosAct +"#" + funcionInvocadaAct+"#"+ id.getTipoParamXX(CuentaParametrosAct)+ "#" +resE.getKey()[0] );
+				genError(32, line[0],(CuentaParametrosAct+1) +"#" + funcionInvocadaAct+"#"+ id.getTipoParamXX(CuentaParametrosAct)+ "#" +resE.getKey()[0] );
 				safeExit(32);
 				throw new CompilationErrorException();
 				//return new SimpleEntry<String[],Boolean>(devolverArray("errorSem"),false);
@@ -1420,7 +1420,7 @@ public class Compiler {
 					//NO ENTIENDO BIEN ESTE ERROR
 					//HABER ESTUDIAO
 					//System.out.println("CuentaParametros tiene valor: "+CuentaParametros);
-					genError(32, line[0],CuentaParametrosAct +"#" + funcionInvocadaAct+"#"+ id.getTipoParamXX(CuentaParametrosAct)+ "#" +resE.getKey()[0] );
+					genError(32, line[0],(CuentaParametrosAct+1) +"#" + funcionInvocadaAct+"#"+ id.getTipoParamXX(CuentaParametrosAct)+ "#" +resE.getKey()[0] );
 					safeExit(32);
 					throw new CompilationErrorException();
 					//return new SimpleEntry<String[],Boolean>(devolverArray("errorSem"),false);

@@ -1,0 +1,14 @@
+TABLA LOCAL DE LA FUNCION func # 1 :
+* LEXEMA : 's'
+	Atributos :
+	+tipo :		'boolean'
+	+despl:		0
+* LEXEMA : 's2'
+	Atributos :
+	+tipo :		'boolean'
+	+despl:		1
+* LEXEMA : 'i'
+	Atributos :
+	+tipo :		'int'
+	+despl:		2
+-------------------------------------------

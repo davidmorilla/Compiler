@@ -1,2 +1,8 @@
-let b boolean;
-b=(4==4==3);
+function func boolean (boolean s, boolean s2, int i){
+	x=5;
+	x %= 5%7%6;
+	return false;
+	}
+func(true,
+		"hey Jude!",
+					5);
