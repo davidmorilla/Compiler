@@ -1160,6 +1160,8 @@ public class Compiler {
 			token=A_lex(br, pointer, line, false);
 			Entry<String[],Boolean> resI=I(br,pointer,line);
 				//<ASEM>
+			if(resI.getValue())
+			{
 				String tipoI = resI.getKey()[0];
 				Entry<String[],Boolean> resN=N(br,pointer,line);
 				if(resN.getValue()){
@@ -1176,6 +1178,11 @@ public class Compiler {
 				else{
 					return new SimpleEntry<String[],Boolean>(devolverArray("errorSin"),false);
 				}
+			}
+			else
+			{
+				return new SimpleEntry<String[],Boolean>(devolverArray("errorSin"),false);
+			}
 		}
 		else if((token.codigo.equals("PARENT") && ((int) token.atributo ==1))||token.codigo.equals("AND")||token.codigo.equals("COMA")||token.codigo.equals("PYC")||token.codigo.equals("EQ")){
 			parser+="29 ";
